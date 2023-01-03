@@ -1,0 +1,346 @@
+<%- include ("../../partials/header.ejs") %> <%- include
+("../../partials/navbar.ejs") %>
+
+<body>
+  <div class="container">
+    <hr />
+    <h2>Pagamentos</h2>
+
+    <hr />
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col-3">
+        <div class="card">
+          <a class="btn btn-success form-control" href="/admin/payments/new"
+            >Novo Pagamento</a
+          >
+        </div>
+      </div>
+
+            <div class="col-2">
+        <div class="card">
+           <div class="dropdown">
+  <button class="btn dropdown-toggle form-control" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+Filter
+  </button>
+  <ul class="dropdown-menu">
+     <% categoriesDespesasImpostos.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasImpostos/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+          <% categoriesDespesasVendasEServicos.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasVendasEServicos/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+       <% categoriesDespesasSalariosEncargos.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasSalariosEncargos/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+       <% categoriesDespesasAdministrativas.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasAdministrativas/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+       <% categoriesDespesasComerciais.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasComerciais/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+      <% categoriesDespesasImoveis.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasImovel/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+       <% categoriesDespesasVeiculos.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasVeiculos/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+     <% categoriesDespesasDiretoria.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasDiretoria/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+      <% categoriesDespesasFinanceiras.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasFinanceiras/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+     
+      <% categoriesOutrasDespesas.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryOutrasDespesas/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+        
+      <% categoriesDespesasBensImobilizados.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasBensImobilizados/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+       <% categoriesDespesasEmprestimosFinanciamentos.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasEmprestimosFinanciamentos/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+      <% categoriesDespesasParcelamentosDividas.forEach(category => { %>
+   <li >
+            <a class="dropdown-item"  href="/categoryDespesasParcelamentosDividas/<%= category.slug %>"><%= category.title %></a>
+        </li>
+    
+     <% }) %>
+
+  </ul>
+</div>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card text-center">
+          <div id="filterData">
+            <button
+              type="button"
+              class="btn dropdown form-control"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Filter
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <select class="dropdown-item" onchange="location = this.value;">
+                  <option value="#">Ano</option>
+                  <option value="/admin/payments/filter/2021">2021</option>
+                  <option value="/admin/payments/filter/2022">2022</option>
+                  <option value="/admin/payments/filter/2023">2023</option>
+                </select>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <select class="dropdown-item" onchange="location = this.value;">
+                  <option value="#">Mês</option>
+                  <option value="/admin/payments/filter/janeiro">Janeiro</option>
+                  <option value="/admin/payments/filter/fevereiro"
+                    >Fevereiro</option
+                  >
+                  <option value="/admin/payments/filter/marco">Março</option>
+                  <option value="/admin/payments/filter/abril">Abril</option>
+                  <option value="/admin/payments/filter/maio">Maio</option>
+                  <option value="/admin/payments/filter/junho">Junho</option>
+                  <option value="/admin/payments/filter/julho">Julho</option>
+                  <option value="/admin/payments/filter/agosto">Agosto</option>
+                  <option value="/admin/payments/filter/setembro"
+                    >Setembro</option
+                  >
+                  <option value="/admin/payments/filter/outubro">Outubro</option>
+                  <option value="/admin/payments/filter/novembro"
+                    >Novembro</option
+                  >
+                  <option value="/admin/payments/filter/dezembro"
+                    >Dezembro</option
+                  >
+                </select>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="card">
+          <!--Barra de Pesquisa-->
+          <form class="form-search">
+            <input
+              class="form-control"
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Pesquisar..."
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <table id="tab" data-type="table-menu" class="table table-bordered">
+      <thead>
+        <tr id="table-header">
+          <th>Fornecedor</th>
+          <th>Valor</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="demo">
+        <% payments.forEach(payment => { %>
+        <tr class="pesquisar" href="/<%= payment.slug %>">
+          <td><%= payment.fornecedor %></td>
+          <td>R$ <%= payment.valor %></td>
+          <td id="formatData"><%= payment.data %></td>
+          <td>
+            <a
+              href="/admin/payments/edit/<%= payment.id %>"
+              class="btn btn-warning"
+              >Editar</a
+            >
+            <form
+              method="POST"
+              action="/payments/delete"
+              style="display: inline;"
+              onsubmit="confirmarDelecao(event, this)"
+            >
+              <input type="hidden" name="id" value="<%= payment.id %>" />
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col col-12">
+        <a style="float:right" href="/payments/page/2">Next >>></a>
+      </div>
+      <hr />
+    </div>
+    <hr />
+    <div class="dashboard">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</body>
+
+<%- include ("../../partials/footer.ejs") %>
+
+  <script>
+      //Filter Category
+      function AdicionarFiltro(tabela, coluna) {
+        var valores = new Array();
+
+        //varrer todas as linhas da tabela recuperando os valores da coluna a ser filtrada. Esses valores são inseridos uma única vez em um vetor valores. Usamos a função indexOf do array para verificar se o valor já foi inserido e, em caso negativo, usamos a função push para inseri-lo na lista.
+        $("#" + tabela + " tbody tr").each(function() {
+          var txt = $(this)
+            .children("td:nth-child(" + coluna + ")")
+            .text();
+          if (valores.indexOf(txt) < 0) {
+            valores.push(txt);
+          }
+        });
+
+        //usando a instrução for, percorremos o array valores e, para cada item, adicionamos uma tag option no select previamente declarado.
+        $("#filtroColuna_" + coluna.toString()).append(
+          "<option>TODOS</option>"
+        );
+        for (elemento in valores) {
+          $("#filtroColuna_" + coluna.toString()).append(
+            "<option>" + valores[elemento] + "</option>"
+          );
+        }
+        //um tratamento ao evento change do select cujo nome foi definido como filtroColuna_N, onde N é o índice da coluna. Primeiro obtemos o valor selecionado através da função val() da jQuery. Em seguida todas as linhas são tornadas visíveis com o método show().
+        $("#filtroColuna_" + coluna.toString()).change(function() {
+          var filtro = $(this).val();
+          $("#" + tabela + " tbody tr").show();
+          //Caso o item selecionado não seja “TODOS”, percorremos todas as linhas da tabela verificando o valor da coluna filtrada. Caso este não seja igual ao valor selecionado, a linha é ocultada com o método hide().
+          if (filtro != "TODOS") {
+            $("#" + tabela + " tbody tr").each(function() {
+              var txt = $(this)
+                .children("td:nth-child(" + coluna + ")")
+                .text();
+              if (txt != filtro) {
+                $(this).hide();
+              }
+            });
+          }
+        });
+      }
+      //Tendo definido a função AdicionarFiltro, podemos testá-la passando como parâmetro o nome da tabela, “tab”, e o índice da terceira coluna que, nesse caso inicia a contagem no 1.
+      AdicionarFiltro("tab", 3);
+    </script>
+
+    <script>
+      //delete Script
+      function confirmarDelecao(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este Pagamento?");
+        if (decision) {
+          form.submit();
+        }
+      }
+
+      ////////////////////////////
+      // search script
+      const inputSearch = document.querySelector("#search");
+      const tableMenu = document.querySelector("[data-type='table-menu']");
+
+      const trs = Array.from(tableMenu.querySelectorAll("tbody tr"));
+      const trsPesquisar = Array.from(
+        tableMenu.querySelectorAll("tr.pesquisar")
+      );
+
+      inputSearch.addEventListener("input", function() {
+        const str = this.value;
+        if (str) {
+          filterData(str);
+        } else {
+          showAllItems();
+        }
+      });
+
+      function showAllItems() {
+        trs.forEach((tr) => tr.classList.remove("hide"));
+      }
+
+      function filterData(str) {
+        showAllItems();
+        trsPesquisar.forEach((trPesquisar) => {
+          let found = false;
+
+          for (let i=0; i < trs.length; i++) {
+            let tr = trs[i];
+            if (tr.textContent.toLowerCase().includes(str.toLowerCase())) {
+              found = true;
+              tr.classList.remove("hide");
+            } else {
+              tr.classList.add("hide");
+            }
+          }
+        });
+      }
+      /////////////////////////////////////////////////
+    </script>
+
+<!-- script dashboard   -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

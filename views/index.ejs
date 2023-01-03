@@ -1,0 +1,95 @@
+<%- include ("partials/header.ejs") %> <%- include ("partials/navbar.ejs") %>
+<body>
+  <div class="container">
+    <hr />
+    <div class="jumbotron text-center">
+      <h1 class="display-4">Controle de despesas</h1>
+      <hr class="my-4" />
+      <h4>Saldo atual</h4>
+      <h1 id="balance" class="balance">R$ <%= soma %></h1>
+      <br />
+      <div class="row">
+        <div class="col">
+          <h4>Receitas</h4>
+          <p id="money-plus" class="money plus">+ R$ <%= totalReceipts %></p>
+          <a class="btn btn-success" type="submit" href="/admin/receipts">
+            Novo Recebimento
+          </a>
+        </div>
+
+        <div class="col">
+          <h4>Despesas</h4>
+
+          <p id="money-minus" class="money minus">- R$ <%= totalPayments %></p>
+
+          <a class="btn btn-danger" type="submit" href="/admin/payments">
+            Novo Pagamento
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div>
+      <canvas id="myChart"  width="400" height="200"></canvas>
+    </div>
+
+    <hr />
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+  const labels = [
+ 'Fluxo de Caixa'
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label:[
+    'Receitas'
+ 
+  ],
+        backgroundColor: [
+           "rgb(152,251,152)",
+
+        ],
+        borderColor: [
+          "rgba(144, 251, 152, 0.1)",
+        ],
+        borderWidth: 1,
+        data: [<%= totalReceipts %>,],
+      },
+      {
+            label: 'Despesas',
+              backgroundColor: [
+          "rgba(255, 99, 132 )",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 0.1)",
+
+        ],
+        borderWidth: 1,
+        data: [<%= totalPayments %>,],
+
+            // Changes this dataset to become a line
+            type: 'bar'
+        }
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data: data,
+    options: {
+    },
+  };
+</script>
+
+<script>
+  const myChart = new Chart(document.getElementById("myChart"), config);
+</script>
+
+<%- include ("partials/footer.ejs") %>

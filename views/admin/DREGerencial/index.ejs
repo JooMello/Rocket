@@ -1,0 +1,1034 @@
+<%- include ("../../partials/header.ejs") %> <%- include
+("../../partials/navbar.ejs") %>
+<body>
+  <div class="container">
+    <hr />
+    <div class="box text-center">
+      <h1 class="display-4">Demonstrativo de Resultado do Exercício Geral</h1>
+      <hr class="my-4" />
+      <div>
+        <br />
+
+        <div class="canvas-holder" id="c13">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th rowspan="2" class="center">
+                  Categoria
+                </th>
+                <th class="center">
+                  Janeiro
+                </th>
+                <th class="center">
+                  Fevereiro
+                </th>
+                <th class="center">
+                  Março
+                </th>
+                <th class="center">
+                  Abril
+                </th>
+                <th class="center">
+                  Maio
+                </th>
+                <th class="center">
+                  Junho
+                </th>
+                <th class="center">
+                  Julho
+                </th>
+                <th class="center">
+                  Agosto
+                </th>
+                <th class="center ca-table-background-grey current-month">
+                  Setembro
+                </th>
+                <th class="center">
+                  Outubro
+                </th>
+                <th class="center">
+                  Novembro
+                </th>
+                <th class="center">
+                  Dezembro
+                </th>
+                <th class="center">
+                  Total
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- Receitas Operacionais -->
+              <tr>
+                <td class="center">
+                  Receitas Operacionais
+                </td>
+
+                <td class="center"><%=ReceitaOperacionaisJ  %></td>
+
+                <td class="center"><%=ReceitaOperacionaisF  %></td>
+
+                <td class="center"><%= ReceitaOperacionaisMar %></td>
+
+                <td class="center"><%= ReceitaOperacionaisAp %></td>
+
+                <td class="center"><%= ReceitaOperacionaisMa %></td>
+
+                <td class="center"><%= ReceitaOperacionaisJn %></td>
+
+                <td class="center"><%= ReceitaOperacionaisJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaOperacionaisAg %></td>
+
+                <td class="center"><%=ReceitaOperacionaisSt %></td>
+
+                <td class="center"><%=ReceitaOperacionaisOt  %></td>
+
+                <td class="center"><%= ReceitaOperacionaisNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=ReceitaOperacionaisDz  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=totalReceitaOperacionais  %></td>
+              </tr>
+              <!--Receitas de Vendas de Produtos e Serviços-->
+              <tr>
+                <td class="center">
+                  Receitas de Vendas de Produtos e Serviços
+                </td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosJ %></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosF %></td>
+
+                <td class="center"><%=ReceitaVendasProdutosServicosMar%></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosAp %></td>
+
+                <td class="center"><%=ReceitaVendasProdutosServicosMa  %></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosJn %></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaVendasProdutosServicosAg %></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosSt %></td>
+
+                <td class="center"><%=ReceitaVendasProdutosServicosOt  %></td>
+
+                <td class="center"><%= ReceitaVendasProdutosServicosNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=ReceitaVendasProdutosServicosDz  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalReceitaVendasProdutosServicos %></td>
+              </tr>
+              <!--Receitas de Fretes e Entregas-->
+              <tr>
+                <td class="center">
+                  Receitas de Fretes e Entregas
+                </td>
+
+                <td class="center"><%= ReceitaFretesEntregasJ %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasF %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasMar %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasAp %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasMa %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasJn %></td>
+
+                <td class="center"><%=ReceitaFretesEntregasJl  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaFretesEntregasAg %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasSt %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasOt %></td>
+
+                <td class="center"><%= ReceitaFretesEntregasNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaFretesEntregasDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=totalReceitaFretesEntregas%></td>
+              </tr>
+              <!-- Receita Bruta de Vendas-->
+              <tr>
+                <td class="center">
+                  Receita Bruta de Vendas
+                </td>
+
+                <td class="center"><%= ReceitaBrutaVendasJ %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasF  %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasMar %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasAp %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasMa %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasJn %></td>
+
+                <td class="center"><%=ReceitaBrutaVendasJl  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaBrutaVendasAg %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasSt %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasOt %></td>
+
+                <td class="center"><%= ReceitaBrutaVendasNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaBrutaVendasDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=totalReceitaBrutaVendas%></td>
+              </tr>
+              <!-- Deduções da Receita Bruta-->
+              <tr>
+                <td class="center">
+                  Deduções da Receita Bruta
+                </td>
+
+                <td class="center"><%= DeducaoReceitaBrutaJ %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaF %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaMar %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaAp %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaMa %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaJn %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DeducaoReceitaBrutaAg %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaSt %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaOt %></td>
+
+                <td class="center"><%= DeducaoReceitaBrutaNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DeducaoReceitaBrutaDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDeducaoReceitaBruta %></td>
+              </tr>
+              <!-- Impostos Sobre Vendas-->
+              <tr>
+                <td class="center">
+                  Impostos Sobre Vendas
+                </td>
+
+                <td class="center"><%= ReceitaImpostosSobreVendasJ  %></td>
+
+                <td class="center"><%=ReceitaImpostosSobreVendasF   %></td>
+
+                <td class="center"><%= ReceitaImpostosSobreVendasMar  %></td>
+
+                <td class="center"><%= ReceitaImpostosSobreVendasAp  %></td>
+
+                <td class="center"><%=ReceitaImpostosSobreVendasMa  %></td>
+
+                <td class="center"><%=  ReceitaImpostosSobreVendasJn %></td>
+
+                <td class="center"><%=ReceitaImpostosSobreVendasJl  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaImpostosSobreVendasAg  %></td>
+
+                <td class="center"><%=ReceitaImpostosSobreVendasSt   %></td>
+
+                <td class="center"><%= ReceitaImpostosSobreVendasOt  %></td>
+
+                <td class="center"><%= ReceitaImpostosSobreVendasNv  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaImpostosSobreVendasDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=totalReceitaImpostosSobreVendas  %></td>
+              </tr>
+              <!-- Comissões Sobre Vendas-->
+              <tr>
+                <td class="center">
+                  Comissões Sobre Vendas
+                </td>
+
+                <td class="center"><%= DespesaComissoesVendasJ %></td>
+
+                <td class="center"><%= DespesaComissoesVendasF %></td>
+
+                <td class="center"><%= DespesaComissoesVendasMar %></td>
+
+                <td class="center"><%= DespesaComissoesVendasAp %></td>
+
+                <td class="center"><%= DespesaComissoesVendasMa %></td>
+
+                <td class="center"><%= DespesaComissoesVendasJn %></td>
+
+                <td class="center"><%= DespesaComissoesVendasJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaComissoesVendasAg %></td>
+
+                <td class="center"><%= DespesaComissoesVendasSt %></td>
+
+                <td class="center"><%= DespesaComissoesVendasOt %></td>
+
+                <td class="center"><%= DespesaComissoesVendasNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaComissoesVendasDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaComissoesVendas %></td>
+              </tr>
+              <!-- Descontos Incondicionais -->
+              <tr>
+                <td class="center">
+                  Descontos Incondicionais
+                </td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisJ %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisF %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisMar %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisAp %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisMa %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisJn %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaDescontosIncondicionaisAg %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisSt %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisOt %></td>
+
+                <td class="center"><%= DespesaDescontosIncondicionaisNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaDescontosIncondicionaisDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesasDescontosIncondicionais %></td>
+              </tr>
+              <!--Devolução de Vendas-->
+              <tr>
+                <td class="center">
+                  Devoluções de Vendas
+                </td>
+
+                <td class="center"><%= DespesaDevolucaoVendaJ %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaF %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaMar %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaAp %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaMa %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaJn %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaDevolucaoVendaAg %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaSt %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaOt %></td>
+
+                <td class="center"><%= DespesaDevolucaoVendaNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaDevolucaoVendaDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesasDevolucaoVenda %></td>
+              </tr>
+              <!-- Receita Líquida de Vendas-->
+              <tr>
+                <td class="center">
+                  Receita Líquida de Vendas
+                </td>
+
+                <td class="center"><%= ReceitaLiquidaVendaJ %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaF %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaMar %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaAp %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaMa %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaJn %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaLiquidaVendaAg %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaSt %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaOt %></td>
+
+                <td class="center"><%= ReceitaLiquidaVendaNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaLiquidaVendaDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalReceitaLiquidaVenda %></td>
+              </tr>
+
+              <!-- Custos Operacionais-->
+              <tr>
+                <td class="center">
+                  Custos Operacionais
+                </td>
+
+                <td class="center"><%= CustoOperacionalJ %></td>
+
+                <td class="center"><%= CustoOperacionalF %></td>
+
+                <td class="center"><%= CustoOperacionalMar %></td>
+
+                <td class="center"><%= CustoOperacionalAp %></td>
+
+                <td class="center"><%= CustoOperacionalMa %></td>
+
+                <td class="center"><%= CustoOperacionalJn %></td>
+
+                <td class="center"><%= CustoOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoOperacionalAg %></td>
+
+                <td class="center"><%= CustoOperacionalSt %></td>
+
+                <td class="center"><%= CustoOperacionalOt %></td>
+
+                <td class="center"><%= CustoOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalCustoOperacional %></td>
+              </tr>
+              <!-- Custo dos Produtos Vendidos-->
+              <tr>
+                <td class="center">
+                  Custo dos Produtos Vendidos
+                </td>
+
+                <td class="center"><%= CustoProdutoVendidoJ %></td>
+
+                <td class="center"><%= CustoProdutoVendidoF %></td>
+
+                <td class="center"><%= CustoProdutoVendidoMar %></td>
+
+                <td class="center"><%= CustoProdutoVendidoAp %></td>
+
+                <td class="center"><%= CustoProdutoVendidoMa %></td>
+
+                <td class="center"><%= CustoProdutoVendidoJn %></td>
+
+                <td class="center"><%= CustoProdutoVendidoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoProdutoVendidoAg %></td>
+
+                <td class="center"><%= CustoProdutoVendidoSt %></td>
+
+                <td class="center"><%= CustoProdutoVendidoOt %></td>
+
+                <td class="center"><%= CustoProdutoVendidoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoProdutoVendidoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalCustoProdutoVendido %></td>
+              </tr>
+              <!-- Custo das Vendas de Produtos-->
+              <tr>
+                <td class="center">
+                  Custo das Vendas de Produtos
+                </td>
+
+                <td class="center"><%= CustoVendaProdutoJ %></td>
+
+                <td class="center"><%= CustoVendaProdutoF %></td>
+
+                <td class="center"><%= CustoVendaProdutoMar %></td>
+
+                <td class="center"><%= CustoVendaProdutoAp %></td>
+
+                <td class="center"><%= CustoVendaProdutoMa %></td>
+
+                <td class="center"><%= CustoVendaProdutoJn %></td>
+
+                <td class="center"><%= CustoVendaProdutoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoVendaProdutoAg %></td>
+
+                <td class="center"><%= CustoVendaProdutoSt %></td>
+
+                <td class="center"><%= CustoVendaProdutoOt %></td>
+
+                <td class="center"><%= CustoVendaProdutoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoVendaProdutoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalCustoVendaProduto %></td>
+              </tr>
+              <!-- Custo dos Serviços Prestados -->
+              <tr>
+                <td class="center">
+                  Custo dos Serviços Prestados
+                </td>
+
+                <td class="center"><%= CustoServicoPrestadoJ %></td>
+
+                <td class="center"><%= CustoServicoPrestadoF %></td>
+
+                <td class="center"><%= CustoServicoPrestadoMar %></td>
+
+                <td class="center"><%= CustoServicoPrestadoAp %></td>
+
+                <td class="center"><%= CustoServicoPrestadoMa %></td>
+
+                <td class="center"><%= CustoServicoPrestadoJn %></td>
+
+                <td class="center"><%= CustoServicoPrestadoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoServicoPrestadoAg %></td>
+
+                <td class="center"><%= CustoServicoPrestadoSt %></td>
+
+                <td class="center"><%= CustoServicoPrestadoOt %></td>
+
+                <td class="center"><%= CustoServicoPrestadoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= CustoServicoPrestadoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalCustoServicoPrestado %></td>
+              </tr>
+              <!-- Lucro Bruto -->
+              <tr>
+                <td class="center">
+                  Lucro Bruto
+                </td>
+
+                <td class="center"><%= LucroBrutoJ %></td>
+
+                <td class="center"><%= LucroBrutoF %></td>
+
+                <td class="center"><%= LucroBrutoMar %></td>
+
+                <td class="center"><%= LucroBrutoAp %></td>
+
+                <td class="center"><%= LucroBrutoMa %></td>
+
+                <td class="center"><%= LucroBrutoJn %></td>
+
+                <td class="center"><%= LucroBrutoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroBrutoAg %></td>
+
+                <td class="center"><%= LucroBrutoSt %></td>
+
+                <td class="center"><%= LucroBrutoOt %></td>
+
+                <td class="center"><%= LucroBrutoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroBrutoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalLucroBruto %></td>
+              </tr>
+              <!--Despesas Operacionais-->
+              <tr>
+                <td class="center">
+                  Despesas Operacionais
+                </td>
+
+                <td class="center"><%= DespesaOperacionalJ %></td>
+
+                <td class="center"><%= DespesaOperacionalF %></td>
+
+                <td class="center"><%= DespesaOperacionalMar %></td>
+
+                <td class="center"><%= DespesaOperacionalAp %></td>
+
+                <td class="center"><%= DespesaOperacionalMa %></td>
+
+                <td class="center"><%= DespesaOperacionalJn %></td>
+
+                <td class="center"><%= DespesaOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaOperacionalAg %></td>
+
+                <td class="center"><%= DespesaOperacionalSt %></td>
+
+                <td class="center"><%= DespesaOperacionalOt %></td>
+
+                <td class="center"><%= DespesaOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaOperacional %></td>
+              </tr>
+              <!-- Despesas Comerciais -->
+              <tr>
+                <td class="center">
+                  Despesas Comerciais
+                </td>
+
+                <td class="center"><%= DespesaComercialJ %></td>
+
+                <td class="center"><%= DespesaComercialF %></td>
+
+                <td class="center"><%= DespesaComercialMar %></td>
+
+                <td class="center"><%= DespesaComercialAp %></td>
+
+                <td class="center"><%= DespesaComercialMa %></td>
+
+                <td class="center"><%= DespesaComercialJn %></td>
+
+                <td class="center"><%= DespesaComercialJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaComercialAg %></td>
+
+                <td class="center"><%= DespesaComercialSt %></td>
+
+                <td class="center"><%= DespesaComercialOt %></td>
+
+                <td class="center"><%= DespesaComercialNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaComercialDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaComercial %></td>
+              </tr>
+              <!-- Despesas Administrativas -->
+              <tr>
+                <td class="center">
+                  Despesas Administrativas
+                </td>
+
+                <td class="center"><%= DespesaAdministrativaJ %></td>
+
+                <td class="center"><%= DespesaAdministrativaF %></td>
+
+                <td class="center"><%= DespesaAdministrativaMar %></td>
+
+                <td class="center"><%= DespesaAdministrativaAp %></td>
+
+                <td class="center"><%= DespesaAdministrativaMa %></td>
+
+                <td class="center"><%= DespesaAdministrativaJn %></td>
+
+                <td class="center"><%= DespesaAdministrativaJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaAdministrativaAg %></td>
+
+                <td class="center"><%= DespesaAdministrativaSt %></td>
+
+                <td class="center"><%= DespesaAdministrativaOt %></td>
+
+                <td class="center"><%= DespesaAdministrativaNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaAdministrativaDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaAdministrativa %></td>
+              </tr>
+            
+              <!-- Lucro / Prejuízo Operacional -->
+              <tr>
+                <td class="center">
+                  Lucro / Prejuízo Operacional
+                </td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalJ %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalF %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalMar %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalAp %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalMa %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalJn %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoOperacionalAg %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalSt %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalOt %></td>
+
+                <td class="center"><%= LucroPrejuizoOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalLucroPrejuizoOperacional %></td>
+              </tr>
+              <!-- Receitas e Despesas Financeiras -->
+              <tr>
+                <td class="center">
+                  Receitas e Despesas Financeiras
+                </td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasJ  %></td>
+
+                <td class="center"><%=ReceitaDespesaFinanceirasF   %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasMar  %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasAp  %></td>
+
+                <td class="center"><%=ReceitaDespesaFinanceirasMa   %></td>
+
+                <td class="center"><%=  ReceitaDespesaFinanceirasJn %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaDespesaFinanceirasAg  %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasSt  %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasOt  %></td>
+
+                <td class="center"><%= ReceitaDespesaFinanceirasNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=ReceitaDespesaFinanceirasDz  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalReceitaDespesaFinanceiras %></td>
+              </tr>
+              <!-- Receitas e Rendimentos Financeiros -->
+              <tr>
+                <td class="center">
+                  Receitas e Rendimentos Financeiros
+                </td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosJ  %></td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosF %></td>
+
+                <td class="center"><%=ReceitaRendimentosFinanceirosMar  %></td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosAp  %></td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosMa  %></td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosJn  %></td>
+
+                <td class="center"><%= ReceitaRendimentosFinanceirosJl  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaRendimentosFinanceirosAg  %></td>
+
+                <td class="center"><%=ReceitaRendimentosFinanceirosSt %></td>
+
+                <td class="center"><%=ReceitaRendimentosFinanceirosOt %></td>
+
+                <td class="center"><%=ReceitaRendimentosFinanceirosNv%></td>
+
+                <td class="center ca-table-background-grey current-month"><%=ReceitaRendimentosFinanceirosDz  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=totalReceitaRendimentosFinanceiros%></td>
+              </tr>
+              <!-- Despesas Financeiras -->
+              <tr>
+                <td class="center">
+                  Despesas Financeiras
+                </td>
+
+                <td class="center"><%= DespesaFinanceirasJ  %></td>
+
+                <td class="center"><%= DespesaFinanceirasF  %></td>
+
+                <td class="center"><%= DespesaFinanceirasMar  %></td>
+
+                <td class="center"><%= DespesaFinanceirasAp  %></td>
+
+                <td class="center"><%= DespesaFinanceirasMa  %></td>
+
+                <td class="center"><%= DespesaFinanceirasJn  %></td>
+
+                <td class="center"><%= DespesaFinanceirasJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=DespesaFinanceirasAg   %></td>
+
+                <td class="center"><%= DespesaFinanceirasSt  %></td>
+
+                <td class="center"><%= DespesaFinanceirasOt  %></td>
+
+                <td class="center"><%= DespesaFinanceirasNv  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%=DespesaFinanceirasDz  %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaFinanceiras %></td>
+              </tr>
+              <!-- Outras Receitas e Despesas Não Operacionais -->
+              <tr>
+                <td class="center">
+                  Outras Receitas e Despesas Não Operacionais
+                </td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalJ %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalF %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalMar %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalAp %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalMa %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalJn %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= OutraReceitaDespesaNaoOperacionalAg %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalSt %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalOt %></td>
+
+                <td class="center"><%= OutraReceitaDespesaNaoOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= OutraReceitaDespesaNaoOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalOutraReceitaDespesaNaoOperacional %></td>
+              </tr>
+              <!--  Outras Receitas Não Operacionais-->
+              <tr>
+                <td class="center">
+                  Outras Receitas Não Operacionais
+                </td>
+
+                <td class="center"><%= ReceitaNaoOperacionalJ %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalF %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalMar %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalAp %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalMa %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalJn %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaNaoOperacionalAg %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalSt %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalOt %></td>
+
+                <td class="center"><%= ReceitaNaoOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= ReceitaNaoOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalReceitaNaoOperacional %></td>
+              </tr>
+              <!--  Outras Despesas Não Operacionais -->
+              <tr>
+                <td class="center">
+                  Outras Despesas Não Operacionais
+                </td>
+
+                <td class="center"><%= DespesaNaoOperacionalJ %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalF %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalMar %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalAp %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalMa %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalJn %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaNaoOperacionalAg %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalSt %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalOt %></td>
+
+                <td class="center"><%= DespesaNaoOperacionalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaNaoOperacionalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaNaoOperacional %></td>
+              </tr>
+              <!-- Lucro / Prejuízo Líquido -->
+              <tr>
+                <td class="center">
+                  Lucro / Prejuízo Líquido
+                </td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoJ %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoF %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoMar %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoAp %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoMa %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoJn %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoLiquidoAg %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoSt %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoOt %></td>
+
+                <td class="center"><%= LucroPrejuizoLiquidoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoLiquidoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalLucroPrejuizoLiquido %></td>
+              </tr>
+              <!-- Despesas com Investimentos e Empréstimos -->
+              <tr>
+                <td class="center">
+                  Despesas com Investimentos e Empréstimos
+                </td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoJ %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoF %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoMar %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoAp %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoMa %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoJn %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaInvestimentoEmprestimoAg %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoSt %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoOt %></td>
+
+                <td class="center"><%= DespesaInvestimentoEmprestimoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= DespesaInvestimentoEmprestimoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalDespesaInvestimentoEmprestimo %></td>
+              </tr>
+              <!-- Investimentos em Imobilizado -->
+              <tr>
+                <td class="center">
+                  Investimentos em Imobilizado
+                </td>
+
+                <td class="center"><%= InvestimentoImobilizadoJ %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoF %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoMar %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoAp %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoMa %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoJn %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= InvestimentoImobilizadoAg %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoSt %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoOt %></td>
+
+                <td class="center"><%= InvestimentoImobilizadoNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= InvestimentoImobilizadoDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalInvestimentoImobilizado %></td>
+              </tr>
+              <!-- Empréstimos e Dívidas -->
+              <tr>
+                <td class="center">
+                  Empréstimos e Dívidas
+                </td>
+
+                <td class="center"><%= EmprestimoDividasJ %></td>
+
+                <td class="center"><%= EmprestimoDividasF %></td>
+
+                <td class="center"><%= EmprestimoDividasMar %></td>
+
+                <td class="center"><%= EmprestimoDividasAp %></td>
+
+                <td class="center"><%= EmprestimoDividasMa %></td>
+
+                <td class="center"><%= EmprestimoDividasJn %></td>
+
+                <td class="center"><%= EmprestimoDividasJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= EmprestimoDividasAg %></td>
+
+                <td class="center"><%= EmprestimoDividasSt %></td>
+
+                <td class="center"><%= EmprestimoDividasOt %></td>
+
+                <td class="center"><%= EmprestimoDividasNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= EmprestimoDividasDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalEmprestimoDividas %></td>
+              </tr>
+              <!-- Lucro / Prejuízo Final -->
+              <tr>
+                <td class="center">
+                  Lucro / Prejuízo Final
+                </td>
+
+                <td class="center"><%= LucroPrejuizoFinalJ %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalF %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalMar %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalAp %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalMa %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalJn %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalJl %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoFinalAg %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalSt %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalOt %></td>
+
+                <td class="center"><%= LucroPrejuizoFinalNv %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= LucroPrejuizoFinalDz %></td>
+
+                <td class="center ca-table-background-grey current-month"><%= totalLucroPrejuizoFinal %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr />
+    </div>
+  </div>
+</body>
+
+<%- include ("../../partials/footer.ejs") %>

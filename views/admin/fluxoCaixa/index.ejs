@@ -1,0 +1,2450 @@
+<%- include ("../../partials/header.ejs") %> <%- include
+("../../partials/navbar.ejs") %>
+<body>
+  <div class="container">
+    <hr /> 
+   
+    <div class="box text-center">
+      <h1 class="display-4">Fluxo de Caixa</h1>
+      <hr class="my-4" />
+      <h4>Saldo atual</h4>
+      <h1 id="balance" class="balance">R$ <%= soma %></h1>
+      <br />
+      <div class="row">
+        <div class="col">
+          <h4>Receitas</h4>
+          <p id="money-plus" class="money plus">+ R$ <%= totalReceipts %></p>
+          <a class="btn btn-success" type="submit" href="/admin/receipts">
+            Novo Recebimento
+          </a>
+        </div>
+
+        <div class="col">
+          <h4>Despesas</h4>
+
+          <p id="money-minus" class="money minus">- R$ <%= totalPayments %></p>
+
+          <a class="btn btn-danger" type="submit" href="/admin/payments">
+            Novo Pagamento
+          </a>
+        </div>
+      </div>
+      <hr />
+      
+      <div>
+        <button id="week" data-nome="c13">Mensal</button>
+        <button id="January2022" data-nome="c1">Janeiro</button>
+          <button id="February2022" data-nome="c2">Fevereiro</button>
+           <button id="March2022" data-nome="c3">Março</button>
+           <button id="April2022" data-nome="c4">Abril</button>
+           <button id="May2022" data-nome="c5">Maio</button>
+            <button id="June2022" data-nome="c6">Junho</button>
+            <button id="July2022" data-nome="c7">Junho</button>
+               <button id="August2022" data-nome="c8">Agosto</button>
+                <button id="September2022" data-nome="c9">Setembro</button>
+                 <button id="October2022" data-nome="c10">Outubro</button>
+                 <button id="November2022" data-nome="c11">Novembro</button>
+                  <button id="December2022" data-nome="c12">Dezembro</button>
+        <br />
+       
+           <div class="canvas-holder" id="c13">
+          <canvas id="CanvaWeek" width="400" height="200"></canvas>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th rowspan="2" class="center">
+                  Categorias de lançamentos
+                </th>
+                <th colspan="2" class="center">
+                  Jan/2022
+                </th>
+                <th colspan="2" class="center">
+                  Fev/2022
+                </th>
+                <th colspan="2" class="center">
+                  Mar/2022
+                </th>
+                <th colspan="2" class="center">
+                  Abr/2022
+                </th>
+                <th colspan="2" class="center">
+                  Mai/2022
+                </th>
+                <th colspan="2" class="center">
+                  Jun/2022
+                </th>
+                <th colspan="2" class="center">
+                  Jul/2022
+                </th>
+                <th colspan="2" class="center">
+                  Ago/2022
+                </th>
+                <th
+                  colspan="2"
+                  class="center ca-table-background-grey current-month"
+                >
+                  Set/2022
+                </th>
+                <th colspan="2" class="center">
+                  Out/2022
+                </th>
+                <th colspan="2" class="center">
+                  Nov/2022
+                </th>
+                <th colspan="2" class="center">
+                  Dez/2022
+                </th>
+                <th colspan="2" class="center">
+                  Total
+                </th>
+              </tr>
+              <tr>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center ca-table-background-grey current-month">
+                  Previsto
+                </td>
+                <td class="center ca-table-background-grey current-month">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center">
+                  Previsto
+                </td>
+                <td class="center">
+                  Realizado
+                </td>
+                <td class="center ca-table-background-grey current-month">
+                  Previsto
+                </td>
+                <td class="center ca-table-background-grey current-month">
+                  Realizado
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- Saldo do Mês Anterior-->
+              <tr>
+                <td class="center">
+                  Saldo do Mês Anterior
+                </td>
+                <td class="center"></td>
+                <td class="center ">
+                  <%= somaJF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaFF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaMarF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaApF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaMaF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaJnF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaJlF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= somaAgF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= somaStF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaOtF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaNvF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= somaDzF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= soma %>
+                </td>
+              </tr>
+              <!--Total de Recebimentos-->
+              <tr>
+                <td class="center">
+                  Total de Recebimentos
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsJF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsFF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsMarF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsApF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsMaF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsJnF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsJlF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= receiptsAgF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= receiptsStF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsOtF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= receiptsNvF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= receiptsDzF, %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalReceipts %>
+                </td>
+              </tr>
+              <!--Total de Pagamentos-->
+              <tr>
+                <td class="center">
+                  Total de Pagamentos
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsJF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsFF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsMarF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsApF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsMaF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsJnF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsJlF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= paymentsAgF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= paymentsStF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsOtF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= paymentsNvF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= paymentsDzF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPayments %>
+                </td>
+              </tr>
+              <!--4.02 Despesas com Vendas e Serviços-->
+              <tr>
+                <td class="center">
+                  4.02 Despesas com Vendas e Serviços
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasVendasEServicoAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVendasEServicoNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasVendasEServicoDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasVendasEServico %>
+                </td>
+              </tr>
+              <!--4.03 Despesas com Salarios e Encargos-->
+              <tr>
+                <td class="center">
+                  4.03 Despesas com Salarios e Encargos
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasSalariosEncargoAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasSalariosEncargoNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasSalariosEncargoDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasSalariosEncargo %>
+                </td>
+              </tr>
+              <!-- 4.04 Despesas com Colaboradores-->
+              <tr>
+                <td class="center">
+                  4.04 Despesas com Colaboradores
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasColaboradoresAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasColaboradoresNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasColaboradoresDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasColaboradores %>
+                </td>
+              </tr>
+              <!--4.05 Despesas Administrativas-->
+              <tr>
+                <td class="center">
+                  4.05 Despesas Administrativas
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasAdministrativaAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasAdministrativaNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasAdministrativaDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasAdministrativa %>
+                </td>
+              </tr>
+              <!--4.07 Despesas com Imóvel-->
+              <tr>
+                <td class="center">
+                  4.07 Despesas com Imóvel
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasImoveisAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasImoveisSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasImoveisNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasImoveisDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasImoveis %>
+                </td>
+              </tr>
+              <!--4.08 Despesas com Veículos-->
+              <tr>
+                <td class="center">
+                  4.08 Despesas com Veículos
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasVeiculosAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasVeiculosSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasVeiculosNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasVeiculosDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasVeiculos %>
+                </td>
+              </tr>
+              <!-- 5.01 Bens Imobilizados da Empresa-->
+              <tr>
+                <td class="center">
+                  5.01 Bens Imobilizados da Empresa
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosJ %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosMar %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosAp %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosMa %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosJn %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosJl %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasBensImobilizadosAg %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosSt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosOt %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= DespesasBensImobilizadosNv %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= DespesasBensImobilizadosDz %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= totalPaymentsDespesasBensImobilizados %>
+                </td>
+              </tr>
+              <!-- Saldo Final de Caixa-->
+              <tr>
+                <td class="center">
+                  Saldo Final de Caixa
+                </td>
+                <td class="center"></td>
+                <td class="center ">
+                  <%= somaJF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaFF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaMarF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaApF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaMaF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaJnF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaJlF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= somaAgF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center">
+                  <%= somaStF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaOtF %>
+                </td>
+                <td class="center"></td>
+                <td class="center">
+                  <%= somaNvF %>
+                </td>
+                <td class="center"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= somaDzF %>
+                </td>
+                <td class="center ca-table-background-grey current-month"></td>
+                <td class="center ca-table-background-grey current-month">
+                  <%= soma %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="canvas-holder" id="c1">
+          <div class="chartBox">
+            <canvas id="CanvaJanuary2022" width="400" height="200"></canvas>
+         
+          </div>
+          <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisJanuaryDays[i] %>
+                </td>
+                <td class="center ">
+                  <%= ReceiptsJanuary2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsJanuary2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysJanuary[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+         <div class="canvas-holder" id="c2">
+          <div class="chartBox">
+            <canvas id="CanvaFebruary2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 27 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisFebruaryDays[i] %>
+                </td>
+                <td class="center ">
+                  <%= ReceiptsFebruary2022[i] %> 
+                </td>
+                <td class="center ">
+                 <%= PaymentsFebruary2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysFebruary[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c3">
+          <div class="chartBox">
+            <canvas id="CanvaMarch2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisMarchDays[i] %>
+                </td>
+                <td class="center ">
+                  <%= ReceiptsMarch2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsMarch2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysMarch[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+            <div class="canvas-holder" id="c4">
+          <div class="chartBox">
+            <canvas id="CanvaApril2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisAprilDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsApril2022[i] %> 
+                </td>
+                <td class="center ">
+                  <%= PaymentsApril2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysApril[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c5">
+          <div class="chartBox">
+            <canvas id="CanvaMay2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisMayDays[i] %>
+                </td>
+                <td class="center ">
+                    <%= ReceiptsMay2022[i] %>
+                </td>
+                <td class="center ">
+                <%= PaymentsMay2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysMay[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c6">
+          <div class="chartBox">
+            <canvas id="CanvaJune2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisJuneDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsJune2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsJune2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysJune[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+            <div class="canvas-holder" id="c7">
+          <div class="chartBox">
+            <canvas id="CanvaJuly2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisJulyDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsJuly2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsJuly2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysJuly[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c8">
+          <div class="chartBox">
+            <canvas id="CanvaAugust2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisAugustDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsAugust2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsAugust2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysAugust[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c9">
+          <div class="chartBox">
+            <canvas id="CanvaSeptember2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisSeptemberDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsSeptember2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsSeptember2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysSeptember[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+            <div class="canvas-holder" id="c10">
+          <div class="chartBox">
+            <canvas id="CanvaOctober2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisOctoberDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsOctober2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsOctober2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysOctober[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+           <div class="canvas-holder" id="c11">
+          <div class="chartBox">
+            <canvas id="CanvaNovember2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisNovemberDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsNovember2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsNovember2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysNovember[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+          <div class="canvas-holder" id="c12">
+          <div class="chartBox">
+            <canvas id="CanvaDecember2022" width="400" height="200"></canvas>
+          
+          </div>
+             <table data-type="table-menu" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="center">
+                  Data
+                </th>
+                <th class="center">
+                  Recebimentos
+                </th>
+                <th class="center">
+                  Pagamentos
+                </th>
+                <th class="center">
+                  Sando Final
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data-->
+
+              <tr>
+                <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                <td class="center">
+                  <%= thisDecemberDays[i] %>
+                </td>
+                <td class="center ">
+                 <%= ReceiptsDecember2022[i] %>
+                </td>
+                <td class="center ">
+                  <%= PaymentsDecember2022[i] %>
+                </td>
+
+                <td class="center">
+                   <%= amountDaysDecember[i] %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          </div>
+      </div> 
+
+      <hr />
+    </div>
+  </div>
+</body>
+
+
+<script>
+  function mostrar() {
+    for (var i = 1; i < 14; i++) {
+      document.getElementById("c" + i).hidden = true;
+    }
+    var obj = event.target.dataset.nome;
+    document.getElementById(obj).hidden = false;
+  }
+
+  function inicia() {
+    for (var i = 1; i < 13; i++) {
+      document.getElementById("c" + i).hidden = true;
+    }
+        document.getElementById("week").addEventListener("click", mostrar);
+    document.getElementById("January2022").addEventListener("click", mostrar);
+     document.getElementById("February2022").addEventListener("click", mostrar);
+     document.getElementById("March2022").addEventListener("click", mostrar);
+     document.getElementById("April2022").addEventListener("click", mostrar);
+      document.getElementById("May2022").addEventListener("click", mostrar);
+      document.getElementById("June2022").addEventListener("click", mostrar);
+      document.getElementById("July2022").addEventListener("click", mostrar);
+       document.getElementById("August2022").addEventListener("click", mostrar);
+       document.getElementById("September2022").addEventListener("click", mostrar);
+       document.getElementById("October2022").addEventListener("click", mostrar);
+       document.getElementById("November2022").addEventListener("click", mostrar);
+         document.getElementById("December2022").addEventListener("click", mostrar);
+  }
+  window.addEventListener("load", inicia);
+
+</script>
+
+<!--importar o chartjs via cdn:-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<!--Lógica chart.js-->
+
+<script>
+
+    // setup
+
+    const dataWeek = {
+    labels: [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
+    ],
+    datasets: [
+       {
+      type: 'line',
+      label: 'Saldo',
+      data:
+
+      [
+        <%= somaJ %>,<%= somaF %>,
+        <%= somaMar %>,<%= somaAp %>,
+        <%= somaMa %>,<%= somaJn %>,
+         <%= somaJl %>,<%= somaAg %>,
+          <%= somaSt %>,<%= somaOt %>,
+           <%= somaNv %>,<%= somaDz %>,
+      ],
+
+      fill: false,
+      borderColor: 'rgb(54, 162, 235)'
+    },
+     {
+      type: 'bar',
+      label: 'Receitas',
+      data:  [
+        <%= receiptsJ %>,<%= receiptsF %>,
+        <%= receiptsMar %>,<%= receiptsAp %>,
+        <%= receiptsMa %>,<%= receiptsJn %>,
+          <%= receiptsJl %>,<%= receiptsAg %>,
+        <%= receiptsSt %>,<%= receiptsOt %>,
+        <%= receiptsNv %>,<%= receiptsDz %>,
+      ],
+      borderColor:  "rgb(152,251,152)",
+      backgroundColor: 'rgba(152,251,152 )'
+    },
+    {
+      type: 'bar',
+      label: 'Despesas',
+      data: [
+        <%= paymentsJ %>,<%= paymentsF %>,
+        <%= paymentsMar %>,<%= paymentsAp %>,
+        <%= paymentsMa %>,<%= paymentsJn %>,
+        <%= paymentsJl %>,<%= paymentsAg %>,
+        <%= paymentsSt %>,<%= paymentsOt %>,
+        <%= paymentsNv %>,<%= paymentsDz %>,
+      ],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132 )'
+    },
+   ]
+  };
+
+  const configWeek =  {
+    type :  'scatter' ,
+    data : dataWeek ,
+    options :  {
+      scales :
+       {
+        y :  {
+          beginAtZero :  true
+        }
+      }
+    }
+  } ;
+
+
+     // render init block
+  const myChartWeek = new Chart(document.getElementById("CanvaWeek"), configWeek);
+</script>
+
+<script>
+
+const datesjanuary2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisJanuaryDays[i] %>',
+<% } %>]);
+
+                  const somajanuary2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysJanuary[i] %>,
+                  <% } %>]);
+
+                   const receiptsjanuary2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsJanuary2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsjanuary2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsJanuary2022ChartJS[i] %>,
+                  <% } %>]);
+
+ 
+          
+
+
+     
+
+      // setup
+      const dataJanuary2022 = {
+      labels: datesjanuary2022 ,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somajanuary2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsjanuary2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsjanuary2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configJanuary2022 =  {
+      type :  'scatter' ,
+      data : dataJanuary2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartJanuary2022 = new Chart(document.getElementById("CanvaJanuary2022"), configJanuary2022);
+
+ 
+</script>
+
+<script>
+
+const datesfebruary2022 = ([
+    <% for (var i = 0 ; i <= 27 ; i ++ ) { %>
+      '<%= thisFebruaryDays[i] %>',
+<% } %>]);
+
+                  const somafebruary2022  = ([
+    <% for (var i = 0 ; i <= 27 ; i ++ ) { %>
+                  <%= somaDaysFebruary[i] %>,
+                  <% } %>]);
+
+                   const receiptsfebruary2022 = ([
+    <% for (var i = 0 ; i <= 27 ; i ++ ) { %>
+                  <%= ReceiptsFebruary2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsfebruary2022  = ([
+    <% for (var i = 0 ; i <= 28 ; i ++ ) { %>
+                  <%= PaymentsFebruary2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataFebruary2022 = {
+      labels: datesfebruary2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somafebruary2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsfebruary2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsfebruary2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configFebruary2022 =  {
+      type :  'scatter' ,
+      data : dataFebruary2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartFebruary2022 = new Chart(document.getElementById("CanvaFebruary2022"), configFebruary2022);
+
+   
+</script>
+
+<script>
+
+const datesmarch2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisMarchDays[i] %>',
+<% } %>]);
+
+                  const somamarch2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysMarch[i] %>,
+                  <% } %>]);
+
+                   const receiptsmarch2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsMarch2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsmarch2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsMarch2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataMarch2022 = {
+      labels: datesmarch2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somamarch2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsmarch2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsmarch2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configMarch2022 =  {
+      type :  'scatter' ,
+      data : dataMarch2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartMarch2022 = new Chart(document.getElementById("CanvaMarch2022"), configMarch2022);
+
+   
+</script>
+
+<script>
+
+const datesapril2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+      '<%= thisAprilDays[i] %>',
+<% } %>]);
+
+                  const somaapril2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= somaDaysApril[i] %>,
+                  <% } %>]);
+
+                   const receiptsapril2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= ReceiptsApril2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsapril2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= PaymentsApril2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataApril2022 = {
+      labels: datesapril2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaapril2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsapril2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsapril2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configApril2022 =  {
+      type :  'scatter' ,
+      data : dataApril2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartApril2022 = new Chart(document.getElementById("CanvaApril2022"), configApril2022);
+
+   
+</script>
+
+<script>
+
+const datesmay2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisMayDays[i] %>',
+<% } %>]);
+
+                  const somamay2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysMay[i] %>,
+                  <% } %>]);
+
+                   const receiptsmay2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsMay2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsmay2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsMay2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataMay2022 = {
+      labels: datesmay2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somamay2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsmay2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsmay2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configMay2022 =  {
+      type :  'scatter' ,
+      data : dataMay2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartMay2022 = new Chart(document.getElementById("CanvaMay2022"), configMay2022);
+
+   
+</script>
+
+<script>
+
+const datesjune2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+      '<%= thisJuneDays[i] %>',
+<% } %>]);
+
+                  const somajune2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= somaDaysJune[i] %>,
+                  <% } %>]);
+                   const receiptsjune2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= ReceiptsJune2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsjune2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= PaymentsJune2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataJune2022 = {
+      labels: datesjune2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somajune2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsjune2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsjune2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configJune2022 =  {
+      type :  'scatter' ,
+      data : dataJune2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartJune2022 = new Chart(document.getElementById("CanvaJune2022"), configJune2022);
+
+   
+</script>
+
+<script>
+
+const datesjuly2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+      '<%= thisJulyDays[i] %>',
+<% } %>]);
+
+                  const somajuly2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= somaDaysJuly[i] %>,
+                  <% } %>]);
+                   const receiptsjuly2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= ReceiptsJuly2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsjuly2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= PaymentsJuly2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataJuly2022 = {
+      labels: datesjuly2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somajuly2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsjuly2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsjuly2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configJuly2022 =  {
+      type :  'scatter' ,
+      data : dataJuly2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartJuly2022 = new Chart(document.getElementById("CanvaJuly2022"), configJuly2022);
+
+   
+</script>
+
+<script>
+
+const datesAugust2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisAugustDays[i] %>',
+<% } %>]);
+
+                  const somaAugust2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysAugust[i] %>,
+                  <% } %>]);
+                   const receiptsAugust2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsAugust2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsAugust2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsAugust2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataAugust2022 = {
+      labels: datesAugust2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaAugust2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsAugust2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsAugust2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configAugust2022 =  {
+      type :  'scatter' ,
+      data : dataAugust2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartAugust2022 = new Chart(document.getElementById("CanvaAugust2022"), configAugust2022);
+
+   
+</script>
+
+<script>
+
+const datesSeptember2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+      '<%= thisSeptemberDays[i] %>',
+<% } %>]);
+
+                  const somaSeptember2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= somaDaysSeptember[i] %>,
+                  <% } %>]);
+                   const receiptsSeptember2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= ReceiptsSeptember2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsSeptember2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= PaymentsSeptember2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataSeptember2022 = {
+      labels: datesSeptember2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaSeptember2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsSeptember2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsSeptember2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configSeptember2022 =  {
+      type :  'scatter' ,
+      data : dataSeptember2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartSeptember2022 = new Chart(document.getElementById("CanvaSeptember2022"), configSeptember2022);
+
+   
+</script>
+
+<script>
+
+const datesOctober2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisOctoberDays[i] %>',
+<% } %>]);
+
+                  const somaOctober2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysOctober[i] %>,
+                  <% } %>]);
+                   const receiptsOctober2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsOctober2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsOctober2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsOctober2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataOctober2022 = {
+      labels: datesOctober2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaOctober2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsOctober2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsOctober2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configOctober2022 =  {
+      type :  'scatter' ,
+      data : dataOctober2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartOctober2022 = new Chart(document.getElementById("CanvaOctober2022"), configOctober2022);
+
+   
+</script>
+
+<script>
+
+const datesNovember2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+      '<%= thisNovemberDays[i] %>',
+<% } %>]);
+
+                  const somaNovember2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= somaDaysNovember[i] %>,
+                  <% } %>]);
+                   const receiptsNovember2022 = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= ReceiptsNovember2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsNovember2022  = ([
+    <% for (var i = 0 ; i <= 29 ; i ++ ) { %>
+                  <%= PaymentsNovember2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataNovember2022 = {
+      labels: datesNovember2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaNovember2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsNovember2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsNovember2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configNovember2022 =  {
+      type :  'scatter' ,
+      data : dataNovember2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartNovember2022 = new Chart(document.getElementById("CanvaNovember2022"), configNovember2022);
+
+   
+</script>
+
+<script>
+
+const datesDecember2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+      '<%= thisDecemberDays[i] %>',
+<% } %>]);
+
+                  const somaDecember2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= somaDaysDecember[i] %>,
+                  <% } %>]);
+                   const receiptsDecember2022 = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= ReceiptsDecember2022ChartJS[i] %>,
+                  <% } %>]);
+
+                   const paymentsDecember2022  = ([
+    <% for (var i = 0 ; i <= 30 ; i ++ ) { %>
+                  <%= PaymentsDecember2022ChartJS[i] %>,
+                  <% } %>]);
+
+
+     
+
+      // setup
+      const dataDecember2022 = {
+      labels: datesDecember2022,
+      datasets: [
+         {
+        type: 'line',
+        label: 'Saldo',
+        data: somaDecember2022 ,
+
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)'
+      },
+       {
+        type: 'bar',
+        label: 'Receitas',
+        data:receiptsDecember2022 ,
+        borderColor:  "rgb(152,251,152)",
+        backgroundColor: 'rgba(152,251,152 )'
+      },
+      {
+        type: 'bar',
+        label: 'Despesas',
+        data: paymentsDecember2022 ,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132 )'
+      },
+     ]
+    };
+
+    const configDecember2022 =  {
+      type :  'scatter' ,
+      data : dataDecember2022 ,
+      options :  {
+        scales :  {
+             x :  {
+            type :  'time',
+            time: {
+              unit: 'day',
+              parser: 'dd-MM-yyyy',
+            }
+          },
+          y :  {
+            beginAtZero :  true
+          }
+        }
+      }
+    } ;
+
+
+       // render init block
+    const myChartDecember2022 = new Chart(document.getElementById("CanvaDecember2022"), configDecember2022);
+
+   
+</script>
+<%- include ("../../partials/footer.ejs") %>

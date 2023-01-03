@@ -1,0 +1,665 @@
+<%- include ("../../partials/header.ejs") %> <%- include ("../../partials/navbar.ejs") %>
+<div class="container">
+
+ <hr>
+  <h2>Categorias de Receitas</h2>
+  <hr>
+  <a class="btn btn-primary" href="/admin/categories/receitas/sales&services/newReceita"
+    >Receitas de Vendas e de Serviços</a
+  >
+  <hr />
+    <table id="tab" data-type="table-menu" class="table table-bordered">
+
+    <tbody>
+      <% categoriesreceitas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/receitas/sales&services/editReceita/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+          <form
+            method="POST"
+            action="/categories/receitas/sales&services/deleteReceita"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<hr />
+  <a class="btn btn-primary" href="/admin/categories/receitas/others/newOthers"
+    >Outras Receitas e Entradas</a
+  >
+  <hr />
+    <table id="tab" data-type="table-menu" class="table table-bordered">
+
+    <tbody>
+      <% categoriesOthersReceitas.forEach(categoryOthers => { %>
+      <tr class="pesquisar">
+        <th><%= categoryOthers.title %></th>
+        <th>
+          <a
+            href="/admin/categories/receitas/others/editOthers/<%= categoryOthers.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+          <form
+            method="POST"
+            action="/categories/receitas/others/deleteOthers"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= categoryOthers.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+
+  
+<hr />
+  <a class="btn btn-primary" href="/admin/categories/receitas/financial/newFinancial"
+    >Receitas Financeiras</a
+  >
+  <hr />
+    <table id="tab" data-type="table-menu" class="table table-bordered">
+
+    <tbody>
+      <% categoriesFinancialReceitas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/receitas/financial/editFinancial/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+          <form
+            method="POST"
+            action="/categories/receitas/financial/deleteFinancial"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+   <hr />
+
+
+<hr />
+  <a class="btn btn-primary" href="/admin/categories/receitas/fretes/newFretes"
+    >Receitas de Fretes e Entregas</a
+  >
+  <hr />
+    <table id="tab" data-type="table-menu" class="table table-bordered">
+
+    <tbody>
+      <% categoriesFretesEntregas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/receitas/fretes/editFretes/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+          <form
+            method="POST"
+            action="/categories/receitas/fretes/deleteFretes"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+   <hr />
+
+  <h2>Categorias de Despesas</h2>
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/impostosVendas&Servicos/newDespesaImpostos"
+    > Impostos sobre Vendas e sobre Serviços</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasImpostos.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/impostosVendas&Servicos/editDespesaImpostos/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/impostosVendas&Servicos/deleteDespesaImpostos"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/despesasVendasEServicos/newDespesasVendasEServicos"
+    > Despesas com Vendas e Serviços</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasVendasEServicos.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/despesasVendasEServicos/editDespesasVendasEServicos/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/despesasVendasEServicos/deleteDespesasVendasEServicos"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/salariosEncargo/new"
+    > Despesas com Salários e Encargos</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasSalariosEncargos.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/salariosEncargo/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/salariosEncargo/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/colaboradores/new"
+    > Despesas com Colaboradores</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasColaboradores.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/colaboradores/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/colaboradores/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/adminstrativas/new"
+    > Despesas Administrativas</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasAdminstrativas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/adminstrativas/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/adminstrativas/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/comerciais/new"
+    > Despesas Comerciais</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasComerciais.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/comerciais/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/comerciais/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/imovel/new"
+    > Despesas com Imóvel</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasImoveis.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/imovel/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/imovel/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/veiculos/new"
+    > Despesas com Veículos</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasVeiculos.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/veiculos/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/veiculos/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/diretoria/new"
+    > Despesas com Diretoria</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasDiretoria.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/diretoria/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/diretoria/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/financeiras/new"
+    > Despesas Financeiras</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasFinanceiras.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/financeiras/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/financeiras/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/outrasDespesas/new"
+    > Outras Despesas</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesOutrasDespesas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/outrasDespesas/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/outrasDespesas/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/bensImobilizados/new"
+    > Bens Imobilizados da Empresa
+</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasBensImobilizados.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/bensImobilizados/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/bensImobilizados/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/emprestimosFinanciamentos/new"
+    > Empréstimos e Financiamentos
+</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasEmprestimosFinanciamentos.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/emprestimosFinanciamentos/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/emprestimosFinanciamentos/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+<hr />
+
+  <a class="btn btn-primary" href="/admin/categories/despesas/parcelamentosDividas/new"
+    > Parcelamentos e Dívidas
+</a
+    ></a
+  >
+  <hr />
+  <table id="tab" data-type="table-menu" class="table table-bordered">
+    <tbody>
+      <% categoriesDespesasParcelamentosDividas.forEach(category => { %>
+      <tr class="pesquisar">
+        <th><%= category.title %></th>
+        <th>
+          <a
+            href="/admin/categories/despesas/parcelamentosDividas/edit/<%= category.id %>"
+            class="btn btn-warning"
+            >Editar</a
+          >
+
+          <form
+            method="POST"
+            action="/categories/despesas/parcelamentosDividas/delete"
+            style="display: inline;"
+            onsubmit="confirmarDelecao(event, this)"
+          >
+            <input type="hidden" name="id" value="<%= category.id %>" />
+            <button class="btn btn-danger">Deletar</button>
+          </form>
+        </th>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<hr />
+
+
+
+
+
+    
+</div>
+<%- include ("../../partials/footer.ejs") %>
+<script>
+  function confirmarDelecao(event, form) {
+    event.preventDefault();
+    var decision = confirm("Você quer deletar esta categoria?");
+    if (decision) {
+      form.submit();
+    }
+  }
+</script>
+
+
+
