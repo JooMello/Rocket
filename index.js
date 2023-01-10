@@ -113,8 +113,9 @@ const {
   addDays,
   eachDayOfInterval,
   format,
-  parseISO
+  parseISO,
 } = require('date-fns');
+
 
 
 app.get("/", adminAuth, async (req, res) => {
@@ -261,7 +262,13 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: January,
     end: daysOfJanuary
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+/////////////////////
+  const JanuaryDays = eachDayOfInterval({
+    start: January,
+    end: daysOfJanuary
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+  
+////documentação date-fns, format (eachDayOfInterval);
 
 
   const February = new Date('2022/02/01');
@@ -270,13 +277,24 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: February,
     end: daysOfFebruary
   }, ).map(d => format(d, 'dd-MM-yyyy'))
-
+  ////////
+  const FebruaryDays = eachDayOfInterval({
+    start: February,
+    end: daysOfFebruary
+  }, ).map(d => format(d, 'dd/MM/yyyy'))
+////////
   const March = new Date('2022/03/01');
   const daysOfMarch = addDays(March, 31);
   const thisMarchDays = eachDayOfInterval({
     start: March,
     end: daysOfMarch
   }, ).map(d => format(d, 'dd-MM-yyyy'));
+  //////
+  const MarchDays = eachDayOfInterval({
+    start: March,
+    end: daysOfMarch
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+  ////
 
   const April = new Date('2022/04/01');
   const daysOfApril = addDays(April, 30);
@@ -284,6 +302,12 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: April,
     end: daysOfApril
   }, ).map(d => format(d, 'dd-MM-yyyy'));
+  //////
+  const AprilDays = eachDayOfInterval({
+    start: April,
+    end: daysOfApril
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+  ////
 
   const May = new Date('2022/05/01');
   const daysOfMay = addDays(May, 31);
@@ -291,7 +315,12 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: May,
     end: daysOfMay
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+  //////
+  const MayDays = eachDayOfInterval({
+    start: May,
+    end: daysOfMay
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+///////
 
   const June = new Date('2022/06/01');
   const daysOfJune = addDays(June, 30);
@@ -299,14 +328,24 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: June,
     end: daysOfJune
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+  ////
+    const JuneDays = eachDayOfInterval({
+    start: June,
+    end: daysOfJune
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+//////
   const July = new Date('2022/07/01');
   const daysOfJuly = addDays(July, 30);
   const thisJulyDays = eachDayOfInterval({
     start: July,
     end: daysOfJuly
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+//////
+const JulyDays = eachDayOfInterval({
+  start: July,
+  end: daysOfJuly
+}, ).map(d => format(d, 'dd/MM/yyyy'));
+////
 
   const August = new Date('2022/08/01');
   const daysOfAugust = addDays(August, 31);
@@ -314,6 +353,12 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: August,
     end: daysOfAugust
   }, ).map(d => format(d, 'dd-MM-yyyy'));
+/////
+  const AugustDays = eachDayOfInterval({
+    start: August,
+    end: daysOfAugust
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+////
 
   const September = new Date('2022/09/01');
   const daysOfSeptember = addDays(September, 30);
@@ -321,14 +366,24 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: September,
     end: daysOfSeptember
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+/////
+const SeptemberDays = eachDayOfInterval({
+  start: September,
+  end: daysOfSeptember
+}, ).map(d => format(d, 'dd/MM/yyyy'));
+////
   const October = new Date('2022/10/01');
   const daysOfOctober = addDays(October, 31);
   const thisOctoberDays = eachDayOfInterval({
     start: October,
     end: daysOfOctober
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+/////
+  const OctoberDays = eachDayOfInterval({
+    start: October,
+    end: daysOfOctober
+  }, ).map(d => format(d, 'dd/MM/yyyy'));
+////
 
   const November = new Date('2022/11/01');
   const daysOfNovember = addDays(November, 30);
@@ -336,7 +391,12 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: November,
     end: daysOfNovember
   }, ).map(d => format(d, 'dd-MM-yyyy'));
-
+//////
+const NovemberDays = eachDayOfInterval({
+  start: November,
+  end: daysOfNovember
+}, ).map(d => format(d, 'dd/MM/yyyy'));
+////
 
   const December = new Date('2022/12/01');
   const daysOfDecember = addDays(December, 31);
@@ -344,6 +404,11 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: December,
     end: daysOfDecember
   }, ).map(d => format(d, 'dd-MM-yyyy'));
+/////
+const DecemberDays = eachDayOfInterval({
+  start: December,
+  end: daysOfDecember
+}, ).map(d => format(d, 'dd/MM/yyyy'));
 
 
 
@@ -3707,18 +3772,18 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
                                               totalPayments: totalPayments,
                                               totalReceipts: totalReceipts,
                                               soma: soma,
-                                              thisJanuaryDays,
-                                              thisFebruaryDays,
-                                              thisMarchDays,
-                                              thisAprilDays,
-                                              thisMayDays,
-                                              thisJuneDays,
-                                              thisJulyDays,
-                                              thisAugustDays,
-                                              thisSeptemberDays,
-                                              thisOctoberDays,
-                                              thisNovemberDays,
-                                              thisDecemberDays,
+                                              thisJanuaryDays,JanuaryDays,
+                                              thisFebruaryDays,FebruaryDays,
+                                              thisMarchDays,MarchDays,
+                                              thisAprilDays,AprilDays,
+                                              thisMayDays,MayDays,
+                                              thisJuneDays,JuneDays,
+                                              thisJulyDays,JulyDays,
+                                              thisAugustDays,AugustDays,
+                                              thisSeptemberDays,SeptemberDays,
+                                              thisOctoberDays,OctoberDays,
+                                              thisNovemberDays,NovemberDays,
+                                              thisDecemberDays,DecemberDays,
                                               ReceiptsJanuary2022,
                                               PaymentsJanuary2022,
                                               amountDaysJanuary,
