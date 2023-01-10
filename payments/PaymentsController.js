@@ -24,6 +24,11 @@ const {
 } = require("sequelize");
 
 
+const {
+  formatRelative,
+  format
+} = require('date-fns');
+
 //lista todos os pagamento
 router.get("/admin/payments", adminAuth, async (req, res, next) => {
 
@@ -185,7 +190,6 @@ router.get("/admin/payments", adminAuth, async (req, res, next) => {
   });
   var totalPayments14 = amount14['sum(`valor`)']
   /////////////////////////////////////////////////////////////////
-
 
   Payment.findAll({
     include: [{
