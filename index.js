@@ -109,7 +109,12 @@ app.use("/", CategoriesFretesEntregasController);
 app.use("/", usersController);
 app.use("/", paymentsController);
 app.use("/", receiptsController)
-
+const {
+  addDays,
+  eachDayOfInterval,
+  format,
+  parseISO
+} = require('date-fns');
 
 
 app.get("/", adminAuth, async (req, res) => {
@@ -249,12 +254,6 @@ app.get("/admin/categories", adminAuth, (req, res) => {
 
 
 app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
-  const {
-    addDays,
-    eachDayOfInterval,
-    format
-  } = require('date-fns');
-
 
   const January = new Date('2022/01/01');
   const daysOfJanuary = addDays(January, 31);
@@ -262,6 +261,8 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     start: January,
     end: daysOfJanuary
   }, ).map(d => format(d, 'dd-MM-yyyy'));
+
+
 
   const February = new Date('2022/02/01');
   const daysOfFebruary = addDays(February, 28);
@@ -3609,8 +3610,6 @@ app.get("/admin/fluxoCaixa", adminAuth, async (req, res) => {
     (-Number(await getAmount(Payment, 30, 11, 2022))),
     (-Number(await getAmount(Payment, 31, 11, 2022))),
   ]);
-
-
 
 
 
