@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário Ellen! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                         0 0 40px rgba(255, 105, 180, 0.6);
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .name {
+            font-size: 5rem;
+            background: linear-gradient(45deg, #ff6b9d, #ffa07a, #ffd700, #ff69b4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 3s ease infinite, pulse 1.5s ease-in-out infinite;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        @keyframes rainbowText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .message {
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .emoji-line {
+            font-size: 3rem;
+            margin: 30px 0;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Confetes */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Foguete voador */
+        .rocket {
+            position: absolute;
+            font-size: 3rem;
+            animation: flyRocket 8s linear infinite;
+        }
+
+        @keyframes flyRocket {
+            0% {
+                left: -100px;
+                top: 80%;
+            }
+            50% {
+                left: 50%;
+                top: 20%;
+            }
+            100% {
+                left: 110%;
+                top: 80%;
+            }
+        }
+
+        /* Gatinhos flutuantes */
+        .cat {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Estrelinhas piscando */
+        .star {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        /* Corações flutuantes */
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 6s ease-in-out infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -50px;
+                opacity: 1;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+            }
+        }
+
+        .cake {
+            font-size: 5rem;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+            margin: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .name { font-size: 3.5rem; }
+            .message { font-size: 1.5rem; }
+            .cake { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Feliz Aniversário 🎉</h1>
+        <div class="name">Ellen</div>
+        <div class="cake">🎂</div>
+        <div class="message">
+            Que seu dia seja tão especial quanto você é! ✨<br>
+            Que venham muitos momentos incríveis, sorrisos<br>
+            e muito amor nesse novo ano de vida! 💕
+        </div>
+        <div class="emoji-line">
+            🎈 🎁 🎊 🎀 🌟
+        </div>
+    </div>
+
+    <!-- Foguetes -->
+    <div class="rocket" style="animation-delay: 0s;">🚀</div>
+    <div class="rocket" style="animation-delay: 4s;">🚀</div>
+
+    <!-- Gatinhos -->
+    <div class="cat" style="left: 10%; top: 20%; animation-delay: 0s;">😺</div>
+    <div class="cat" style="right: 10%; top: 30%; animation-delay: 1s;">🐱</div>
+    <div class="cat" style="left: 15%; bottom: 20%; animation-delay: 2s;">😸</div>
+    <div class="cat" style="right: 15%; bottom: 30%; animation-delay: 1.5s;">😻</div>
+
+    <!-- Estrelinhas -->
+    <div class="star" style="left: 5%; top: 10%; animation-delay: 0s;">⭐</div>
+    <div class="star" style="right: 8%; top: 15%; animation-delay: 0.5s;">✨</div>
+    <div class="star" style="left: 20%; top: 25%; animation-delay: 1s;">🌟</div>
+    <div class="star" style="right: 25%; top: 35%; animation-delay: 1.5s;">💫</div>
+    <div class="star" style="left: 30%; bottom: 15%; animation-delay: 0.7s;">⭐</div>
+    <div class="star" style="right: 35%; bottom: 25%; animation-delay: 1.2s;">✨</div>
+
+    <!-- Corações -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💕</div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;">💝</div>
+    <div class="heart" style="left: 70%; animation-delay: 1s;">💗</div>
+    <div class="heart" style="left: 90%; animation-delay: 3s;">💞</div>
+
+    <script>
+        // Criar confetes coloridos
+        const colors = ['#ff6b9d', '#ffa07a', '#ffd700', '#ff69b4', '#00f2fe', '#4facfe', '#f093fb'];
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            confetti.style.width = (Math.random() * 10 + 5) + 'px';
+            confetti.style.height = (Math.random() * 10 + 5) + 'px';
+            document.body.appendChild(confetti);
+        }
+
+        // Adicionar mais balões flutuantes
+        const balloons = ['🎈', '🎀', '🎁', '🎊', '🎉'];
+        for (let i = 0; i < 10; i++) {
+            const balloon = document.createElement('div');
+            balloon.className = 'heart';
+            balloon.textContent = balloons[Math.floor(Math.random() * balloons.length)];
+            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.animationDelay = Math.random() * 6 + 's';
+            balloon.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            document.body.appendChild(balloon);
+        }
+    </script>
+</body>
+</html>
