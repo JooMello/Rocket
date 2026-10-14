@@ -188,36 +188,85 @@
             font-style: italic;
         }
 
-        /* Gatinhos */
-        .kittens {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-
-        .kitten-img {
-            width: 80px;
-            height: 80px;
+        /* Gatinhos espalhados */
+        .floating-kitten {
+            position: fixed;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #FFB6C1;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-            animation: floatKitten 3s ease-in-out infinite;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInKitten 0.8s ease forwards;
         }
 
-        .kitten-img:nth-child(2) {
-            animation-delay: 0.5s;
+        @keyframes fadeInKitten {
+            to { opacity: 1; }
         }
 
-        .kitten-img:nth-child(3) {
-            animation-delay: 1s;
+        .floating-kitten:nth-child(1) {
+            left: 5%;
+            top: 15%;
+            animation: floatKitten1 4s ease-in-out infinite, fadeInKitten 0.8s ease 0.5s forwards;
         }
 
-        @keyframes floatKitten {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .floating-kitten:nth-child(2) {
+            right: 8%;
+            top: 20%;
+            animation: floatKitten2 3.5s ease-in-out infinite, fadeInKitten 0.8s ease 0.7s forwards;
+        }
+
+        .floating-kitten:nth-child(3) {
+            left: 10%;
+            bottom: 20%;
+            animation: floatKitten3 4.2s ease-in-out infinite, fadeInKitten 0.8s ease 0.9s forwards;
+        }
+
+        .floating-kitten:nth-child(4) {
+            right: 12%;
+            bottom: 25%;
+            animation: floatKitten1 3.8s ease-in-out infinite, fadeInKitten 0.8s ease 1.1s forwards;
+        }
+
+        .floating-kitten:nth-child(5) {
+            left: 15%;
+            top: 50%;
+            animation: floatKitten2 4.5s ease-in-out infinite, fadeInKitten 0.8s ease 1.3s forwards;
+        }
+
+        .floating-kitten:nth-child(6) {
+            right: 10%;
+            top: 55%;
+            animation: floatKitten3 3.2s ease-in-out infinite, fadeInKitten 0.8s ease 1.5s forwards;
+        }
+
+        .floating-kitten:nth-child(7) {
+            left: 8%;
+            top: 70%;
+            animation: floatKitten1 4.8s ease-in-out infinite, fadeInKitten 0.8s ease 1.7s forwards;
+        }
+
+        .floating-kitten:nth-child(8) {
+            right: 15%;
+            bottom: 15%;
+            animation: floatKitten2 3.3s ease-in-out infinite, fadeInKitten 0.8s ease 1.9s forwards;
+        }
+
+        @keyframes floatKitten1 {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes floatKitten2 {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-12px) rotate(-5deg); }
+        }
+
+        @keyframes floatKitten3 {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
         }
 
         .footer {
@@ -331,13 +380,9 @@
                 right: 20px;
             }
 
-            .kittens {
-                gap: 10px;
-            }
-
-            .kitten-img {
-                width: 70px;
-                height: 70px;
+            .floating-kitten {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -369,12 +414,6 @@
                 <span>✨</span>
             </div>
             
-            <div class="kittens">
-                <img src="images/gatinho1.jpg" alt="Gatinho fofo" class="kitten-img">
-                <img src="images/gatinho2.webp" alt="Gatinho fofo" class="kitten-img">
-                <img src="images/gatinho1.jpg" alt="Gatinho fofo" class="kitten-img">
-            </div>
-
             <div class="message">
                 <strong>Feliz Aniversário, Amor da Minha Vida!</strong><br><br>
                 
@@ -409,6 +448,18 @@
 
     <!-- Botão música -->
     <button class="music-btn" id="musicBtn">🎵</button>
+
+    <!-- Gatinhos espalhados (aparecem depois de abrir) -->
+    <div id="floatingKittens" style="display: none;">
+        <img src="images/gatinho3.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho4.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho5.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho6.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho7.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho8.webp" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho1.jpg" alt="Gatinho" class="floating-kitten">
+        <img src="images/gatinho2.webp" alt="Gatinho" class="floating-kitten">
+    </div>
 
     <script>
         let audioContext;
@@ -559,6 +610,11 @@
             // Mostrar conteúdo
             document.getElementById('content').classList.add('show');
             document.getElementById('musicBtn').classList.add('show');
+            
+            // Mostrar gatinhos espalhados
+            setTimeout(() => {
+                document.getElementById('floatingKittens').style.display = 'block';
+            }, 800);
             
             // Iniciar música após um delay
             setTimeout(() => {
