@@ -467,19 +467,32 @@
             celebration: [{f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}]
         };
 
-        // Careless Whisper - George Michael (melodia do saxofone)
+        // Careless Whisper - George Michael (melodia EXATA do saxofone)
         const carelessWhisper = [
-            // Intro icônico
-            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
-            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:440,d:0.6},{f:392,d:0.6},{f:349,d:0.8},
+            // Intro icônico (D - E - F - G - E - D - D)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
             
-            // Continuação
-            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
-            {f:247,d:0.6},{f:294,d:0.6},{f:330,d:0.6},{f:294,d:0.6},{f:262,d:1.2},
+            // Segunda frase (D - E - F - G - A - G - F)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:440,d:1.0},{f:392,d:0.5},{f:349,d:1.0},
             
-            // Repetição
-            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
-            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:440,d:0.6},{f:392,d:0.6},{f:349,d:1.0}
+            // Terceira frase (D - E - F - G - E - D - D)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
+            
+            // Quarta frase (B - D - E - D - C)
+            {f:247,d:0.5},{f:294,d:0.5},{f:330,d:0.5},{f:294,d:0.5},{f:262,d:1.5},
+            
+            // Repetição do refrão
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
+            
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:440,d:1.0},{f:392,d:0.5},{f:349,d:1.5},
+            
+            // Final suave
+            {f:330,d:0.5},{f:294,d:0.5},{f:262,d:0.5},{f:294,d:2.0}
         ];
 
         function playSound(freq, dur, time, volume = 0.25) {
@@ -519,26 +532,27 @@
             });
         }
 
-        function playSaxophone(freq, dur, time, volume = 0.25) {
+        function playSaxophone(freq, dur, time, volume = 0.28) {
             if (!audioContext) return;
             
-            // Oscilador principal (som de saxofone)
+            // Oscilador principal (som de saxofone mais rico)
             const osc = audioContext.createOscillator();
             const gain = audioContext.createGain();
             osc.connect(gain);
             gain.connect(audioContext.destination);
             osc.frequency.value = freq;
-            osc.type = 'sine'; // Som suave tipo saxofone
+            osc.type = 'triangle'; // Triangle para som mais quente
             
+            // Envelope mais suave e expressivo
             gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(volume, time + 0.05);
-            gain.gain.linearRampToValueAtTime(volume * 0.8, time + dur * 0.5);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.08);
+            gain.gain.linearRampToValueAtTime(volume * 0.85, time + dur * 0.7);
             gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
             
             osc.start(time);
             osc.stop(time + dur);
 
-            // Harmônico para enriquecer o som
+            // Harmônico para profundidade
             const harm = audioContext.createOscillator();
             const harmGain = audioContext.createGain();
             harm.connect(harmGain);
@@ -547,11 +561,26 @@
             harm.type = 'sine';
             
             harmGain.gain.setValueAtTime(0, time);
-            harmGain.gain.linearRampToValueAtTime(volume * 0.15, time + 0.05);
+            harmGain.gain.linearRampToValueAtTime(volume * 0.18, time + 0.08);
             harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
             
             harm.start(time);
             harm.stop(time + dur);
+
+            // Sub-harmônico para corpo
+            const sub = audioContext.createOscillator();
+            const subGain = audioContext.createGain();
+            sub.connect(subGain);
+            subGain.connect(audioContext.destination);
+            sub.frequency.value = freq / 2;
+            sub.type = 'sine';
+            
+            subGain.gain.setValueAtTime(0, time);
+            subGain.gain.linearRampToValueAtTime(volume * 0.12, time + 0.08);
+            subGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            sub.start(time);
+            sub.stop(time + dur);
         }
 
         function createConfetti() {
@@ -634,11 +663,11 @@
                 createConfetti();
             }, 8200);
 
-            // Música em loop (Careless Whisper dura ~16s)
+            // Música em loop (Careless Whisper dura ~20s)
             setTimeout(() => {
                 setInterval(() => {
                     playCarelessWhisper();
-                }, 16000);
+                }, 20000);
             }, 8200);
         }
     </script>
