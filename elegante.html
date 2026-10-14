@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o design - Aniversário Ellen 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFE8F0 0%, #FFD6E8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #FF1493;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #DB7093;
+            font-weight: 500;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            width: 380px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.2);
+            border: 3px solid #FFB6C1;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 20, 147, 0.3);
+            border-color: #FF1493;
+        }
+
+        .option-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .option-card:nth-child(2) .option-icon {
+            animation-delay: 0.5s;
+        }
+
+        .option-title {
+            font-size: 1.8rem;
+            color: #FF1493;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .option-description {
+            font-size: 1rem;
+            color: #DB7093;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .option-features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #DB7093;
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+
+        .option-button {
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
+            width: 100%;
+        }
+
+        .option-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.4);
+        }
+
+        .decorations {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+            .options-container {
+                gap: 30px;
+            }
+            .option-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💕 Feliz Aniversário Ellen 💕</h1>
+        <p>Três versões lindas! Escolha sua favorita:</p>
+    </div>
+
+    <div class="options-container">
+        <!-- Opção 1 -->
+        <div class="option-card" onclick="window.location.href='opcao1.html'">
+            <div class="option-icon">💌</div>
+            <div class="option-title">Opção 1: Carta + Fogos</div>
+            <div class="option-description">
+                Carta que abre com fogos de artifício! 🎆
+            </div>
+            <div class="option-features">
+                <div class="feature">
+                    <span class="feature-icon">✨</span>
+                    <span>Envelope rosa elegante</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎆</span>
+                    <span>Fogos de artifício</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💕</span>
+                    <span>Carta desliza para fora</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎀</span>
+                    <span>Mensagem de amor</span>
+                </div>
+            </div>
+            <button class="option-button">Ver Opção 1 💌</button>
+        </div>
+
+        <!-- Opção 2 -->
+        <div class="option-card" onclick="window.location.href='opcao2.html'">
+            <div class="option-icon">🎁</div>
+            <div class="option-title">Opção 2: Caixa Romântica</div>
+            <div class="option-description">
+                Caixa de presente com declaração de amor! 💕
+            </div>
+            <div class="option-features">
+                <div class="feature">
+                    <span class="feature-icon">🎁</span>
+                    <span>Caixa rosa com laço</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎊</span>
+                    <span>Explosão de confetes</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💕</span>
+                    <span>Declaração de amor</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💖</span>
+                    <span>Mensagem especial</span>
+                </div>
+            </div>
+            <button class="option-button">Ver Opção 2 🎁</button>
+        </div>
+
+        <!-- Opção 3 -->
+        <div class="option-card" onclick="window.location.href='opcao3.html'">
+            <div class="option-icon">💝</div>
+            <div class="option-title">Opção 3: Super Romântica</div>
+            <div class="option-description">
+                A mais romântica de todas! Declaração profunda! 💖
+            </div>
+            <div class="option-features">
+                <div class="feature">
+                    <span class="feature-icon">💝</span>
+                    <span>Caixa rosa com laço</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎊</span>
+                    <span>Explosão de confetes</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💖</span>
+                    <span>Declaração MUITO romântica</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">✨</span>
+                    <span>Texto mais longo e emotivo</span>
+                </div>
+            </div>
+            <button class="option-button">Ver Opção 3 💝</button>
+        </div>
+    </div>
+
+    <div class="decorations">
+        <span>🐱</span>
+        <span>🌸</span>
+        <span>🎀</span>
+        <span>💕</span>
+        <span>🧁</span>
+        <span>🍪</span>
+    </div>
+</body>
+</html>
