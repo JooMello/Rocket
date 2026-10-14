@@ -318,63 +318,6 @@
             }
         }
 
-        /* Botão iniciar */
-        .start-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .start-content {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .start-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 3rem;
-            color: #FF1493;
-            margin-bottom: 20px;
-        }
-
-        .start-subtitle {
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .start-button {
-            background: linear-gradient(135deg, #FF1493, #FF69B4);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .start-button:hover {
-            transform: scale(1.1);
-        }
-
-        .start-button:active {
-            transform: scale(0.95);
-        }
-
-        .hidden {
-            display: none !important;
-        }
 
         /* Mobile */
         @media (max-width: 600px) {
@@ -408,32 +351,10 @@
             .birthday-message {
                 padding: 30px 25px;
             }
-
-            .start-title {
-                font-size: 2rem;
-            }
-
-            .start-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .start-button {
-                padding: 15px 40px;
-                font-size: 1.2rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Tela inicial -->
-    <div class="start-screen" id="startScreen">
-        <div class="start-content">
-            <div class="start-title">🐔 Surpresa Especial! 🥚</div>
-            <div class="start-subtitle">Prepare-se para uma animação divertida!</div>
-            <button class="start-button" onclick="startAnimation()">🎬 Começar</button>
-        </div>
-    </div>
-
     <!-- Cenário -->
     <div class="cloud cloud1"></div>
     <div class="cloud cloud2"></div>
@@ -442,7 +363,7 @@
     <!-- Galinha Real -->
     <div class="chicken-wrapper">
         <div class="chicken">
-            <img src="images/galinha-real.png" alt="Galinha">
+            <img src="images/galinha-branca.png" alt="Galinha">
         </div>
     </div>
 
@@ -548,51 +469,64 @@
             }
         }
 
-        function startAnimation() {
+        // Auto-iniciar quando a página carregar
+        window.addEventListener('load', function() {
             // Criar AudioContext
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
             if (audioContext.state === 'suspended') {
-                audioContext.resume();
+                // Tentar ativar o audio (pode não funcionar em alguns navegadores sem interação)
+                document.body.addEventListener('click', function() {
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
+                }, { once: true });
             }
-
-            // Esconder tela inicial
-            document.getElementById('startScreen').classList.add('hidden');
 
             // Sons durante a animação
             setTimeout(() => {
                 // Som de andar (loop)
                 for (let i = 0; i < 20; i++) {
                     setTimeout(() => {
-                        playSoundSequence(comicSounds.walk, audioContext.currentTime);
+                        if (audioContext) {
+                            playSoundSequence(comicSounds.walk, audioContext.currentTime);
+                        }
                     }, i * 250);
                 }
             }, 500);
 
             // Som de botar ovo
             setTimeout(() => {
-                playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
+                if (audioContext) {
+                    playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
+                }
             }, 5500);
 
             // Som de rachar
             setTimeout(() => {
-                playSoundSequence(comicSounds.crack, audioContext.currentTime);
+                if (audioContext) {
+                    playSoundSequence(comicSounds.crack, audioContext.currentTime);
+                }
             }, 7700);
 
             // Celebração
             setTimeout(() => {
-                playSoundSequence(comicSounds.celebration, audioContext.currentTime);
-                playBirthdaySong();
+                if (audioContext) {
+                    playSoundSequence(comicSounds.celebration, audioContext.currentTime);
+                    playBirthdaySong();
+                }
                 createConfetti();
             }, 8300);
 
             // Música contínua
             setTimeout(() => {
                 setInterval(() => {
-                    playBirthdaySong();
+                    if (audioContext) {
+                        playBirthdaySong();
+                    }
                 }, 10000);
             }, 8300);
-        }
+        });
     </script>
 </body>
 </html>
