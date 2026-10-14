@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário Ellen 💕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,261 +14,373 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F5 50%, #FFEEF8 100%);
+            background: linear-gradient(135deg, #FFB3D9 0%, #FFD6E8 25%, #FFE5F0 50%, #FFF0F7 75%, #FFB3D9 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
+            padding: 20px;
         }
 
-        /* Nuvenzinhas fofas de fundo */
-        .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 100px;
-            opacity: 0.6;
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        /* Card principal */
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
-            text-align: center;
-            max-width: 500px;
-            margin: 20px;
-            position: relative;
-            z-index: 10;
-            border: 3px solid #FFB6C1;
-        }
-
-        /* Gatinhos decorativos nos cantos */
-        .corner-cat {
+        /* Decorações de fundo */
+        .bg-decoration {
             position: absolute;
             font-size: 2rem;
-            animation: gentle-bounce 3s ease-in-out infinite;
+            opacity: 0.3;
+            animation: float-slow 6s ease-in-out infinite;
         }
 
-        .corner-cat.top-left {
-            top: -15px;
-            left: -15px;
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
 
-        .corner-cat.top-right {
-            top: -15px;
-            right: -15px;
+        /* Container do envelope */
+        .envelope-container {
+            position: relative;
+            width: 350px;
+            height: 400px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes gentle-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .envelope-container:hover {
+            transform: scale(1.02);
         }
 
-        /* Título */
-        .title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #FF69B4;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+        .envelope-container.opened {
+            cursor: default;
         }
 
-        /* Nome da aniversariante */
-        .name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #FF1493;
-            margin: 20px 0;
-            text-shadow: 2px 2px 0 rgba(255, 182, 193, 0.3);
+        /* Envelope */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 250px;
+            bottom: 0;
         }
 
-        /* Linha de gatinhos e flores */
-        .decoration-line {
-            font-size: 1.8rem;
-            margin: 25px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            align-items: center;
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FF69B4, #FF85C1);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4);
         }
 
-        /* Mensagem */
-        .message {
-            font-size: 1.1rem;
-            color: #DB7093;
-            line-height: 1.8;
-            margin: 25px 0;
-            font-weight: 500;
+        .envelope-front {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-bottom: 150px solid #FF1493;
+            bottom: 0;
+            transform-origin: top center;
+            transition: transform 1s ease;
+            z-index: 3;
         }
 
-        /* Coraçãozinho final */
-        .heart-bottom {
-            font-size: 2rem;
-            margin-top: 20px;
-            animation: pulse-heart 1.5s ease-in-out infinite;
+        .envelope-container.opened .envelope-front {
+            transform: rotateX(180deg);
         }
 
-        @keyframes pulse-heart {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Flores flutuantes */
-        .floating-flower {
+        /* Decorações no envelope */
+        .envelope-decoration {
             position: absolute;
             font-size: 1.5rem;
-            animation: float-gentle 4s ease-in-out infinite;
-            opacity: 0.6;
+            z-index: 2;
         }
 
-        @keyframes float-gentle {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
-
-        /* Gatinhos flutuantes fofos */
-        .floating-cat {
+        /* Carta */
+        .letter {
             position: absolute;
-            font-size: 2rem;
-            animation: float-gentle 5s ease-in-out infinite;
-            opacity: 0.7;
+            width: 320px;
+            height: 450px;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(255, 105, 180, 0.3);
+            padding: 30px 25px;
+            text-align: center;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2;
+            border: 4px solid #FFB6C1;
+            overflow-y: auto;
         }
 
-        /* Pétalas caindo delicadamente */
-        .petal {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: fall-soft linear infinite;
-            opacity: 0.7;
+        .envelope-container.opened .letter {
+            transform: translateX(-50%) translateY(-50px);
         }
 
-        @keyframes fall-soft {
-            to {
-                transform: translateY(100vh) rotate(180deg);
-                opacity: 0;
-            }
+        /* Conteúdo da carta */
+        .letter-header {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: #FF1493;
+            margin-bottom: 15px;
+            animation: fade-in 0.5s ease 1.2s backwards;
         }
 
-        /* Corações sutis */
-        .heart-float {
-            position: absolute;
-            color: #FFB6C1;
-            animation: rise-gentle 8s ease-in-out infinite;
-        }
-
-        @keyframes rise-gentle {
-            0% {
-                bottom: -30px;
-                opacity: 0.8;
-            }
-            100% {
-                bottom: 110%;
-                opacity: 0;
-            }
-        }
-
-        /* Laçinho decorativo */
-        .bow {
+        .letter-bow {
             font-size: 2.5rem;
-            margin: 15px 0;
-            display: inline-block;
-            animation: gentle-swing 2s ease-in-out infinite;
+            margin: 10px 0;
+            animation: fade-in 0.5s ease 1.4s backwards, gentle-swing 2s ease-in-out 1.4s infinite;
         }
 
         @keyframes gentle-swing {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .letter-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FF1493;
+            margin: 15px 0;
+            animation: fade-in 0.5s ease 1.6s backwards;
+        }
+
+        .letter-decoration-line {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            margin: 15px 0;
+            animation: fade-in 0.5s ease 1.8s backwards;
+        }
+
+        .letter-message {
+            font-size: 0.95rem;
+            color: #DB7093;
+            line-height: 1.7;
+            margin: 20px 0;
+            font-weight: 500;
+            animation: fade-in 0.5s ease 2s backwards;
+        }
+
+        .letter-footer {
+            margin-top: 15px;
+            animation: fade-in 0.5s ease 2.2s backwards;
+        }
+
+        .letter-footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1.3rem;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Instrução de clique */
+        .click-instruction {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: #FF1493;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
+            animation: bounce-soft 2s ease-in-out infinite;
+            border: 2px solid #FFB6C1;
+            z-index: 10;
+        }
+
+        .envelope-container.opened .click-instruction {
+            display: none;
+        }
+
+        @keyframes bounce-soft {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Pétalas e corações caindo */
+        .falling-item {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: fall-rotate 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall-rotate {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confetes rosa */
+        .confetti-pink {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FF69B4;
+            animation: confetti-fall 5s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
-            .card {
-                padding: 40px 30px;
-                margin: 15px;
+            .envelope-container {
+                width: 300px;
+                height: 380px;
             }
-            .title { font-size: 1.6rem; }
-            .name { font-size: 2.8rem; }
-            .message { font-size: 1rem; }
-            .decoration-line { font-size: 1.5rem; }
+            .letter {
+                width: 280px;
+                height: 420px;
+                padding: 25px 20px;
+            }
+            .letter-header { font-size: 1.5rem; }
+            .letter-name { font-size: 2rem; }
+            .letter-message { font-size: 0.9rem; }
+            .envelope-front {
+                border-left: 150px solid transparent;
+                border-right: 150px solid transparent;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Nuvenzinhas de fundo -->
-    <div class="cloud" style="width: 100px; height: 50px; top: 10%; left: 5%;"></div>
-    <div class="cloud" style="width: 120px; height: 60px; top: 20%; right: 10%;"></div>
-    <div class="cloud" style="width: 90px; height: 45px; bottom: 15%; left: 8%;"></div>
-    <div class="cloud" style="width: 110px; height: 55px; bottom: 25%; right: 5%;"></div>
+    <!-- Decorações de fundo -->
+    <div class="bg-decoration" style="left: 5%; top: 10%; animation-delay: 0s;">🐱</div>
+    <div class="bg-decoration" style="right: 8%; top: 15%; animation-delay: 1s;">🌸</div>
+    <div class="bg-decoration" style="left: 10%; bottom: 20%; animation-delay: 2s;">🍪</div>
+    <div class="bg-decoration" style="right: 12%; bottom: 25%; animation-delay: 1.5s;">🧁</div>
+    <div class="bg-decoration" style="left: 15%; top: 50%; animation-delay: 0.5s;">💕</div>
+    <div class="bg-decoration" style="right: 15%; top: 40%; animation-delay: 2.5s;">😺</div>
 
-    <!-- Card principal -->
-    <div class="card">
-        <!-- Gatinhos nos cantos -->
-        <div class="corner-cat top-left">🐱</div>
-        <div class="corner-cat top-right">🐱</div>
+    <!-- Container do envelope -->
+    <div class="envelope-container" id="envelope">
+        <!-- Instrução -->
+        <div class="click-instruction">
+            👆 Clique para abrir a carta! 💕
+        </div>
 
-        <div class="title">Feliz Aniversário</div>
-        
-        <div class="bow">🎀</div>
-        
-        <div class="name">Ellen</div>
-        
-        <div class="decoration-line">
-            <span>🌸</span>
-            <span>🐱</span>
-            <span>💕</span>
-            <span>🐱</span>
-            <span>🌸</span>
+        <!-- Carta (dentro do envelope) -->
+        <div class="letter">
+            <div class="letter-header">Feliz Aniversário</div>
+            
+            <div class="letter-bow">🎀</div>
+            
+            <div class="letter-name">Ellen</div>
+            
+            <div class="letter-decoration-line">
+                <span>🌸</span>
+                <span>🐱</span>
+                <span>💕</span>
+                <span>🐱</span>
+                <span>🌸</span>
+            </div>
+            
+            <div class="letter-message">
+                Que seu dia seja repleto de amor,<br>
+                sorrisos e momentos especiais! 💖<br><br>
+                Você merece tudo de mais lindo<br>
+                nesse mundo! ✨<br><br>
+                Feliz aniversário! 🎂
+            </div>
+            
+            <div class="letter-footer">
+                <div class="letter-footer-icons">
+                    <span>🐱</span>
+                    <span>🌸</span>
+                    <span>🍪</span>
+                    <span>🧁</span>
+                    <span>🎂</span>
+                    <span>🌺</span>
+                    <span>🎀</span>
+                    <span>💕</span>
+                    <span>😺</span>
+                    <span>🌷</span>
+                    <span>🍰</span>
+                    <span>💝</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="message">
-            Que seu dia seja repleto de amor,<br>
-            sorrisos e momentos especiais!<br>
-            Você merece tudo de mais lindo<br>
-            nesse mundo! ✨
+
+        <!-- Envelope -->
+        <div class="envelope">
+            <div class="envelope-back"></div>
+            
+            <!-- Decorações no envelope -->
+            <div class="envelope-decoration" style="top: 30%; left: 15%;">🐱</div>
+            <div class="envelope-decoration" style="top: 30%; right: 15%;">🐱</div>
+            <div class="envelope-decoration" style="top: 50%; left: 20%;">🌸</div>
+            <div class="envelope-decoration" style="top: 50%; right: 20%;">🌸</div>
+            <div class="envelope-decoration" style="bottom: 30%; left: 50%; transform: translateX(-50%);">💕</div>
+            
+            <div class="envelope-front"></div>
         </div>
-        
-        <div class="heart-bottom">💖</div>
     </div>
 
-    <!-- Gatinhos flutuantes -->
-    <div class="floating-cat" style="left: 8%; top: 15%; animation-delay: 0s;">🐱</div>
-    <div class="floating-cat" style="right: 12%; top: 25%; animation-delay: 1.5s;">😺</div>
-    <div class="floating-cat" style="left: 10%; bottom: 20%; animation-delay: 2s;">😸</div>
-    <div class="floating-cat" style="right: 8%; bottom: 30%; animation-delay: 0.8s;">😻</div>
-
-    <!-- Flores flutuantes -->
-    <div class="floating-flower" style="left: 15%; top: 30%; animation-delay: 0s;">🌸</div>
-    <div class="floating-flower" style="right: 18%; top: 40%; animation-delay: 1s;">🌺</div>
-    <div class="floating-flower" style="left: 20%; bottom: 35%; animation-delay: 1.5s;">🌷</div>
-    <div class="floating-flower" style="right: 15%; bottom: 25%; animation-delay: 0.5s;">🌼</div>
-    <div class="floating-flower" style="left: 12%; top: 50%; animation-delay: 2s;">🌹</div>
-    <div class="floating-flower" style="right: 10%; top: 60%; animation-delay: 2.5s;">🌸</div>
-
     <script>
-        // Criar pétalas caindo delicadamente
-        const petals = ['🌸', '🌺', '🌷', '🌼'];
-        for (let i = 0; i < 15; i++) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
-            petal.style.left = Math.random() * 100 + '%';
-            petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
-            petal.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(petal);
+        // Abrir envelope ao clicar
+        const envelope = document.getElementById('envelope');
+        envelope.addEventListener('click', function() {
+            if (!this.classList.contains('opened')) {
+                this.classList.add('opened');
+            }
+        });
+
+        // Criar pétalas, gatinhos e cookies caindo
+        const fallingItems = ['🌸', '🌺', '🌷', '🐱', '😺', '💕', '🍪', '🧁', '🎀'];
+        for (let i = 0; i < 20; i++) {
+            const item = document.createElement('div');
+            item.className = 'falling-item';
+            item.textContent = fallingItems[Math.floor(Math.random() * fallingItems.length)];
+            item.style.left = Math.random() * 100 + '%';
+            item.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            item.style.animationDelay = Math.random() * 8 + 's';
+            item.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
+            document.body.appendChild(item);
         }
 
-        // Criar coraçõezinhos subindo
-        for (let i = 0; i < 8; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'heart-float';
-            heart.textContent = '💕';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
-            heart.style.animationDelay = Math.random() * 8 + 's';
-            heart.style.animationDuration = (Math.random() * 3 + 7) + 's';
-            document.body.appendChild(heart);
+        // Criar confetes rosa
+        const pinkShades = ['#FF69B4', '#FFB6C1', '#FF1493', '#FFC0CB', '#FF85C1'];
+        for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti-pink';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = pinkShades[Math.floor(Math.random() * pinkShades.length)];
+            confetti.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            confetti.style.width = (Math.random() * 6 + 5) + 'px';
+            confetti.style.height = (Math.random() * 6 + 5) + 'px';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            document.body.appendChild(confetti);
         }
     </script>
 </body>
