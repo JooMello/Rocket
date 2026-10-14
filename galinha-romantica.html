@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🐔💕 Galinha do Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFE5F1 0%, #FFD6E8 25%, #FFC9E0 50%, #FFB8D8 75%, #FFA7D0 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Corações flutuantes */
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: floatHeart 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-10deg); }
+            75% { transform: translateY(-10px) rotate(10deg); }
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.4);
+            animation: appear 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: #FF1493;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #FF69B4;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* GALINHA ANIMADA */
+        .chicken-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .chicken {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Corpo da galinha */
+        .chicken-body {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD1D1 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Cabeça */
+        .chicken-head {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFEBEB 0%, #FFD9D9 100%);
+            border-radius: 50%;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: headBob 1s ease-in-out infinite;
+        }
+
+        @keyframes headBob {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Crista */
+        .chicken-crest {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            background: #FF1493;
+            border-radius: 50% 50% 0 0;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .chicken-crest::before,
+        .chicken-crest::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FF1493;
+            border-radius: 50%;
+        }
+
+        .chicken-crest::before {
+            left: -8px;
+            top: 5px;
+        }
+
+        .chicken-crest::after {
+            right: -8px;
+            top: 5px;
+        }
+
+        /* Bico */
+        .chicken-beak {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #FFA500;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Olhos */
+        .chicken-eye {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            top: 25px;
+            border: 2px solid #333;
+            animation: blink 3s ease-in-out infinite;
+        }
+
+        .chicken-eye::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            top: 2px;
+            left: 3px;
+        }
+
+        .chicken-eye.left {
+            left: 15px;
+        }
+
+        .chicken-eye.right {
+            right: 15px;
+        }
+
+        @keyframes blink {
+            0%, 45%, 55%, 100% { height: 15px; }
+            50% { height: 2px; }
+        }
+
+        /* Asas */
+        .chicken-wing {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(135deg, #FFD1D1 0%, #FFC0C0 100%);
+            border-radius: 50% 0 50% 50%;
+            top: 50%;
+            animation: flapWing 0.8s ease-in-out infinite;
+        }
+
+        .chicken-wing.left {
+            left: -20px;
+            transform-origin: right center;
+        }
+
+        .chicken-wing.right {
+            right: -20px;
+            transform-origin: left center;
+            transform: scaleX(-1);
+        }
+
+        @keyframes flapWing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-20deg); }
+        }
+
+        /* Pés */
+        .chicken-feet {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+        }
+
+        .chicken-foot {
+            width: 30px;
+            height: 10px;
+            background: #FFA500;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .chicken-foot::before,
+        .chicken-foot::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 3px;
+            background: #FFA500;
+            bottom: -5px;
+        }
+
+        .chicken-foot::before {
+            left: -5px;
+            transform: rotate(-30deg);
+        }
+
+        .chicken-foot::after {
+            right: -5px;
+            transform: rotate(30deg);
+        }
+
+        /* Coração da galinha */
+        .chicken-heart {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 2.5rem;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.3); }
+            20%, 40% { transform: scale(1.1); }
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin: 30px 0;
+        }
+
+        .message strong {
+            color: #FF1493;
+            font-size: 1.3rem;
+        }
+
+        .message em {
+            color: #FF69B4;
+            font-style: italic;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #FF1493;
+            font-weight: 600;
+        }
+
+        /* Clique para iniciar */
+        .click-instruction {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px 60px;
+            border-radius: 25px;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.5);
+            z-index: 1000;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .click-instruction h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #FF1493;
+            margin-bottom: 20px;
+        }
+
+        .click-instruction p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .click-instruction button {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .click-instruction button:hover {
+            transform: scale(1.1);
+        }
+
+        .click-instruction button:active {
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .chicken-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .chicken-body {
+                width: 100px;
+                height: 120px;
+            }
+
+            .chicken-head {
+                width: 65px;
+                height: 65px;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .message strong {
+                font-size: 1.15rem;
+            }
+
+            .click-instruction {
+                padding: 30px 40px;
+            }
+
+            .click-instruction h2 {
+                font-size: 1.5rem;
+            }
+
+            .click-instruction p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de início -->
+    <div class="click-instruction" id="startScreen">
+        <h2>🐔💕 Galinha do Amor</h2>
+        <p>Prepare-se para uma mensagem especial!</p>
+        <button onclick="startExperience()">🎵 Começar</button>
+    </div>
+
+    <!-- Corações flutuantes -->
+    <div id="hearts"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <h1 class="title">Galinha do Amor</h1>
+        <p class="subtitle">Uma mensagem romântica pra você! 💕</p>
+
+        <div class="chicken-container">
+            <div class="chicken">
+                <div class="chicken-body">
+                    <div class="chicken-wing left"></div>
+                    <div class="chicken-wing right"></div>
+                </div>
+                <div class="chicken-head">
+                    <div class="chicken-crest"></div>
+                    <div class="chicken-eye left"></div>
+                    <div class="chicken-eye right"></div>
+                    <div class="chicken-beak"></div>
+                </div>
+                <div class="chicken-feet">
+                    <div class="chicken-foot"></div>
+                    <div class="chicken-foot"></div>
+                </div>
+                <div class="chicken-heart">💖</div>
+            </div>
+        </div>
+
+        <div class="message">
+            <strong>Você ilumina meus dias!</strong><br><br>
+            
+            Como essa galinha apaixonada, meu coração<br>
+            não para de <em>bater mais forte</em> quando penso em você! 💓<br><br>
+            
+            Você é a pessoa mais especial do mundo,<br>
+            e cada momento ao seu lado é pura alegria! ✨<br><br>
+            
+            <strong>Te amo com todo meu coração! 🐔💕</strong>
+        </div>
+
+        <div class="footer">
+            💕 Feito com muito amor 💕
+        </div>
+    </div>
+
+    <script>
+        let audioContext;
+        let isPlaying = false;
+
+        // Melodia romântica suave (All of Me - simplified)
+        const romanticSong = [
+            // Frase 1
+            {f:330,d:0.5},{f:330,d:0.3},{f:349,d:0.3},{f:392,d:0.6},{f:349,d:0.3},{f:330,d:0.8},
+            {f:294,d:0.5},{f:294,d:0.3},{f:330,d:0.3},{f:349,d:0.6},{f:330,d:0.3},{f:294,d:0.8},
+            
+            // Frase 2
+            {f:262,d:0.5},{f:294,d:0.3},{f:330,d:0.3},{f:349,d:0.6},{f:392,d:0.3},{f:440,d:0.8},
+            {f:392,d:0.5},{f:349,d:0.3},{f:330,d:0.3},{f:294,d:0.6},{f:330,d:0.3},{f:349,d:1.0},
+            
+            // Frase 3 (refrão suave)
+            {f:440,d:0.5},{f:440,d:0.3},{f:392,d:0.3},{f:349,d:0.6},{f:330,d:0.3},{f:392,d:0.8},
+            {f:349,d:0.5},{f:330,d:0.3},{f:294,d:0.3},{f:330,d:0.6},{f:294,d:0.3},{f:262,d:1.0},
+            
+            // Frase 4 (finalização)
+            {f:330,d:0.5},{f:349,d:0.3},{f:392,d:0.3},{f:440,d:0.6},{f:392,d:0.3},{f:349,d:0.8},
+            {f:330,d:0.5},{f:294,d:0.3},{f:262,d:0.3},{f:294,d:0.6},{f:330,d:0.3},{f:294,d:1.2}
+        ];
+
+        function playNote(freq, dur, time) {
+            // Melodia suave com timbre romântico
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine'; // Som suave
+            
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(0.15, time + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+
+            // Harmonia suave
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = freq * 1.5; // Quinta
+            harm.type = 'triangle';
+            
+            harmGain.gain.setValueAtTime(0, time);
+            harmGain.gain.linearRampToValueAtTime(0.08, time + 0.05);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm.start(time);
+            harm.stop(time + dur);
+
+            // Baixo suave
+            const bass = audioContext.createOscillator();
+            const bassGain = audioContext.createGain();
+            bass.connect(bassGain);
+            bassGain.connect(audioContext.destination);
+            bass.frequency.value = freq / 2;
+            bass.type = 'sine';
+            
+            bassGain.gain.setValueAtTime(0, time);
+            bassGain.gain.linearRampToValueAtTime(0.1, time + 0.05);
+            bassGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            bass.start(time);
+            bass.stop(time + dur);
+        }
+
+        function playSong() {
+            if (!audioContext || !isPlaying) return;
+            
+            let t = audioContext.currentTime;
+            romanticSong.forEach(({f, d}) => {
+                playNote(f, d, t);
+                t += d;
+            });
+            
+            // Loop contínuo
+            setTimeout(() => {
+                if (isPlaying) playSong();
+            }, (t - audioContext.currentTime + 2) * 1000); // 2s de pausa entre loops
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartEmojis = ['💕', '💖', '💗', '💓', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 12000);
+            }, 800);
+        }
+
+        function startExperience() {
+            // Criar AudioContext
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // Esconder tela de início
+            document.getElementById('startScreen').classList.add('hidden');
+            
+            // Iniciar música
+            isPlaying = true;
+            setTimeout(() => playSong(), 500);
+            
+            // Criar corações
+            createHearts();
+        }
+    </script>
+</body>
+</html>
