@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🎉 Feliz Aniversário Ellen!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,25 +13,17 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            font-family: 'Fredoka', sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #FFE8F5 0%, #FFF0F7 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 25%, #F093FB 50%, #4FACFE 75%, #00F2FE 100%);
+            background-size: 400% 400%;
+            animation: rainbow 10s ease infinite;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-        }
-
-        body.party-mode {
-            background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 25%, #F093FB 50%, #4FACFE 75%, #00F2FE 100%);
-            background-size: 400% 400%;
-            animation: rainbow 8s ease infinite;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
         @keyframes rainbow {
@@ -39,103 +31,88 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Envelope */
-        #envelope {
-            position: relative;
-            width: 90vw;
-            max-width: 400px;
-            height: 280px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        #envelope:active {
-            transform: scale(0.95);
-        }
-
-        #envelope.hidden {
-            display: none;
-        }
-
-        .envelope-base {
-            position: absolute;
-            bottom: 0;
+        /* Container */
+        .container {
             width: 100%;
-            height: 200px;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* Caixa de presente fechada */
+        .gift-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            max-width: 300px;
+            margin: 0 auto;
             background: linear-gradient(135deg, #FF1493, #FF69B4);
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 20px 50px rgba(255, 20, 147, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 20px;
         }
 
-        .envelope-base span {
-            font-size: 2.5rem;
-            animation: float 2s ease-in-out infinite;
+        .gift-box:active {
+            transform: scale(0.95);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .gift-box.opened {
+            display: none;
         }
 
-        .envelope-flap {
-            position: absolute;
-            bottom: 200px;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 200px solid transparent;
-            border-right: 200px solid transparent;
-            border-top: 120px solid #C71585;
-        }
-
-        .instruction {
-            position: absolute;
-            top: -70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            color: #FF1493;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
-            animation: bounce 2s ease infinite;
-            white-space: nowrap;
+        .gift-icon {
+            font-size: 5rem;
+            animation: bounce 1.5s ease-in-out infinite;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-12px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        /* Card de Parabéns */
-        #card {
+        .gift-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gift-instruction {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Conteúdo (aparece depois) */
+        .content {
             display: none;
-            width: 90vw;
-            max-width: 500px;
             background: white;
             border-radius: 25px;
-            padding: 40px 25px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            animation: cardAppear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            overflow: hidden;
+            padding: 40px 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            animation: contentAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        #card.show {
+        .content.show {
             display: block;
         }
 
-        @keyframes cardAppear {
+        @keyframes contentAppear {
             from {
                 opacity: 0;
-                transform: scale(0.3) rotate(-10deg);
+                transform: scale(0.5) rotate(-10deg);
             }
             to {
                 opacity: 1;
@@ -143,81 +120,103 @@
             }
         }
 
-        .card-title {
+        .title {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #FF1493;
-            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
-        .card-name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #FF1493;
-            margin: 20px 0;
-            text-shadow: 3px 3px 0 #FFD700;
-            animation: pulse 2s ease infinite;
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 25px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .card-cake {
+        .name {
             font-size: 4rem;
+            font-weight: 800;
+            color: #FF1493;
+            margin: 25px 0;
+            text-shadow: 4px 4px 0 #FFD700;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .cake-big {
+            font-size: 5rem;
             margin: 20px 0;
+            display: inline-block;
             animation: spin 3s linear infinite;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .card-emojis {
+        .emojis {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-            font-size: 2rem;
             flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            font-size: 2.5rem;
         }
 
-        .card-message {
+        .message {
             font-size: 1.15rem;
             color: #555;
             line-height: 1.8;
             margin: 25px 0;
         }
 
-        .card-message strong {
+        .message strong {
             color: #FF1493;
+            font-weight: 700;
             font-size: 1.3rem;
         }
 
+        .footer {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #FFE5EE;
+            font-size: 1.1rem;
+            color: #FF1493;
+            font-weight: 600;
+        }
+
+        /* Botão música */
         .music-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 65px;
-            height: 65px;
+            bottom: 25px;
+            right: 25px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF1493, #9D4EDD);
             border: none;
             color: white;
-            font-size: 2rem;
+            font-size: 2.2rem;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
             z-index: 1000;
-            animation: spinMusic 2s linear infinite;
             display: none;
+            animation: spinMusic 3s linear infinite;
         }
 
         .music-btn.show {
             display: block;
+        }
+
+        .music-btn.paused {
+            animation: none;
         }
 
         @keyframes spinMusic {
@@ -225,146 +224,152 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Efeitos */
+        /* Confetes */
         .confetti {
             position: fixed;
-            width: 8px;
-            height: 8px;
-            background: #FF1493;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
         }
 
         @keyframes confettiFall {
             to {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
 
+        /* Balões */
         .balloon {
             position: fixed;
-            font-size: 2.5rem;
-            animation: balloonFloat 10s linear infinite;
+            font-size: 3rem;
+            animation: balloonRise 12s linear infinite;
         }
 
-        @keyframes balloonFloat {
+        @keyframes balloonRise {
             from {
-                bottom: -50px;
-                transform: translateX(0);
+                bottom: -60px;
+                transform: translateX(0) rotate(0deg);
             }
             to {
                 bottom: 110vh;
-                transform: translateX(30px);
+                transform: translateX(50px) rotate(15deg);
             }
         }
 
         /* Mobile */
         @media (max-width: 500px) {
-            #envelope {
-                max-width: 340px;
-                height: 240px;
+            .gift-box {
+                max-width: 260px;
             }
 
-            .envelope-base {
-                height: 170px;
+            .gift-icon {
+                font-size: 4rem;
             }
 
-            .envelope-base span {
-                font-size: 2rem;
-            }
-
-            .envelope-flap {
-                bottom: 170px;
-                border-left: 170px solid transparent;
-                border-right: 170px solid transparent;
-                border-top: 100px solid #C71585;
-            }
-
-            .instruction {
-                font-size: 1rem;
-                padding: 12px 24px;
-                top: -60px;
-            }
-
-            #card {
-                padding: 30px 20px;
-            }
-
-            .card-title {
-                font-size: 1.6rem;
-            }
-
-            .card-name {
-                font-size: 2.8rem;
-                text-shadow: 2px 2px 0 #FFD700;
-            }
-
-            .card-cake {
-                font-size: 3rem;
-            }
-
-            .card-emojis {
-                font-size: 1.6rem;
-                gap: 10px;
-            }
-
-            .card-message {
-                font-size: 1.05rem;
-            }
-
-            .card-message strong {
+            .gift-text {
                 font-size: 1.2rem;
             }
 
+            .gift-instruction {
+                font-size: 0.9rem;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .name {
+                font-size: 3rem;
+                text-shadow: 3px 3px 0 #FFD700;
+            }
+
+            .cake-big {
+                font-size: 4rem;
+            }
+
+            .emojis {
+                font-size: 2rem;
+                gap: 12px;
+            }
+
+            .message {
+                font-size: 1.05rem;
+            }
+
+            .message strong {
+                font-size: 1.2rem;
+            }
+
+            .footer {
+                font-size: 1rem;
+            }
+
             .music-btn {
-                width: 55px;
-                height: 55px;
-                font-size: 1.6rem;
-                bottom: 15px;
-                right: 15px;
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Envelope -->
-    <div id="envelope">
-        <div class="instruction">👆 Clique para abrir! 🎉</div>
-        <div class="envelope-flap"></div>
-        <div class="envelope-base">
-            <span>🎁</span>
-            <span>💕</span>
-            <span>🎉</span>
+    <div class="container">
+        <!-- Caixa de presente -->
+        <div class="gift-box" id="giftBox">
+            <div class="gift-icon">🎁</div>
+            <div class="gift-text">Para Ellen</div>
+            <div class="gift-instruction">👆 Toque para abrir!</div>
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="content" id="content">
+            <div class="title">🎉 Feliz Aniversário! 🎉</div>
+            <div class="subtitle">Prepare-se para comemorar!</div>
+            
+            <div class="name">ELLEN</div>
+            
+            <div class="cake-big">🎂</div>
+            
+            <div class="emojis">
+                <span>🎁</span>
+                <span>🎈</span>
+                <span>🎊</span>
+                <span>🥳</span>
+                <span>💕</span>
+                <span>✨</span>
+            </div>
+            
+            <div class="message">
+                <strong>PARABÉNS!</strong><br><br>
+                Hoje é o seu dia especial! 🎉<br>
+                Hora de comemorar, sorrir e<br>
+                ser muito, muito feliz!<br><br>
+                <strong>Te amo demais! 💕</strong>
+            </div>
+            
+            <div class="footer">
+                ✨ Aproveite cada momento! ✨
+            </div>
         </div>
     </div>
 
-    <!-- Card -->
-    <div id="card">
-        <div class="card-title">🎉 Feliz Aniversário 🎉</div>
-        <div class="card-name">ELLEN</div>
-        <div class="card-cake">🎂</div>
-        <div class="card-emojis">
-            <span>🎁</span>
-            <span>🎈</span>
-            <span>🎊</span>
-            <span>🥳</span>
-            <span>💕</span>
-        </div>
-        <div class="card-message">
-            <strong>PARABÉNS!</strong><br><br>
-            Hoje é o seu dia especial! 🎉<br>
-            Hora de comemorar e ser muito feliz!<br><br>
-            <strong>Te amo demais! 💕</strong>
-        </div>
-    </div>
-
-    <!-- Botão Música -->
+    <!-- Botão música -->
     <button class="music-btn" id="musicBtn">🎵</button>
 
     <script>
         let audioContext;
         let isPlaying = false;
-        let scheduledNotes = [];
 
         // Música Parabéns
         const song = [
@@ -381,16 +386,33 @@
             gain.connect(audioContext.destination);
             osc.frequency.value = freq;
             osc.type = 'square';
+            
+            // VOLUME AUMENTADO para 0.35 (era 0.2)
             gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(0.2, time + 0.01);
+            gain.gain.linearRampToValueAtTime(0.35, time + 0.01);
             gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
             osc.start(time);
             osc.stop(time + dur);
+
+            // Harmonia mais forte também
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = freq / 2;
+            harm.type = 'square';
+            
+            harmGain.gain.setValueAtTime(0, time);
+            harmGain.gain.linearRampToValueAtTime(0.15, time + 0.01);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm.start(time);
+            harm.stop(time + dur);
         }
 
         function playSong() {
-            if (!audioContext) return;
-            if (!isPlaying) return;
+            if (!audioContext || !isPlaying) return;
             
             let t = audioContext.currentTime;
             song.forEach(({f, d}) => {
@@ -404,90 +426,92 @@
         }
 
         function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
             if (!isPlaying) {
                 isPlaying = true;
+                btn.classList.remove('paused');
+                btn.textContent = '🎵';
                 playSong();
             } else {
                 isPlaying = false;
-                document.getElementById('musicBtn').textContent = '🔇';
-                setTimeout(() => {
-                    document.getElementById('musicBtn').textContent = '🎵';
-                }, 300);
+                btn.classList.add('paused');
+                btn.textContent = '🔇';
             }
         }
 
         function createConfetti() {
-            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D'];
-            for (let i = 0; i < 50; i++) {
+            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const c = document.createElement('div');
                     c.className = 'confetti';
                     c.style.left = Math.random() * 100 + 'vw';
                     c.style.top = '-10px';
                     c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    c.style.width = (Math.random() * 10 + 5) + 'px';
+                    c.style.height = c.style.width;
                     c.style.animation = `confettiFall ${2 + Math.random() * 2}s linear forwards`;
                     document.body.appendChild(c);
                     setTimeout(() => c.remove(), 4000);
-                }, i * 30);
+                }, i * 20);
             }
         }
 
         function createBalloon() {
             const b = document.createElement('div');
             b.className = 'balloon';
-            b.textContent = '🎈';
+            b.textContent = ['🎈', '🎈', '🎈'][Math.floor(Math.random() * 3)];
             b.style.left = Math.random() * 90 + 'vw';
-            b.style.bottom = '-50px';
-            b.style.animationDuration = (8 + Math.random() * 4) + 's';
+            b.style.animationDuration = (10 + Math.random() * 4) + 's';
             document.body.appendChild(b);
-            setTimeout(() => b.remove(), 12000);
+            setTimeout(() => b.remove(), 14000);
         }
 
-        // Abrir envelope
-        document.getElementById('envelope').addEventListener('click', function() {
-            // Iniciar áudio
+        // Abrir presente
+        document.getElementById('giftBox').addEventListener('click', function() {
+            // Criar AudioContext
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
             
-            // Garantir que o contexto está rodando
+            // Garantir que está ativo
             if (audioContext.state === 'suspended') {
                 audioContext.resume();
             }
             
-            // Esconder envelope
-            this.classList.add('hidden');
+            // Esconder caixa
+            this.classList.add('opened');
             
-            // Mostrar card
-            document.getElementById('card').classList.add('show');
+            // Mostrar conteúdo
+            document.getElementById('content').classList.add('show');
             document.getElementById('musicBtn').classList.add('show');
             
-            // Mudar fundo
-            document.body.classList.add('party-mode');
-            
-            // Iniciar música
+            // Iniciar música após um delay
             setTimeout(() => {
                 isPlaying = true;
                 playSong();
-            }, 500);
+            }, 600);
             
-            // Confetes
-            setTimeout(createConfetti, 300);
+            // Efeitos
+            setTimeout(createConfetti, 400);
             
             // Balões contínuos
-            setInterval(createBalloon, 2000);
+            setInterval(createBalloon, 2500);
             
             // Confetes contínuos
             setInterval(() => {
+                const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD'];
                 const c = document.createElement('div');
                 c.className = 'confetti';
                 c.style.left = Math.random() * 100 + 'vw';
                 c.style.top = '-10px';
-                c.style.background = ['#FF1493', '#FFD700', '#4FACFE'][Math.floor(Math.random() * 3)];
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                c.style.width = (Math.random() * 8 + 4) + 'px';
+                c.style.height = c.style.width;
                 c.style.animation = `confettiFall ${2 + Math.random() * 2}s linear forwards`;
                 document.body.appendChild(c);
                 setTimeout(() => c.remove(), 4000);
-            }, 400);
+            }, 500);
         });
 
         // Botão música
