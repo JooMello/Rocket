@@ -99,17 +99,17 @@
             border-top: 5px solid #556B2F;
         }
 
-        /* GALINHA */
+        /* GALINHA REAL */
         .chicken-wrapper {
             position: fixed;
             bottom: 150px;
-            left: -200px;
+            left: -250px;
             animation: walkChicken 5s ease-in-out forwards;
         }
 
         @keyframes walkChicken {
             0% {
-                left: -200px;
+                left: -250px;
             }
             40% {
                 left: calc(50% - 100px);
@@ -120,151 +120,22 @@
         }
 
         .chicken {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             position: relative;
             animation: chickenBob 0.3s ease-in-out infinite;
         }
 
         @keyframes chickenBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            0%, 100% { transform: translateY(0) scaleX(1); }
+            50% { transform: translateY(-8px) scaleX(1); }
         }
 
-        /* Corpo da galinha */
-        .chicken-body {
-            width: 100px;
-            height: 80px;
-            background: white;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            position: absolute;
-            bottom: 30px;
-            left: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Cabeça */
-        .chicken-head {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 20px;
-            left: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Crista */
-        .chicken-comb {
-            width: 30px;
-            height: 25px;
-            background: #DC143C;
-            border-radius: 50% 50% 0 0;
-            position: absolute;
-            top: -10px;
-            left: 10px;
-        }
-
-        .chicken-comb::before,
-        .chicken-comb::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #DC143C;
-            border-radius: 50%;
-        }
-
-        .chicken-comb::before {
-            left: -8px;
-            top: 5px;
-        }
-
-        .chicken-comb::after {
-            right: -8px;
-            top: 5px;
-        }
-
-        /* Olho */
-        .chicken-eye {
-            width: 12px;
-            height: 12px;
-            background: black;
-            border-radius: 50%;
-            position: absolute;
-            top: 18px;
-            left: 8px;
-        }
-
-        /* Bico */
-        .chicken-beak {
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent;
-            border-right: 0;
-            border-top: 10px solid #FFA500;
-            border-bottom: 10px solid #FFA500;
-            position: absolute;
-            top: 22px;
-            left: -12px;
-        }
-
-        /* Asa */
-        .chicken-wing {
-            width: 40px;
-            height: 50px;
-            background: #F5F5F5;
-            border-radius: 50%;
-            position: absolute;
-            top: 40px;
-            right: 10px;
-            transform: rotate(20deg);
-        }
-
-        /* Pés */
-        .chicken-legs {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .chicken-leg {
-            width: 4px;
-            height: 30px;
-            background: #FFA500;
-        }
-
-        .chicken-foot {
-            width: 25px;
-            height: 3px;
-            background: #FFA500;
-            position: relative;
-            margin-top: -3px;
-        }
-
-        .chicken-foot::before,
-        .chicken-foot::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 2px;
-            background: #FFA500;
-        }
-
-        .chicken-foot::before {
-            left: 0;
-            bottom: 0;
-            transform: rotate(-30deg);
-        }
-
-        .chicken-foot::after {
-            right: 0;
-            bottom: 0;
-            transform: rotate(30deg);
+        .chicken img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
         }
 
         /* OVO */
@@ -508,18 +379,18 @@
         /* Mobile */
         @media (max-width: 600px) {
             .chicken {
-                width: 120px;
-                height: 120px;
+                width: 150px;
+                height: 150px;
             }
 
-            .chicken-body {
-                width: 80px;
-                height: 65px;
+            .chicken-wrapper {
+                bottom: 130px;
             }
 
-            .chicken-head {
-                width: 40px;
-                height: 40px;
+            .egg {
+                bottom: 150px;
+                width: 35px;
+                height: 48px;
             }
 
             .birthday-title {
@@ -568,27 +439,10 @@
     <div class="cloud cloud2"></div>
     <div class="ground"></div>
 
-    <!-- Galinha -->
+    <!-- Galinha Real -->
     <div class="chicken-wrapper">
         <div class="chicken">
-            <div class="chicken-head">
-                <div class="chicken-comb"></div>
-                <div class="chicken-eye"></div>
-                <div class="chicken-beak"></div>
-            </div>
-            <div class="chicken-body">
-                <div class="chicken-wing"></div>
-            </div>
-            <div class="chicken-legs">
-                <div>
-                    <div class="chicken-leg"></div>
-                    <div class="chicken-foot"></div>
-                </div>
-                <div>
-                    <div class="chicken-leg"></div>
-                    <div class="chicken-foot"></div>
-                </div>
-            </div>
+            <img src="images/galinha-real.png" alt="Galinha">
         </div>
     </div>
 
