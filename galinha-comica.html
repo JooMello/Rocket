@@ -467,12 +467,19 @@
             celebration: [{f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}]
         };
 
-        // Música de parabéns (25% mais rápida)
-        const birthdaySong = [
-            {f:264,d:0.225},{f:264,d:0.225},{f:297,d:0.45},{f:264,d:0.45},{f:352,d:0.45},{f:330,d:0.9},
-            {f:264,d:0.225},{f:264,d:0.225},{f:297,d:0.45},{f:264,d:0.45},{f:396,d:0.45},{f:352,d:0.9},
-            {f:264,d:0.225},{f:264,d:0.225},{f:528,d:0.45},{f:440,d:0.45},{f:352,d:0.45},{f:330,d:0.45},{f:297,d:0.45},
-            {f:470,d:0.225},{f:470,d:0.225},{f:440,d:0.45},{f:352,d:0.45},{f:396,d:0.45},{f:352,d:0.9}
+        // Careless Whisper - George Michael (melodia do saxofone)
+        const carelessWhisper = [
+            // Intro icônico
+            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
+            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:440,d:0.6},{f:392,d:0.6},{f:349,d:0.8},
+            
+            // Continuação
+            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
+            {f:247,d:0.6},{f:294,d:0.6},{f:330,d:0.6},{f:294,d:0.6},{f:262,d:1.2},
+            
+            // Repetição
+            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:330,d:0.6},{f:294,d:0.8},{f:294,d:0.4},
+            {f:294,d:0.6},{f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.6},{f:440,d:0.6},{f:392,d:0.6},{f:349,d:1.0}
         ];
 
         function playSound(freq, dur, time, volume = 0.25) {
@@ -501,14 +508,50 @@
             });
         }
 
-        function playBirthdaySong() {
+        function playCarelessWhisper() {
             if (!audioContext) return;
             
             let t = audioContext.currentTime;
-            birthdaySong.forEach(({f, d}) => {
-                playSound(f, d, t, 0.35);
+            carelessWhisper.forEach(({f, d}) => {
+                // Som de saxofone (sine wave mais suave)
+                playSaxophone(f, d, t, 0.3);
                 t += d;
             });
+        }
+
+        function playSaxophone(freq, dur, time, volume = 0.25) {
+            if (!audioContext) return;
+            
+            // Oscilador principal (som de saxofone)
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine'; // Som suave tipo saxofone
+            
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.05);
+            gain.gain.linearRampToValueAtTime(volume * 0.8, time + dur * 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+
+            // Harmônico para enriquecer o som
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = freq * 2;
+            harm.type = 'sine';
+            
+            harmGain.gain.setValueAtTime(0, time);
+            harmGain.gain.linearRampToValueAtTime(volume * 0.15, time + 0.05);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm.start(time);
+            harm.stop(time + dur);
         }
 
         function createConfetti() {
@@ -587,15 +630,15 @@
             setTimeout(() => {
                 document.querySelector('.birthday-message').classList.add('show');
                 playSoundSequence(comicSounds.celebration, audioContext.currentTime);
-                playBirthdaySong();
+                playCarelessWhisper();
                 createConfetti();
             }, 8200);
 
-            // Música em loop
+            // Música em loop (Careless Whisper dura ~16s)
             setTimeout(() => {
                 setInterval(() => {
-                    playBirthdaySong();
-                }, 9000);
+                    playCarelessWhisper();
+                }, 16000);
             }, 8200);
         }
     </script>
