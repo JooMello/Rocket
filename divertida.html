@@ -14,9 +14,7 @@
 
         body {
             font-family: 'Fredoka', sans-serif;
-            background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 25%, #F093FB 50%, #4FACFE 75%, #00F2FE 100%);
-            background-size: 400% 400%;
-            animation: rainbow-bg 8s ease infinite;
+            background: linear-gradient(135deg, #FFE8F5 0%, #FFF5F7 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,24 +23,124 @@
             position: relative;
         }
 
+        /* Estado: Antes de abrir */
+        body.unopened {
+            background: linear-gradient(135deg, #FFE8F5 0%, #FFF5F7 100%);
+        }
+
+        /* Estado: Depois de abrir */
+        body.opened {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 25%, #F093FB 50%, #4FACFE 75%, #00F2FE 100%);
+            background-size: 400% 400%;
+            animation: rainbow-bg 8s ease infinite;
+        }
+
         @keyframes rainbow-bg {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
 
-        /* Container */
-        .container {
-            max-width: 900px;
+        /* Envelope */
+        .envelope-wrapper {
+            position: relative;
             width: 90%;
+            max-width: 400px;
+            height: 280px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        body.opened .envelope-wrapper {
+            display: none;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .envelope-back {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .envelope-decoration {
+            font-size: 2rem;
+            animation: gentle-float 2s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .envelope-flap {
+            position: absolute;
+            bottom: 70%;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-top: 140px solid #C71585;
+            cursor: pointer;
+        }
+
+        .instruction {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #FF1493;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            animation: bounce-instruction 2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes bounce-instruction {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Container principal (aparece depois de abrir) */
+        .container {
+            display: none;
+            max-width: 90%;
+            width: 100%;
+            max-width: 600px;
             background: rgba(255, 255, 255, 0.98);
-            border-radius: 40px;
-            padding: 50px 40px;
+            border-radius: 30px;
+            padding: 40px 30px;
             box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
             z-index: 10;
-            animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             border: 5px solid #FFD700;
+        }
+
+        body.opened .container {
+            display: block;
+            animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         @keyframes bounce-in {
@@ -59,9 +157,8 @@
             }
         }
 
-        /* Título */
         .title {
-            font-size: 4rem;
+            font-size: 2.5rem;
             font-weight: 700;
             background: linear-gradient(45deg, #FF1493, #FF6B9D, #FFD700, #4FACFE, #9D4EDD);
             background-size: 300% 300%;
@@ -69,7 +166,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: rainbow-text 3s ease infinite, shake 0.5s ease infinite;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         @keyframes rainbow-text {
@@ -83,17 +180,16 @@
             75% { transform: rotate(2deg); }
         }
 
-        /* Nome */
         .name {
-            font-size: 5.5rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: #FF1493;
             text-shadow: 
-                3px 3px 0 #FFD700,
-                6px 6px 0 #4FACFE,
-                9px 9px 0 #9D4EDD;
+                2px 2px 0 #FFD700,
+                4px 4px 0 #4FACFE,
+                6px 6px 0 #9D4EDD;
             animation: jump 0.8s ease-in-out infinite;
-            margin: 30px 0;
+            margin: 20px 0;
         }
 
         @keyframes jump {
@@ -101,14 +197,14 @@
             50% { transform: translateY(-10px) scale(1.05); }
         }
 
-        /* Emojis girando */
         .emoji-circle {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
-            margin: 40px 0;
-            font-size: 3rem;
+            gap: 10px;
+            margin: 25px 0;
+            font-size: 2rem;
+            flex-wrap: wrap;
         }
 
         .emoji {
@@ -127,60 +223,85 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Mensagem */
         .message {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #333;
-            line-height: 1.8;
-            margin: 40px 0;
+            line-height: 1.6;
+            margin: 25px 0;
             font-weight: 500;
-            animation: pulse-text 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
         }
 
         .message .highlight {
             color: #FF1493;
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
         }
 
-        /* Botão de festa */
-        .party-button {
-            background: linear-gradient(135deg, #FF1493, #FFD700);
+        .cake {
+            font-size: 4rem;
+            display: inline-block;
+            animation: cake-bounce 1s ease-in-out infinite;
+            margin: 15px 0;
+        }
+
+        @keyframes cake-bounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            25% { transform: translateY(-15px) rotate(0deg); }
+            50% { transform: translateY(0) rotate(5deg); }
+            75% { transform: translateY(-15px) rotate(0deg); }
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #FF1493;
+            animation: rainbow-text 3s ease infinite;
+            background: linear-gradient(45deg, #FF1493, #FFD700, #4FACFE, #9D4EDD);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Controle de música */
+        .music-control {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF1493, #9D4EDD);
             color: white;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8rem;
             cursor: pointer;
-            margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
-            transition: all 0.3s ease;
-            animation: wiggle 1s ease-in-out infinite;
-            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            z-index: 1000;
+            animation: spin-music 2s linear infinite;
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+        body.opened .music-control {
+            display: block;
         }
 
-        .party-button:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+        @keyframes spin-music {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Balões flutuantes */
+        /* Animações de fundo */
         .balloon {
+            display: none;
             position: absolute;
-            font-size: 3rem;
+            font-size: 2.5rem;
             animation: float-up 8s ease-in-out infinite;
+        }
+
+        body.opened .balloon {
+            display: block;
         }
 
         @keyframes float-up {
@@ -197,11 +318,15 @@
             }
         }
 
-        /* Estrelas piscando */
         .star {
+            display: none;
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.8rem;
             animation: twinkle 1s ease-in-out infinite;
+        }
+
+        body.opened .star {
+            display: block;
         }
 
         @keyframes twinkle {
@@ -215,192 +340,123 @@
             }
         }
 
-        /* Confetes explosivos */
         .confetti {
             position: absolute;
             width: 10px;
             height: 10px;
         }
 
-        @keyframes confetti-explosion {
+        @keyframes confetti-fall {
             to {
                 transform: translate(var(--tx), var(--ty)) rotate(720deg);
                 opacity: 0;
             }
         }
 
-        /* Cake */
-        .cake {
-            font-size: 5rem;
-            display: inline-block;
-            animation: cake-bounce 1s ease-in-out infinite;
-            margin: 20px 0;
-        }
-
-        @keyframes cake-bounce {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            25% { transform: translateY(-15px) rotate(0deg); }
-            50% { transform: translateY(0) rotate(5deg); }
-            75% { transform: translateY(-15px) rotate(0deg); }
-        }
-
-        /* Footer divertido */
-        .footer {
-            margin-top: 40px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #FF1493;
-            animation: rainbow-text 3s ease infinite;
-            background: linear-gradient(45deg, #FF1493, #FFD700, #4FACFE, #9D4EDD);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Controle de música */
-        .music-control {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #FF1493, #9D4EDD);
-            color: white;
-            border: none;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            animation: pulse-music 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-music {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
-            }
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 15px 40px rgba(255, 20, 147, 0.8);
-            }
-        }
-
-        .music-control:hover {
-            transform: scale(1.15) rotate(10deg);
-        }
-
-        .music-control.playing {
-            animation: spin-music 2s linear infinite;
-        }
-
-        @keyframes spin-music {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Fogos de artifício */
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-        }
-
-        @keyframes firework-burst {
-            to {
-                transform: translate(var(--fx), var(--fy));
-                opacity: 0;
-            }
-        }
-
-        /* Estrelas cadentes */
-        .shooting-star {
-            position: absolute;
-            width: 3px;
-            height: 80px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0), #FFD700);
-            animation: shoot 2s linear infinite;
-        }
-
-        @keyframes shoot {
-            from {
-                transform: translateX(0) translateY(-100px) rotate(45deg);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(-500px) translateY(500px) rotate(45deg);
-                opacity: 0;
-            }
-        }
-
         @media (max-width: 768px) {
+            .envelope-wrapper {
+                max-width: 320px;
+                height: 240px;
+            }
+            
+            .envelope-flap {
+                border-left: 160px solid transparent;
+                border-right: 160px solid transparent;
+                border-top: 110px solid #C71585;
+            }
+            
+            .instruction {
+                font-size: 0.95rem;
+                padding: 12px 24px;
+                top: -70px;
+            }
+            
             .container {
-                padding: 40px 25px;
+                padding: 30px 20px;
+                border-radius: 25px;
             }
+            
             .title {
-                font-size: 2.5rem;
-            }
-            .name {
-                font-size: 3.5rem;
-                text-shadow: 
-                    2px 2px 0 #FFD700,
-                    4px 4px 0 #4FACFE,
-                    6px 6px 0 #9D4EDD;
-            }
-            .message {
-                font-size: 1.2rem;
-            }
-            .message .highlight {
-                font-size: 1.4rem;
-            }
-            .emoji-circle {
                 font-size: 2rem;
             }
-            .party-button {
-                font-size: 1.2rem;
-                padding: 15px 35px;
+            
+            .name {
+                font-size: 2.8rem;
+                text-shadow: 
+                    2px 2px 0 #FFD700,
+                    3px 3px 0 #4FACFE,
+                    4px 4px 0 #9D4EDD;
             }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .message .highlight {
+                font-size: 1.3rem;
+            }
+            
+            .emoji-circle {
+                font-size: 1.8rem;
+                gap: 8px;
+            }
+            
+            .cake {
+                font-size: 3rem;
+            }
+            
             .music-control {
-                width: 60px;
-                height: 60px;
-                bottom: 20px;
-                right: 20px;
-                font-size: 1.5rem;
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .balloon {
+                font-size: 2rem;
+            }
+            
+            .star {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
-<body>
-    <!-- Balões (mais balões!) -->
+<body class="unopened">
+    <!-- Envelope (antes de abrir) -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="instruction">👆 Clique para abrir! 🎉</div>
+        <div class="envelope">
+            <div class="envelope-back">
+                <span class="envelope-decoration" style="animation-delay: 0s;">🎁</span>
+                <span class="envelope-decoration" style="animation-delay: 0.2s;">🎈</span>
+                <span class="envelope-decoration" style="animation-delay: 0.4s;">💕</span>
+                <span class="envelope-decoration" style="animation-delay: 0.6s;">🎉</span>
+            </div>
+            <div class="envelope-flap"></div>
+        </div>
+    </div>
+
+    <!-- Balões (aparecem depois de abrir) -->
     <div class="balloon" style="left: 5%; animation-delay: 0s;">🎈</div>
-    <div class="balloon" style="left: 15%; animation-delay: 1.5s;">🎈</div>
-    <div class="balloon" style="left: 25%; animation-delay: 3s;">🎈</div>
-    <div class="balloon" style="left: 35%; animation-delay: 2s;">🎈</div>
-    <div class="balloon" style="left: 45%; animation-delay: 4.5s;">🎈</div>
-    <div class="balloon" style="left: 55%; animation-delay: 1s;">🎈</div>
-    <div class="balloon" style="left: 65%; animation-delay: 3.5s;">🎈</div>
-    <div class="balloon" style="left: 75%; animation-delay: 0.5s;">🎈</div>
-    <div class="balloon" style="left: 85%; animation-delay: 2.5s;">🎈</div>
+    <div class="balloon" style="left: 20%; animation-delay: 1.5s;">🎈</div>
+    <div class="balloon" style="left: 40%; animation-delay: 3s;">🎈</div>
+    <div class="balloon" style="left: 60%; animation-delay: 1s;">🎈</div>
+    <div class="balloon" style="left: 80%; animation-delay: 2.5s;">🎈</div>
     <div class="balloon" style="left: 95%; animation-delay: 4s;">🎈</div>
 
-    <!-- Estrelas (mais estrelas!) -->
+    <!-- Estrelas (aparecem depois de abrir) -->
     <div class="star" style="left: 5%; top: 10%; animation-delay: 0s;">⭐</div>
     <div class="star" style="right: 10%; top: 20%; animation-delay: 0.3s;">✨</div>
     <div class="star" style="left: 15%; bottom: 15%; animation-delay: 0.6s;">💫</div>
     <div class="star" style="right: 20%; bottom: 25%; animation-delay: 0.9s;">🌟</div>
-    <div class="star" style="left: 80%; top: 30%; animation-delay: 0.4s;">⭐</div>
-    <div class="star" style="right: 5%; top: 70%; animation-delay: 0.7s;">✨</div>
-    <div class="star" style="left: 40%; top: 5%; animation-delay: 0.2s;">⭐</div>
-    <div class="star" style="right: 40%; top: 50%; animation-delay: 0.5s;">✨</div>
+    <div class="star" style="left: 50%; top: 5%; animation-delay: 0.2s;">⭐</div>
+    <div class="star" style="right: 5%; top: 60%; animation-delay: 0.7s;">✨</div>
     <div class="star" style="left: 70%; bottom: 10%; animation-delay: 0.8s;">💫</div>
-    <div class="star" style="right: 30%; bottom: 40%; animation-delay: 0.1s;">🌟</div>
-    <div class="star" style="left: 25%; top: 60%; animation-delay: 0.6s;">⭐</div>
-    <div class="star" style="right: 15%; top: 40%; animation-delay: 0.9s;">✨</div>
+    <div class="star" style="right: 40%; bottom: 40%; animation-delay: 0.1s;">🌟</div>
 
-    <!-- Container -->
+    <!-- Container principal (aparece depois de abrir) -->
     <div class="container">
         <div class="title">🎉 FELIZ ANIVERSÁRIO 🎉</div>
         
@@ -419,266 +475,130 @@
         <div class="message">
             <span class="highlight">PARABÉNS!</span><br><br>
             Hoje é o seu dia especial! 🎉<br>
-            Hora de comemorar, sorrir e ser feliz!<br><br>
-            Que venham muitas aventuras,<br>
-            risadas e momentos incríveis! 🎈<br><br>
+            Hora de comemorar, sorrir<br>
+            e ser muito feliz!<br><br>
             <span class="highlight">Te amo demais! 💕</span>
         </div>
-        
-        <button class="party-button" onclick="celebrate()">
-            🎊 EXPLODIR DE ALEGRIA! 🎊
-        </button>
         
         <div class="footer">
             ✨ Aproveite muito o seu dia! ✨
         </div>
     </div>
 
-    <!-- Botão de controle de música -->
+    <!-- Botão de música -->
     <button class="music-control" id="musicControl" onclick="toggleMusic()">
         🎵
     </button>
 
-    <!-- Áudio -->
-    <audio id="backgroundMusic" loop>
-        <!-- Música de aniversário -->
-    </audio>
-
     <script>
-        // Criar música de aniversário RETRÔ com Web Audio API
+        // Música retrô 8-bit
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let isPlaying = true; // Começa tocando automaticamente
-        let oscillators = [];
+        let isPlaying = false;
 
-        // Notas da música "Parabéns" completa - estilo retrô 8-bit
         const happyBirthdaySong = [
-            // Parabéns pra você
-            { note: 264, duration: 0.3 }, // C
-            { note: 264, duration: 0.3 }, // C
-            { note: 297, duration: 0.6 }, // D
-            { note: 264, duration: 0.6 }, // C
-            { note: 352, duration: 0.6 }, // F
-            { note: 330, duration: 1.2 }, // E
-            
-            // Parabéns pra você
-            { note: 264, duration: 0.3 }, // C
-            { note: 264, duration: 0.3 }, // C
-            { note: 297, duration: 0.6 }, // D
-            { note: 264, duration: 0.6 }, // C
-            { note: 396, duration: 0.6 }, // G
-            { note: 352, duration: 1.2 }, // F
-            
-            // Parabéns querida Ellen
-            { note: 264, duration: 0.3 }, // C
-            { note: 264, duration: 0.3 }, // C
-            { note: 528, duration: 0.6 }, // C (oitava acima)
-            { note: 440, duration: 0.6 }, // A
-            { note: 352, duration: 0.6 }, // F
-            { note: 330, duration: 0.6 }, // E
-            { note: 297, duration: 0.6 }, // D
-            
-            // Parabéns pra você
-            { note: 470, duration: 0.3 }, // Bb
-            { note: 470, duration: 0.3 }, // Bb
-            { note: 440, duration: 0.6 }, // A
-            { note: 352, duration: 0.6 }, // F
-            { note: 396, duration: 0.6 }, // G
-            { note: 352, duration: 1.2 }, // F
+            { note: 264, duration: 0.3 }, { note: 264, duration: 0.3 },
+            { note: 297, duration: 0.6 }, { note: 264, duration: 0.6 },
+            { note: 352, duration: 0.6 }, { note: 330, duration: 1.2 },
+            { note: 264, duration: 0.3 }, { note: 264, duration: 0.3 },
+            { note: 297, duration: 0.6 }, { note: 264, duration: 0.6 },
+            { note: 396, duration: 0.6 }, { note: 352, duration: 1.2 },
+            { note: 264, duration: 0.3 }, { note: 264, duration: 0.3 },
+            { note: 528, duration: 0.6 }, { note: 440, duration: 0.6 },
+            { note: 352, duration: 0.6 }, { note: 330, duration: 0.6 },
+            { note: 297, duration: 0.6 }, { note: 470, duration: 0.3 },
+            { note: 470, duration: 0.3 }, { note: 440, duration: 0.6 },
+            { note: 352, duration: 0.6 }, { note: 396, duration: 0.6 },
+            { note: 352, duration: 1.2 },
         ];
 
-        // Criar som retrô 8-bit
         function playRetroNote(frequency, duration, startTime) {
-            // Melodia principal (onda quadrada - som retrô)
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.value = frequency;
-            oscillator.type = 'square'; // Som retrô/8-bit
-            
-            gainNode.gain.setValueAtTime(0, startTime);
-            gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.01);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-            
-            oscillator.start(startTime);
-            oscillator.stop(startTime + duration);
-            
-            // Harmonia (oitava abaixo) para som mais cheio
-            const harmonyOsc = audioContext.createOscillator();
-            const harmonyGain = audioContext.createGain();
-            
-            harmonyOsc.connect(harmonyGain);
-            harmonyGain.connect(audioContext.destination);
-            
-            harmonyOsc.frequency.value = frequency / 2;
-            harmonyOsc.type = 'square';
-            
-            harmonyGain.gain.setValueAtTime(0, startTime);
-            harmonyGain.gain.linearRampToValueAtTime(0.08, startTime + 0.01);
-            harmonyGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-            
-            harmonyOsc.start(startTime);
-            harmonyOsc.stop(startTime + duration);
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = frequency;
+            osc.type = 'square';
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.15, startTime + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = frequency / 2;
+            harm.type = 'square';
+            harmGain.gain.setValueAtTime(0, startTime);
+            harmGain.gain.linearRampToValueAtTime(0.08, startTime + 0.01);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            harm.start(startTime);
+            harm.stop(startTime + duration);
         }
 
         function playHappyBirthday() {
             if (!isPlaying) return;
-            
             let currentTime = audioContext.currentTime;
-            
             happyBirthdaySong.forEach(({ note, duration }) => {
                 playRetroNote(note, duration, currentTime);
                 currentTime += duration;
             });
-            
-            // Repetir a música com pausa
             setTimeout(() => {
                 if (isPlaying) playHappyBirthday();
-            }, (currentTime - audioContext.currentTime + 1) * 1000); // +1s de pausa
+            }, (currentTime - audioContext.currentTime + 1) * 1000);
         }
 
         function toggleMusic() {
             const button = document.getElementById('musicControl');
-            
             if (!isPlaying) {
                 isPlaying = true;
-                button.classList.add('playing');
-                button.textContent = '🎵';
                 playHappyBirthday();
             } else {
                 isPlaying = false;
-                button.classList.remove('playing');
                 button.textContent = '🔇';
-            }
-        }
-
-        // Iniciar música automaticamente após interação do usuário
-        document.addEventListener('click', function startMusic() {
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            if (isPlaying) {
-                playHappyBirthday();
-                const button = document.getElementById('musicControl');
-                button.classList.add('playing');
-            }
-            document.removeEventListener('click', startMusic);
-        }, { once: true });
-
-        // Criar estrelas cadentes
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 50 + '%';
-            document.body.appendChild(star);
-            
-            setTimeout(() => star.remove(), 2000);
-        }
-
-        setInterval(createShootingStar, 3000);
-
-        // Criar fogos de artifício aleatórios
-        function createRandomFirework() {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * (window.innerHeight * 0.6);
-            
-            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = x + 'px';
-                firework.style.top = y + 'px';
-                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                const angle = (Math.PI * 2 * i) / particleCount;
-                const velocity = 50 + Math.random() * 100;
-                const fx = Math.cos(angle) * velocity;
-                const fy = Math.sin(angle) * velocity;
-                
-                firework.style.setProperty('--fx', fx + 'px');
-                firework.style.setProperty('--fy', fy + 'px');
-                
-                document.body.appendChild(firework);
-                
-                firework.style.animation = `firework-burst ${0.8 + Math.random() * 0.4}s ease-out forwards`;
-                
-                setTimeout(() => firework.remove(), 1200);
-            }
-        }
-
-        // Fogos de artifício contínuos
-        setInterval(createRandomFirework, 2000);
-
-        function celebrate() {
-            // Explosão de confetes
-            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            
-            for (let i = 0; i < 150; i++) {
                 setTimeout(() => {
+                    if (!isPlaying) button.textContent = '🎵';
+                }, 300);
+            }
+        }
+
+        // Abrir envelope
+        document.getElementById('envelopeWrapper').addEventListener('click', function() {
+            document.body.classList.remove('unopened');
+            document.body.classList.add('opened');
+            
+            // Iniciar música
+            setTimeout(() => {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                isPlaying = true;
+                playHappyBirthday();
+            }, 500);
+
+            // Confetes contínuos
+            setTimeout(() => {
+                setInterval(() => {
+                    const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD'];
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
-                    confetti.style.left = centerX + 'px';
-                    confetti.style.top = centerY + 'px';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-20px';
                     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.width = (Math.random() * 8 + 4) + 'px';
                     confetti.style.height = confetti.style.width;
-                    
-                    const angle = (Math.PI * 2 * i) / 150;
-                    const velocity = 150 + Math.random() * 200;
-                    const tx = Math.cos(angle) * velocity;
-                    const ty = Math.sin(angle) * velocity;
-                    
+                    const tx = (Math.random() - 0.5) * 200;
+                    const ty = window.innerHeight + 100;
                     confetti.style.setProperty('--tx', tx + 'px');
                     confetti.style.setProperty('--ty', ty + 'px');
-                    
+                    confetti.style.animation = `confetti-fall ${3 + Math.random() * 2}s linear forwards`;
                     document.body.appendChild(confetti);
-                    
-                    confetti.style.animation = `confetti-explosion ${1 + Math.random() * 0.5}s ease-out forwards`;
-                    
-                    setTimeout(() => confetti.remove(), 1500);
-                }, i * 5);
-            }
-            
-            // Vibrar o botão
-            const button = document.querySelector('.party-button');
-            button.style.animation = 'none';
-            setTimeout(() => {
-                button.style.animation = 'wiggle 0.1s ease-in-out 10';
-            }, 10);
-        }
-
-        // Confetes contínuos de fundo
-        setInterval(() => {
-            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD'];
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = '-20px';
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.width = (Math.random() * 8 + 4) + 'px';
-            confetti.style.height = confetti.style.width;
-            
-            const tx = (Math.random() - 0.5) * 200;
-            const ty = window.innerHeight + 100;
-            confetti.style.setProperty('--tx', tx + 'px');
-            confetti.style.setProperty('--ty', ty + 'px');
-            confetti.style.animation = `confetti-explosion ${3 + Math.random() * 2}s linear forwards`;
-            
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }, 300);
-
-        // Explosão inicial após 1 segundo
-        setTimeout(celebrate, 1000);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, 300);
+            }, 800);
+        });
     </script>
 </body>
 </html>
