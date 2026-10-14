@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -21,6 +22,43 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+            width: 100%;
+        }
+
+        /* Botão de início simples */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .start-overlay.hidden {
+            display: none;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .start-button:active {
+            transform: scale(0.95);
         }
 
         /* Nuvens */
@@ -28,8 +66,9 @@
             position: fixed;
             background: white;
             border-radius: 100px;
-            opacity: 0.8;
-            animation: floatCloud 20s linear infinite;
+            opacity: 0.7;
+            animation: floatCloud 25s linear infinite;
+            pointer-events: none;
         }
 
         .cloud::before,
@@ -41,46 +80,46 @@
         }
 
         .cloud1 {
-            width: 100px;
-            height: 40px;
-            top: 15%;
-            left: -150px;
+            width: 80px;
+            height: 35px;
+            top: 10%;
+            left: -120px;
         }
 
         .cloud1::before {
-            width: 50px;
-            height: 50px;
-            top: -25px;
+            width: 40px;
+            height: 40px;
+            top: -20px;
             left: 10px;
         }
 
         .cloud1::after {
-            width: 60px;
-            height: 40px;
-            top: -15px;
+            width: 50px;
+            height: 35px;
+            top: -12px;
             right: 10px;
         }
 
         .cloud2 {
-            width: 120px;
-            height: 45px;
-            top: 25%;
-            left: -200px;
-            animation-delay: 10s;
+            width: 100px;
+            height: 40px;
+            top: 20%;
+            left: -150px;
+            animation-delay: 12s;
         }
 
         .cloud2::before {
-            width: 55px;
-            height: 55px;
-            top: -28px;
-            left: 15px;
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 12px;
         }
 
         .cloud2::after {
-            width: 65px;
-            height: 45px;
-            top: -18px;
-            right: 15px;
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 12px;
         }
 
         @keyframes floatCloud {
@@ -94,138 +133,132 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 150px;
+            height: 120px;
             background: linear-gradient(180deg, #8FBC8F 0%, #6B8E23 100%);
-            border-top: 5px solid #556B2F;
+            border-top: 4px solid #556B2F;
         }
 
         /* GALINHA REAL */
         .chicken-wrapper {
             position: fixed;
-            bottom: 150px;
-            left: -250px;
+            bottom: 120px;
+            left: -220px;
+            z-index: 10;
             animation: walkChicken 5s ease-in-out forwards;
         }
 
         @keyframes walkChicken {
-            0% {
-                left: -250px;
-            }
-            40% {
-                left: calc(50% - 100px);
-            }
-            100% {
-                left: calc(50% - 100px);
-            }
+            0% { left: -220px; }
+            40% { left: 50%; transform: translateX(-50%); }
+            100% { left: 50%; transform: translateX(-50%); }
         }
 
         .chicken {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            animation: chickenBob 0.3s ease-in-out infinite;
+            width: 180px;
+            height: 180px;
+            animation: chickenBob 0.35s ease-in-out infinite;
         }
 
         @keyframes chickenBob {
-            0%, 100% { transform: translateY(0) scaleX(1); }
-            50% { transform: translateY(-8px) scaleX(1); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .chicken img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
         }
 
-        /* OVO */
+        /* OVO REAL */
         .egg {
             position: fixed;
-            bottom: 180px;
-            left: calc(50% - 20px);
-            width: 40px;
-            height: 55px;
-            background: linear-gradient(135deg, #FFF8DC 0%, #F5E6D3 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
             opacity: 0;
-            animation: layEgg 2s ease-out 5.5s forwards, crackEgg 0.5s ease-out 8s forwards;
-            z-index: 100;
+            z-index: 9;
+            animation: layEgg 2s ease-out 5.5s forwards;
+        }
+
+        .egg img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes layEgg {
             0% {
                 opacity: 0;
-                transform: translateY(0) scale(0);
+                transform: translateX(-50%) translateY(0) scale(0);
             }
             50% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateX(-50%) translateY(0) scale(1);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateX(-50%) translateY(0) scale(1);
             }
         }
 
-        @keyframes crackEgg {
+        /* Ovo se transformando em quebrado */
+        .egg.cracking .egg-whole {
+            animation: eggShake 0.5s ease-out 2s forwards;
+        }
+
+        .egg.cracking .egg-cracked {
+            animation: eggCrack 0.5s ease-out 2.5s forwards;
+        }
+
+        @keyframes eggShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+
+        @keyframes eggCrack {
             0% {
-                transform: translateY(0) scale(1) rotate(0deg);
-            }
-            20% {
-                transform: translateY(0) scale(1) rotate(-5deg);
-            }
-            40% {
-                transform: translateY(0) scale(1) rotate(5deg);
-            }
-            60% {
-                transform: translateY(0) scale(1) rotate(-5deg);
-            }
-            80% {
-                transform: translateY(0) scale(1.1) rotate(0deg);
+                opacity: 0;
+                transform: scale(0.8);
             }
             100% {
-                transform: translateY(0) scale(0) rotate(0deg);
-                opacity: 0;
+                opacity: 1;
+                transform: scale(1);
             }
         }
 
-        /* Rachaduras no ovo */
-        .egg-crack {
+        .egg-whole {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .egg-cracked {
             position: absolute;
             width: 100%;
             height: 100%;
             opacity: 0;
-            animation: showCracks 0.3s ease-out 7.7s forwards;
         }
 
-        @keyframes showCracks {
-            to { opacity: 1; }
+        /* Ovo some */
+        .egg.exploded {
+            animation: eggExplode 0.3s ease-out forwards;
         }
 
-        .crack-line {
-            position: absolute;
-            width: 2px;
-            height: 30px;
-            background: #8B4513;
-        }
-
-        .crack1 {
-            top: 20%;
-            left: 40%;
-            transform: rotate(20deg);
-        }
-
-        .crack2 {
-            top: 35%;
-            right: 35%;
-            transform: rotate(-30deg);
-        }
-
-        .crack3 {
-            bottom: 30%;
-            left: 30%;
-            transform: rotate(45deg);
+        @keyframes eggExplode {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0);
+            }
         }
 
         /* MENSAGEM DE ANIVERSÁRIO */
@@ -235,14 +268,15 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             background: white;
-            padding: 40px 50px;
-            border-radius: 30px;
-            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.5);
+            padding: 30px 25px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.5);
             text-align: center;
             opacity: 0;
             animation: popMessage 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 8.3s forwards;
             z-index: 1000;
-            max-width: 90%;
+            max-width: 85vw;
+            width: 100%;
         }
 
         @keyframes popMessage {
@@ -251,7 +285,7 @@
                 transform: translate(-50%, -50%) scale(0) rotate(-10deg);
             }
             70% {
-                transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+                transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
             }
             100% {
                 opacity: 1;
@@ -261,41 +295,43 @@
 
         .birthday-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: #FF1493;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 0 #FFD700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #FFD700;
             animation: wiggle 1s ease-in-out infinite;
+            line-height: 1.2;
         }
 
         @keyframes wiggle {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
         }
 
         .birthday-name {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: #FF69B4;
-            margin: 20px 0;
-            text-shadow: 4px 4px 0 #FFD700;
+            margin: 15px 0;
+            text-shadow: 3px 3px 0 #FFD700;
+            line-height: 1;
         }
 
         .birthday-text {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #555;
-            line-height: 1.8;
-            margin: 20px 0;
+            line-height: 1.7;
+            margin: 15px 0;
         }
 
         .birthday-text strong {
             color: #FF1493;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
         }
 
         .birthday-emojis {
-            font-size: 3rem;
-            margin: 20px 0;
+            font-size: 2.5rem;
+            margin: 15px 0;
         }
 
         /* Confetes */
@@ -305,6 +341,7 @@
             height: 10px;
             opacity: 0;
             animation: confettiFall 3s ease-out forwards;
+            pointer-events: none;
         }
 
         @keyframes confettiFall {
@@ -318,26 +355,29 @@
             }
         }
 
-
-        /* Mobile */
-        @media (max-width: 600px) {
-            .chicken {
-                width: 150px;
-                height: 150px;
+        /* Mobile otimizado */
+        @media (max-width: 500px) {
+            .ground {
+                height: 100px;
             }
 
             .chicken-wrapper {
-                bottom: 130px;
+                bottom: 100px;
+            }
+
+            .chicken {
+                width: 140px;
+                height: 140px;
             }
 
             .egg {
-                bottom: 150px;
-                width: 35px;
-                height: 48px;
+                bottom: 115px;
+                width: 50px;
+                height: 65px;
             }
 
             .birthday-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .birthday-name {
@@ -345,16 +385,54 @@
             }
 
             .birthday-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .birthday-text strong {
+                font-size: 1.15rem;
+            }
+
+            .birthday-emojis {
+                font-size: 2rem;
+            }
+
+            .start-button {
+                padding: 18px 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .chicken {
+                width: 120px;
+                height: 120px;
+            }
+
+            .egg {
+                width: 45px;
+                height: 60px;
+            }
+
+            .birthday-title {
+                font-size: 1.5rem;
+            }
+
+            .birthday-name {
+                font-size: 2.5rem;
             }
 
             .birthday-message {
-                padding: 30px 25px;
+                padding: 25px 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Tela de início -->
+    <div class="start-overlay" id="startOverlay">
+        <button class="start-button" onclick="startAnimation()">▶ Começar</button>
+    </div>
+
     <!-- Cenário -->
     <div class="cloud cloud1"></div>
     <div class="cloud cloud2"></div>
@@ -367,13 +445,10 @@
         </div>
     </div>
 
-    <!-- Ovo -->
-    <div class="egg">
-        <div class="egg-crack">
-            <div class="crack-line crack1"></div>
-            <div class="crack-line crack2"></div>
-            <div class="crack-line crack3"></div>
-        </div>
+    <!-- Ovo Real -->
+    <div class="egg" id="egg">
+        <img src="images/ovo-inteiro.png" alt="Ovo" class="egg-whole">
+        <img src="images/ovo-quebrado.png" alt="Ovo Quebrado" class="egg-cracked">
     </div>
 
     <!-- Mensagem de aniversário -->
@@ -394,27 +469,26 @@
 
     <script>
         let audioContext;
-        let isPlaying = false;
 
-        // Sons cômicos e música
+        // Sons cômicos
         const comicSounds = {
             walk: [{f:200,d:0.1},{f:250,d:0.1}],
             layEgg: [{f:400,d:0.2},{f:300,d:0.2},{f:200,d:0.3}],
             crack: [{f:800,d:0.05},{f:600,d:0.05},{f:400,d:0.1}],
-            celebration: [
-                {f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}
-            ]
+            celebration: [{f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}]
         };
 
-        // Música de parabéns animada
+        // Música de parabéns (25% mais rápida)
         const birthdaySong = [
-            {f:264,d:0.3},{f:264,d:0.3},{f:297,d:0.6},{f:264,d:0.6},{f:352,d:0.6},{f:330,d:1.2},
-            {f:264,d:0.3},{f:264,d:0.3},{f:297,d:0.6},{f:264,d:0.6},{f:396,d:0.6},{f:352,d:1.2},
-            {f:264,d:0.3},{f:264,d:0.3},{f:528,d:0.6},{f:440,d:0.6},{f:352,d:0.6},{f:330,d:0.6},{f:297,d:0.6},
-            {f:470,d:0.3},{f:470,d:0.3},{f:440,d:0.6},{f:352,d:0.6},{f:396,d:0.6},{f:352,d:1.2}
+            {f:264,d:0.225},{f:264,d:0.225},{f:297,d:0.45},{f:264,d:0.45},{f:352,d:0.45},{f:330,d:0.9},
+            {f:264,d:0.225},{f:264,d:0.225},{f:297,d:0.45},{f:264,d:0.45},{f:396,d:0.45},{f:352,d:0.9},
+            {f:264,d:0.225},{f:264,d:0.225},{f:528,d:0.45},{f:440,d:0.45},{f:352,d:0.45},{f:330,d:0.45},{f:297,d:0.45},
+            {f:470,d:0.225},{f:470,d:0.225},{f:440,d:0.45},{f:352,d:0.45},{f:396,d:0.45},{f:352,d:0.9}
         ];
 
-        function playSound(freq, dur, time, volume = 0.3) {
+        function playSound(freq, dur, time, volume = 0.25) {
+            if (!audioContext) return;
+            
             const osc = audioContext.createOscillator();
             const gain = audioContext.createGain();
             osc.connect(gain);
@@ -439,15 +513,17 @@
         }
 
         function playBirthdaySong() {
+            if (!audioContext) return;
+            
             let t = audioContext.currentTime;
             birthdaySong.forEach(({f, d}) => {
-                playSound(f, d, t, 0.4);
+                playSound(f, d, t, 0.35);
                 t += d;
             });
         }
 
         function createConfetti() {
-            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D'];
+            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
             const container = document.getElementById('confettiContainer');
             
             for (let i = 0; i < 100; i++) {
@@ -460,73 +536,68 @@
                     confetti.style.width = (Math.random() * 10 + 5) + 'px';
                     confetti.style.height = confetti.style.width;
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.animationDelay = '0s';
                     confetti.style.animationDuration = (2 + Math.random()) + 's';
                     container.appendChild(confetti);
                     
                     setTimeout(() => confetti.remove(), 3000);
-                }, i * 30);
+                }, i * 25);
             }
         }
 
-        // Auto-iniciar quando a página carregar
-        window.addEventListener('load', function() {
+        function startAnimation() {
             // Criar AudioContext
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
             if (audioContext.state === 'suspended') {
-                // Tentar ativar o audio (pode não funcionar em alguns navegadores sem interação)
-                document.body.addEventListener('click', function() {
-                    if (audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                }, { once: true });
+                audioContext.resume();
             }
 
-            // Sons durante a animação
+            // Esconder tela inicial
+            document.getElementById('startOverlay').classList.add('hidden');
+
+            // Sons de andar
             setTimeout(() => {
-                // Som de andar (loop)
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 18; i++) {
                     setTimeout(() => {
-                        if (audioContext) {
-                            playSoundSequence(comicSounds.walk, audioContext.currentTime);
-                        }
-                    }, i * 250);
+                        playSoundSequence(comicSounds.walk, audioContext.currentTime);
+                    }, i * 270);
                 }
             }, 500);
 
             // Som de botar ovo
             setTimeout(() => {
-                if (audioContext) {
-                    playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
-                }
+                playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
             }, 5500);
+
+            // Ovo começa a rachar
+            setTimeout(() => {
+                document.getElementById('egg').classList.add('cracking');
+            }, 7500);
 
             // Som de rachar
             setTimeout(() => {
-                if (audioContext) {
-                    playSoundSequence(comicSounds.crack, audioContext.currentTime);
-                }
+                playSoundSequence(comicSounds.crack, audioContext.currentTime);
             }, 7700);
+
+            // Ovo explode
+            setTimeout(() => {
+                document.getElementById('egg').classList.add('exploded');
+            }, 8000);
 
             // Celebração
             setTimeout(() => {
-                if (audioContext) {
-                    playSoundSequence(comicSounds.celebration, audioContext.currentTime);
-                    playBirthdaySong();
-                }
+                playSoundSequence(comicSounds.celebration, audioContext.currentTime);
+                playBirthdaySong();
                 createConfetti();
             }, 8300);
 
-            // Música contínua
+            // Música em loop
             setTimeout(() => {
                 setInterval(() => {
-                    if (audioContext) {
-                        playBirthdaySong();
-                    }
-                }, 10000);
+                    playBirthdaySong();
+                }, 9000);
             }, 8300);
-        });
+        }
     </script>
 </body>
 </html>
