@@ -39,51 +39,38 @@
             50% { opacity: 1; }
         }
 
-        /* Botão de início */
+        /* Botão de início simples */
         .start-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            flex-direction: column;
-            gap: 20px;
         }
 
         .start-overlay.hidden {
             display: none;
         }
 
-        .start-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.5rem;
-            color: #FFD700;
-            text-align: center;
-            padding: 0 20px;
-            line-height: 1.8;
-            text-shadow: 3px 3px 0 #8B4513;
-        }
-
         .start-button {
-            font-family: 'Press Start 2P', cursive;
-            background: linear-gradient(135deg, #8B0000, #DC143C);
+            background: #8B0000;
             color: #FFD700;
-            border: 4px solid #FFD700;
-            padding: 20px 40px;
-            font-size: 1rem;
+            border: 3px solid #FFD700;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s ease;
-            box-shadow: 0 8px 0 #5A0000, 0 15px 30px rgba(0, 0, 0, 0.5);
+            font-family: 'Poppins', sans-serif;
         }
 
         .start-button:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #5A0000, 0 10px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
         }
 
         /* Chão de pedra */
@@ -113,11 +100,11 @@
             filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
         }
 
-        /* Cavaleiro pixel art */
+        /* Cavaleiro pixel art CSS */
         .knight-wrapper {
             position: fixed;
-            left: -200px;
-            bottom: 100px;
+            left: -150px;
+            bottom: 120px;
             z-index: 10;
         }
 
@@ -126,43 +113,144 @@
         }
 
         @keyframes walkKnight {
-            0% { left: -200px; }
+            0% { left: -150px; }
             100% { left: 50%; transform: translateX(-50%); }
         }
 
         .knight {
-            font-size: 6rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
-            animation: knightWalk 0.6s steps(2) infinite;
+            width: 64px;
+            height: 80px;
+            position: relative;
+            transform-origin: bottom center;
+            animation: knightWalk 0.8s steps(2) infinite;
         }
 
         @keyframes knightWalk {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-4px); }
         }
 
         .knight.stopped {
-            animation: knightBow 1s ease-in-out forwards;
+            animation: none;
         }
 
-        @keyframes knightBow {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(5px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+        /* Cabeça */
+        .knight-head {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #FFA07A;
+            top: 8px;
+            left: 20px;
+            border: 2px solid #8B4513;
         }
 
-        .flower {
-            font-size: 4rem;
-            display: inline-block;
-            animation: flowerFloat 2s ease-in-out infinite;
+        /* Capacete */
+        .knight-helmet {
+            position: absolute;
+            width: 28px;
+            height: 16px;
+            background: #708090;
+            top: 4px;
+            left: 18px;
+            border: 2px solid #2F4F4F;
         }
 
-        @keyframes flowerFloat {
-            0%, 100% { transform: translateY(0) rotate(-10deg); }
-            50% { transform: translateY(-10px) rotate(10deg); }
+        /* Visor */
+        .knight-visor {
+            position: absolute;
+            width: 12px;
+            height: 4px;
+            background: #000;
+            top: 16px;
+            left: 26px;
+        }
+
+        /* Corpo/armadura */
+        .knight-body {
+            position: absolute;
+            width: 32px;
+            height: 36px;
+            background: #708090;
+            top: 32px;
+            left: 16px;
+            border: 2px solid #2F4F4F;
+        }
+
+        /* Braços */
+        .knight-arm {
+            position: absolute;
+            width: 12px;
+            height: 28px;
+            background: #708090;
+            top: 34px;
+            border: 2px solid #2F4F4F;
+        }
+
+        .knight-arm.left {
+            left: 4px;
+        }
+
+        .knight-arm.right {
+            right: 4px;
+        }
+
+        /* Pernas */
+        .knight-leg {
+            position: absolute;
+            width: 12px;
+            height: 32px;
+            background: #4A4A4A;
+            bottom: 0;
+            border: 2px solid #2F4F4F;
+        }
+
+        .knight-leg.left {
+            left: 18px;
+            animation: legWalk 0.8s steps(2) infinite;
+        }
+
+        .knight-leg.right {
+            right: 18px;
+            animation: legWalk 0.8s steps(2) infinite 0.4s;
+        }
+
+        @keyframes legWalk {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .knight.stopped .knight-leg {
+            animation: none;
+        }
+
+        /* Rosa */
+        .rose {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #DC143C;
+            border-radius: 50% 50% 50% 0;
+            top: 40px;
+            right: -25px;
+            transform: rotate(45deg);
+            animation: roseFloat 2s ease-in-out infinite;
+        }
+
+        .rose::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 20px;
+            background: #228B22;
+            bottom: -15px;
+            left: 8px;
+            transform: rotate(-45deg);
+        }
+
+        @keyframes roseFloat {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(-5px); }
         }
 
         /* Mensagem medieval */
@@ -287,13 +375,9 @@
 
         /* Mobile */
         @media (max-width: 500px) {
-            .start-title {
-                font-size: 1rem;
-            }
-
             .start-button {
-                padding: 15px 30px;
-                font-size: 0.9rem;
+                padding: 12px 40px;
+                font-size: 1rem;
             }
 
             .castle {
@@ -302,11 +386,7 @@
             }
 
             .knight {
-                font-size: 4rem;
-            }
-
-            .flower {
-                font-size: 3rem;
+                transform: scale(0.8);
             }
 
             .message-title {
@@ -338,8 +418,7 @@
 <body>
     <!-- Tela de início -->
     <div class="start-overlay" id="startOverlay">
-        <div class="start-title">🏰 Uma Mensagem Medieval para Ellen 💕</div>
-        <button class="start-button" onclick="startAnimation()">▶ COMEÇAR</button>
+        <button class="start-button" onclick="startAnimation()">▶ Começar</button>
     </div>
 
     <!-- Estrelas -->
@@ -349,11 +428,18 @@
     <div class="castle">🏰</div>
     <div class="ground"></div>
 
-    <!-- Cavaleiro com flor -->
+    <!-- Cavaleiro pixel art CSS -->
     <div class="knight-wrapper" id="knightWrapper">
         <div class="knight" id="knight">
-            <span>🤴</span>
-            <span class="flower">🌹</span>
+            <div class="knight-helmet"></div>
+            <div class="knight-visor"></div>
+            <div class="knight-head"></div>
+            <div class="knight-body"></div>
+            <div class="knight-arm left"></div>
+            <div class="knight-arm right"></div>
+            <div class="knight-leg left"></div>
+            <div class="knight-leg right"></div>
+            <div class="rose"></div>
         </div>
     </div>
 
@@ -405,13 +491,92 @@
     <!-- Container de corações -->
     <div id="heartsContainer"></div>
 
-    <!-- Música -->
-    <audio id="medievalMusic" loop>
-        <source src="sounds/careless-whisper.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
-        const musicAudio = document.getElementById('medievalMusic');
+        let audioContext;
+        
+        // Melodia medieval/fantasia
+        const medievalMelody = [
+            // Frase 1 - misteriosa
+            {f:220,d:0.8},{f:247,d:0.8},{f:262,d:0.6},{f:220,d:0.6},{f:196,d:1.2},
+            {f:220,d:0.8},{f:247,d:0.8},{f:262,d:0.6},{f:294,d:0.6},{f:330,d:1.2},
+            
+            // Frase 2 - épica
+            {f:330,d:0.6},{f:349,d:0.6},{f:392,d:0.8},{f:349,d:0.4},{f:330,d:0.8},{f:294,d:0.8},
+            {f:262,d:0.6},{f:294,d:0.6},{f:330,d:1.2},{f:294,d:0.6},{f:262,d:1.2},
+            
+            // Frase 3 - romântica
+            {f:247,d:0.8},{f:262,d:0.8},{f:294,d:0.6},{f:330,d:0.6},{f:349,d:1.0},
+            {f:392,d:0.6},{f:349,d:0.6},{f:330,d:0.8},{f:294,d:0.8},{f:262,d:1.6},
+            
+            // Frase 4 - final
+            {f:220,d:0.8},{f:247,d:0.8},{f:262,d:0.6},{f:220,d:0.6},{f:196,d:1.2},
+            {f:165,d:2.0}
+        ];
+
+        function playMedievalNote(freq, dur, time, volume = 0.15) {
+            if (!audioContext) return;
+            
+            // Tom de flauta medieval
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine';
+            
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.1);
+            gain.gain.linearRampToValueAtTime(volume * 0.7, time + dur * 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+
+            // Harmônico suave
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = freq * 1.5;
+            harm.type = 'triangle';
+            
+            harmGain.gain.setValueAtTime(0, time);
+            harmGain.gain.linearRampToValueAtTime(volume * 0.3, time + 0.1);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm.start(time);
+            harm.stop(time + dur);
+
+            // Drone baixo (bordão medieval)
+            const drone = audioContext.createOscillator();
+            const droneGain = audioContext.createGain();
+            drone.connect(droneGain);
+            droneGain.connect(audioContext.destination);
+            drone.frequency.value = 110; // A grave constante
+            drone.type = 'sawtooth';
+            
+            droneGain.gain.setValueAtTime(0, time);
+            droneGain.gain.linearRampToValueAtTime(volume * 0.2, time + 0.1);
+            droneGain.gain.linearRampToValueAtTime(volume * 0.15, time + dur);
+            
+            drone.start(time);
+            drone.stop(time + dur + 0.1);
+        }
+
+        function playMedievalMusic() {
+            if (!audioContext) return;
+            
+            let t = audioContext.currentTime;
+            medievalMelody.forEach(({f, d}) => {
+                playMedievalNote(f, d, t);
+                t += d;
+            });
+            
+            // Loop após 2 segundos
+            setTimeout(() => {
+                playMedievalMusic();
+            }, (t - audioContext.currentTime + 2) * 1000);
+        }
 
         // Criar estrelas
         function createStars() {
@@ -444,18 +609,28 @@
         }
 
         function startAnimation() {
+            // Criar AudioContext
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
             // Esconder tela inicial
             document.getElementById('startOverlay').classList.add('hidden');
             
             // Criar estrelas
             createStars();
             
+            // Tocar música medieval imediatamente
+            playMedievalMusic();
+            
             // Cavaleiro anda
             const knightWrapper = document.getElementById('knightWrapper');
             const knight = document.getElementById('knight');
             knightWrapper.classList.add('walking');
             
-            // Cavaleiro para e faz reverência
+            // Cavaleiro para
             setTimeout(() => {
                 knight.classList.add('stopped');
             }, 7500);
@@ -463,10 +638,6 @@
             // Mensagem aparece
             setTimeout(() => {
                 document.getElementById('message').classList.add('show');
-                
-                // Tocar música
-                musicAudio.volume = 0.5;
-                musicAudio.play().catch(err => console.log('Audio error:', err));
                 
                 // Criar corações
                 createHearts();
