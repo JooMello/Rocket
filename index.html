@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversário Ellen! 🎉</title>
+    <title>Feliz Aniversário Ellen 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,159 +13,156 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Arial', cursive;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F5 50%, #FFEEF8 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Nuvenzinhas fofas de fundo */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 100px;
+            opacity: 0.6;
         }
 
-        .container {
+        /* Card principal */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
             text-align: center;
+            max-width: 500px;
+            margin: 20px;
+            position: relative;
             z-index: 10;
-            padding: 20px;
-            max-width: 800px;
+            border: 3px solid #FFB6C1;
         }
 
-        h1 {
-            font-size: 4rem;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                         0 0 40px rgba(255, 105, 180, 0.6);
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .name {
-            font-size: 5rem;
-            background: linear-gradient(45deg, #ff6b9d, #ffa07a, #ffd700, #ff69b4);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbowText 3s ease infinite, pulse 1.5s ease-in-out infinite;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        @keyframes rainbowText {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .message {
+        /* Gatinhos decorativos nos cantos */
+        .corner-cat {
+            position: absolute;
             font-size: 2rem;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin: 30px 0;
-            line-height: 1.6;
+            animation: gentle-bounce 3s ease-in-out infinite;
         }
 
-        .emoji-line {
-            font-size: 3rem;
-            margin: 30px 0;
-            animation: spin 3s linear infinite;
+        .corner-cat.top-left {
+            top: -15px;
+            left: -15px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .corner-cat.top-right {
+            top: -15px;
+            right: -15px;
         }
 
-        /* Confetes */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #f0f;
-            animation: fall linear infinite;
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+        /* Título */
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #FF69B4;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        /* Foguete voador */
-        .rocket {
-            position: absolute;
-            font-size: 3rem;
-            animation: flyRocket 8s linear infinite;
+        /* Nome da aniversariante */
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #FF1493;
+            margin: 20px 0;
+            text-shadow: 2px 2px 0 rgba(255, 182, 193, 0.3);
         }
 
-        @keyframes flyRocket {
-            0% {
-                left: -100px;
-                top: 80%;
-            }
-            50% {
-                left: 50%;
-                top: 20%;
-            }
-            100% {
-                left: 110%;
-                top: 80%;
-            }
+        /* Linha de gatinhos e flores */
+        .decoration-line {
+            font-size: 1.8rem;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
         }
 
-        /* Gatinhos flutuantes */
-        .cat {
-            position: absolute;
-            font-size: 2.5rem;
-            animation: float 4s ease-in-out infinite;
+        /* Mensagem */
+        .message {
+            font-size: 1.1rem;
+            color: #DB7093;
+            line-height: 1.8;
+            margin: 25px 0;
+            font-weight: 500;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
+        /* Coraçãozinho final */
+        .heart-bottom {
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: pulse-heart 1.5s ease-in-out infinite;
         }
 
-        /* Estrelinhas piscando */
-        .star {
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Flores flutuantes */
+        .floating-flower {
             position: absolute;
             font-size: 1.5rem;
-            animation: twinkle 1.5s ease-in-out infinite;
+            animation: float-gentle 4s ease-in-out infinite;
+            opacity: 0.6;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.8); }
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
-        /* Corações flutuantes */
-        .heart {
+        /* Gatinhos flutuantes fofos */
+        .floating-cat {
             position: absolute;
             font-size: 2rem;
-            animation: floatUp 6s ease-in-out infinite;
+            animation: float-gentle 5s ease-in-out infinite;
+            opacity: 0.7;
         }
 
-        @keyframes floatUp {
+        /* Pétalas caindo delicadamente */
+        .petal {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: fall-soft linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall-soft {
+            to {
+                transform: translateY(100vh) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Corações sutis */
+        .heart-float {
+            position: absolute;
+            color: #FFB6C1;
+            animation: rise-gentle 8s ease-in-out infinite;
+        }
+
+        @keyframes rise-gentle {
             0% {
-                bottom: -50px;
-                opacity: 1;
+                bottom: -30px;
+                opacity: 0.8;
             }
             100% {
                 bottom: 110%;
@@ -172,87 +170,105 @@
             }
         }
 
-        .cake {
-            font-size: 5rem;
+        /* Laçinho decorativo */
+        .bow {
+            font-size: 2.5rem;
+            margin: 15px 0;
             display: inline-block;
-            animation: bounce 2s ease-in-out infinite;
-            margin: 20px;
+            animation: gentle-swing 2s ease-in-out infinite;
+        }
+
+        @keyframes gentle-swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .name { font-size: 3.5rem; }
-            .message { font-size: 1.5rem; }
-            .cake { font-size: 4rem; }
+            .card {
+                padding: 40px 30px;
+                margin: 15px;
+            }
+            .title { font-size: 1.6rem; }
+            .name { font-size: 2.8rem; }
+            .message { font-size: 1rem; }
+            .decoration-line { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 Feliz Aniversário 🎉</h1>
+    <!-- Nuvenzinhas de fundo -->
+    <div class="cloud" style="width: 100px; height: 50px; top: 10%; left: 5%;"></div>
+    <div class="cloud" style="width: 120px; height: 60px; top: 20%; right: 10%;"></div>
+    <div class="cloud" style="width: 90px; height: 45px; bottom: 15%; left: 8%;"></div>
+    <div class="cloud" style="width: 110px; height: 55px; bottom: 25%; right: 5%;"></div>
+
+    <!-- Card principal -->
+    <div class="card">
+        <!-- Gatinhos nos cantos -->
+        <div class="corner-cat top-left">🐱</div>
+        <div class="corner-cat top-right">🐱</div>
+
+        <div class="title">Feliz Aniversário</div>
+        
+        <div class="bow">🎀</div>
+        
         <div class="name">Ellen</div>
-        <div class="cake">🎂</div>
+        
+        <div class="decoration-line">
+            <span>🌸</span>
+            <span>🐱</span>
+            <span>💕</span>
+            <span>🐱</span>
+            <span>🌸</span>
+        </div>
+        
         <div class="message">
-            Que seu dia seja tão especial quanto você é! ✨<br>
-            Que venham muitos momentos incríveis, sorrisos<br>
-            e muito amor nesse novo ano de vida! 💕
+            Que seu dia seja repleto de amor,<br>
+            sorrisos e momentos especiais!<br>
+            Você merece tudo de mais lindo<br>
+            nesse mundo! ✨
         </div>
-        <div class="emoji-line">
-            🎈 🎁 🎊 🎀 🌟
-        </div>
+        
+        <div class="heart-bottom">💖</div>
     </div>
 
-    <!-- Foguetes -->
-    <div class="rocket" style="animation-delay: 0s;">🚀</div>
-    <div class="rocket" style="animation-delay: 4s;">🚀</div>
+    <!-- Gatinhos flutuantes -->
+    <div class="floating-cat" style="left: 8%; top: 15%; animation-delay: 0s;">🐱</div>
+    <div class="floating-cat" style="right: 12%; top: 25%; animation-delay: 1.5s;">😺</div>
+    <div class="floating-cat" style="left: 10%; bottom: 20%; animation-delay: 2s;">😸</div>
+    <div class="floating-cat" style="right: 8%; bottom: 30%; animation-delay: 0.8s;">😻</div>
 
-    <!-- Gatinhos -->
-    <div class="cat" style="left: 10%; top: 20%; animation-delay: 0s;">😺</div>
-    <div class="cat" style="right: 10%; top: 30%; animation-delay: 1s;">🐱</div>
-    <div class="cat" style="left: 15%; bottom: 20%; animation-delay: 2s;">😸</div>
-    <div class="cat" style="right: 15%; bottom: 30%; animation-delay: 1.5s;">😻</div>
-
-    <!-- Estrelinhas -->
-    <div class="star" style="left: 5%; top: 10%; animation-delay: 0s;">⭐</div>
-    <div class="star" style="right: 8%; top: 15%; animation-delay: 0.5s;">✨</div>
-    <div class="star" style="left: 20%; top: 25%; animation-delay: 1s;">🌟</div>
-    <div class="star" style="right: 25%; top: 35%; animation-delay: 1.5s;">💫</div>
-    <div class="star" style="left: 30%; bottom: 15%; animation-delay: 0.7s;">⭐</div>
-    <div class="star" style="right: 35%; bottom: 25%; animation-delay: 1.2s;">✨</div>
-
-    <!-- Corações -->
-    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
-    <div class="heart" style="left: 30%; animation-delay: 2s;">💕</div>
-    <div class="heart" style="left: 50%; animation-delay: 4s;">💝</div>
-    <div class="heart" style="left: 70%; animation-delay: 1s;">💗</div>
-    <div class="heart" style="left: 90%; animation-delay: 3s;">💞</div>
+    <!-- Flores flutuantes -->
+    <div class="floating-flower" style="left: 15%; top: 30%; animation-delay: 0s;">🌸</div>
+    <div class="floating-flower" style="right: 18%; top: 40%; animation-delay: 1s;">🌺</div>
+    <div class="floating-flower" style="left: 20%; bottom: 35%; animation-delay: 1.5s;">🌷</div>
+    <div class="floating-flower" style="right: 15%; bottom: 25%; animation-delay: 0.5s;">🌼</div>
+    <div class="floating-flower" style="left: 12%; top: 50%; animation-delay: 2s;">🌹</div>
+    <div class="floating-flower" style="right: 10%; top: 60%; animation-delay: 2.5s;">🌸</div>
 
     <script>
-        // Criar confetes coloridos
-        const colors = ['#ff6b9d', '#ffa07a', '#ffd700', '#ff69b4', '#00f2fe', '#4facfe', '#f093fb'];
-        
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            confetti.style.animationDelay = Math.random() * 5 + 's';
-            confetti.style.width = (Math.random() * 10 + 5) + 'px';
-            confetti.style.height = (Math.random() * 10 + 5) + 'px';
-            document.body.appendChild(confetti);
+        // Criar pétalas caindo delicadamente
+        const petals = ['🌸', '🌺', '🌷', '🌼'];
+        for (let i = 0; i < 15; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(petal);
         }
 
-        // Adicionar mais balões flutuantes
-        const balloons = ['🎈', '🎀', '🎁', '🎊', '🎉'];
-        for (let i = 0; i < 10; i++) {
-            const balloon = document.createElement('div');
-            balloon.className = 'heart';
-            balloon.textContent = balloons[Math.floor(Math.random() * balloons.length)];
-            balloon.style.left = Math.random() * 100 + '%';
-            balloon.style.animationDelay = Math.random() * 6 + 's';
-            balloon.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            document.body.appendChild(balloon);
+        // Criar coraçõezinhos subindo
+        for (let i = 0; i < 8; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            heart.style.animationDelay = Math.random() * 8 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 7) + 's';
+            document.body.appendChild(heart);
         }
     </script>
 </body>
