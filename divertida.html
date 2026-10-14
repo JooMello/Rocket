@@ -171,16 +171,53 @@
         }
 
         .message {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: #555;
-            line-height: 1.8;
+            line-height: 1.9;
             margin: 25px 0;
         }
 
         .message strong {
             color: #FF1493;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
+        }
+
+        .message em {
+            color: #FF69B4;
+            font-style: italic;
+        }
+
+        /* Gatinhos */
+        .kittens {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .kitten-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FFB6C1;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            animation: floatKitten 3s ease-in-out infinite;
+        }
+
+        .kitten-img:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .kitten-img:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes floatKitten {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .footer {
@@ -194,34 +231,7 @@
 
         /* Botão música */
         .music-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FF1493, #9D4EDD);
-            border: none;
-            color: white;
-            font-size: 2.2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
-            z-index: 1000;
-            display: none;
-            animation: spinMusic 3s linear infinite;
-        }
-
-        .music-btn.show {
-            display: block;
-        }
-
-        .music-btn.paused {
-            animation: none;
-        }
-
-        @keyframes spinMusic {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            display: none !important;
         }
 
         /* Confetes */
@@ -320,6 +330,15 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .kittens {
+                gap: 10px;
+            }
+
+            .kitten-img {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
@@ -350,12 +369,36 @@
                 <span>✨</span>
             </div>
             
+            <div class="kittens">
+                <img src="https://placekitten.com/200/200" alt="Gatinho fofo" class="kitten-img">
+                <img src="https://placekitten.com/201/201" alt="Gatinho fofo" class="kitten-img">
+                <img src="https://placekitten.com/202/202" alt="Gatinho fofo" class="kitten-img">
+            </div>
+
             <div class="message">
-                <strong>PARABÉNS!</strong><br><br>
-                Hoje é o seu dia especial! 🎉<br>
-                Hora de comemorar, sorrir e<br>
-                ser muito, muito feliz!<br><br>
-                <strong>Te amo demais! 💕</strong>
+                <strong>Feliz Aniversário, Amor da Minha Vida!</strong><br><br>
+                
+                Hoje é o dia mais especial do ano, porque é o dia<br>
+                em que celebramos a existência da pessoa<br>
+                que <em>transformou completamente</em> a minha vida! 💕<br><br>
+                
+                <strong>Você é tudo pra mim:</strong><br>
+                Meu amor, minha melhor amiga, minha inspiração,<br>
+                minha parceira e meu maior presente! 🎁<br><br>
+                
+                Cada dia ao seu lado é uma aventura especial,<br>
+                cada sorriso seu ilumina o meu mundo,<br>
+                e cada momento juntos é um presente que<br>
+                eu <em>guardo no coração</em> para sempre! ✨<br><br>
+                
+                <strong>Eu te amo mais do que palavras podem expressar!</strong><br>
+                Você merece TUDO de mais lindo que esse mundo<br>
+                pode oferecer! 🌟<br><br>
+                
+                Que esse novo ano da sua vida seja repleto de:<br>
+                💕 Amor • 😊 Sorrisos • ✨ Conquistas • 🎉 Alegrias<br><br>
+                
+                <strong>Para sempre seu! Te amo infinito! 💖</strong>
             </div>
             
             <div class="footer">
