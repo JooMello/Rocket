@@ -144,6 +144,9 @@
             bottom: 120px;
             left: -220px;
             z-index: 10;
+        }
+
+        .chicken-wrapper.walking {
             animation: walkChicken 5s ease-in-out forwards;
         }
 
@@ -156,6 +159,9 @@
         .chicken {
             width: 180px;
             height: 180px;
+        }
+
+        .chicken.bobbing {
             animation: chickenBob 0.35s ease-in-out infinite;
         }
 
@@ -181,7 +187,12 @@
             height: 80px;
             opacity: 0;
             z-index: 9;
-            animation: layEgg 2s ease-out 5.5s forwards;
+            display: none;
+        }
+
+        .egg.laying {
+            display: block;
+            animation: layEgg 1.5s ease-out forwards;
         }
 
         .egg img {
@@ -194,15 +205,15 @@
         @keyframes layEgg {
             0% {
                 opacity: 0;
-                transform: translateX(-50%) translateY(0) scale(0);
+                transform: translateX(-50%) scale(0.5);
             }
-            50% {
+            60% {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0) scale(1);
+                transform: translateX(-50%) scale(1.1);
             }
             100% {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0) scale(1);
+                transform: translateX(-50%) scale(1);
             }
         }
 
@@ -273,10 +284,13 @@
             box-shadow: 0 20px 60px rgba(255, 105, 180, 0.5);
             text-align: center;
             opacity: 0;
-            animation: popMessage 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 8.3s forwards;
             z-index: 1000;
             max-width: 85vw;
             width: 100%;
+        }
+
+        .birthday-message.show {
+            animation: popMessage 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
         @keyframes popMessage {
@@ -555,6 +569,14 @@
             // Esconder tela inicial
             document.getElementById('startOverlay').classList.add('hidden');
 
+            // INICIAR ANIMAÇÃO DA GALINHA
+            const chickenWrapper = document.querySelector('.chicken-wrapper');
+            const chicken = document.querySelector('.chicken');
+            const egg = document.getElementById('egg');
+            
+            chickenWrapper.classList.add('walking');
+            chicken.classList.add('bobbing');
+
             // Sons de andar
             setTimeout(() => {
                 for (let i = 0; i < 18; i++) {
@@ -562,41 +584,43 @@
                         playSoundSequence(comicSounds.walk, audioContext.currentTime);
                     }, i * 270);
                 }
-            }, 500);
+            }, 100);
 
-            // Som de botar ovo
+            // GALINHA BOTA O OVO (depois que ela para de andar)
             setTimeout(() => {
+                egg.classList.add('laying');
                 playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
-            }, 5500);
+            }, 5200);
 
-            // Ovo começa a rachar
+            // OVO COMEÇA A RACHAR (2 segundos depois de aparecer)
             setTimeout(() => {
-                document.getElementById('egg').classList.add('cracking');
-            }, 7500);
+                egg.classList.add('cracking');
+            }, 7200);
 
-            // Som de rachar
+            // SOM DE RACHAR
             setTimeout(() => {
                 playSoundSequence(comicSounds.crack, audioContext.currentTime);
-            }, 7700);
+            }, 7400);
 
-            // Ovo explode
+            // OVO EXPLODE (ovo some)
             setTimeout(() => {
-                document.getElementById('egg').classList.add('exploded');
+                egg.classList.add('exploded');
             }, 8000);
 
-            // Celebração
+            // MENSAGEM APARECE (logo após o ovo explodir)
             setTimeout(() => {
+                document.querySelector('.birthday-message').classList.add('show');
                 playSoundSequence(comicSounds.celebration, audioContext.currentTime);
                 playBirthdaySong();
                 createConfetti();
-            }, 8300);
+            }, 8200);
 
             // Música em loop
             setTimeout(() => {
                 setInterval(() => {
                     playBirthdaySong();
                 }, 9000);
-            }, 8300);
+            }, 8200);
         }
     </script>
 </body>
