@@ -456,8 +456,14 @@
     <!-- Container de confetes -->
     <div id="confettiContainer"></div>
 
+    <!-- Música Careless Whisper -->
+    <audio id="carelessWhisperAudio" loop>
+        <source src="sounds/careless-whisper.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         let audioContext;
+        const musicAudio = document.getElementById('carelessWhisperAudio');
 
         // Sons cômicos
         const comicSounds = {
@@ -659,15 +665,12 @@
             setTimeout(() => {
                 document.querySelector('.birthday-message').classList.add('show');
                 playSoundSequence(comicSounds.celebration, audioContext.currentTime);
-                playCarelessWhisper();
+                
+                // Tocar música Careless Whisper (áudio real)
+                musicAudio.volume = 0.6;
+                musicAudio.play().catch(err => console.log('Audio play error:', err));
+                
                 createConfetti();
-            }, 8200);
-
-            // Música em loop (Careless Whisper dura ~20s)
-            setTimeout(() => {
-                setInterval(() => {
-                    playCarelessWhisper();
-                }, 20000);
             }, 8200);
         }
     </script>
