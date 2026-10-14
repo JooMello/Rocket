@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🐔🥚 Surpresa da Galinha!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #98D8E8 50%, #90EE90 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Nuvens */
+        .cloud {
+            position: fixed;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+            animation: floatCloud 20s linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 15%;
+            left: -150px;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 120px;
+            height: 45px;
+            top: 25%;
+            left: -200px;
+            animation-delay: 10s;
+        }
+
+        .cloud2::before {
+            width: 55px;
+            height: 55px;
+            top: -28px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 65px;
+            height: 45px;
+            top: -18px;
+            right: 15px;
+        }
+
+        @keyframes floatCloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(120vw); }
+        }
+
+        /* Chão */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(180deg, #8FBC8F 0%, #6B8E23 100%);
+            border-top: 5px solid #556B2F;
+        }
+
+        /* GALINHA */
+        .chicken-wrapper {
+            position: fixed;
+            bottom: 150px;
+            left: -200px;
+            animation: walkChicken 5s ease-in-out forwards;
+        }
+
+        @keyframes walkChicken {
+            0% {
+                left: -200px;
+            }
+            40% {
+                left: calc(50% - 100px);
+            }
+            100% {
+                left: calc(50% - 100px);
+            }
+        }
+
+        .chicken {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            animation: chickenBob 0.3s ease-in-out infinite;
+        }
+
+        @keyframes chickenBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Corpo da galinha */
+        .chicken-body {
+            width: 100px;
+            height: 80px;
+            background: white;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            bottom: 30px;
+            left: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cabeça */
+        .chicken-head {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Crista */
+        .chicken-comb {
+            width: 30px;
+            height: 25px;
+            background: #DC143C;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        .chicken-comb::before,
+        .chicken-comb::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #DC143C;
+            border-radius: 50%;
+        }
+
+        .chicken-comb::before {
+            left: -8px;
+            top: 5px;
+        }
+
+        .chicken-comb::after {
+            right: -8px;
+            top: 5px;
+        }
+
+        /* Olho */
+        .chicken-eye {
+            width: 12px;
+            height: 12px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+            left: 8px;
+        }
+
+        /* Bico */
+        .chicken-beak {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 0;
+            border-top: 10px solid #FFA500;
+            border-bottom: 10px solid #FFA500;
+            position: absolute;
+            top: 22px;
+            left: -12px;
+        }
+
+        /* Asa */
+        .chicken-wing {
+            width: 40px;
+            height: 50px;
+            background: #F5F5F5;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            transform: rotate(20deg);
+        }
+
+        /* Pés */
+        .chicken-legs {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .chicken-leg {
+            width: 4px;
+            height: 30px;
+            background: #FFA500;
+        }
+
+        .chicken-foot {
+            width: 25px;
+            height: 3px;
+            background: #FFA500;
+            position: relative;
+            margin-top: -3px;
+        }
+
+        .chicken-foot::before,
+        .chicken-foot::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 2px;
+            background: #FFA500;
+        }
+
+        .chicken-foot::before {
+            left: 0;
+            bottom: 0;
+            transform: rotate(-30deg);
+        }
+
+        .chicken-foot::after {
+            right: 0;
+            bottom: 0;
+            transform: rotate(30deg);
+        }
+
+        /* OVO */
+        .egg {
+            position: fixed;
+            bottom: 180px;
+            left: calc(50% - 20px);
+            width: 40px;
+            height: 55px;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5E6D3 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: layEgg 2s ease-out 5.5s forwards, crackEgg 0.5s ease-out 8s forwards;
+            z-index: 100;
+        }
+
+        @keyframes layEgg {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes crackEgg {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+            20% {
+                transform: translateY(0) scale(1) rotate(-5deg);
+            }
+            40% {
+                transform: translateY(0) scale(1) rotate(5deg);
+            }
+            60% {
+                transform: translateY(0) scale(1) rotate(-5deg);
+            }
+            80% {
+                transform: translateY(0) scale(1.1) rotate(0deg);
+            }
+            100% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        /* Rachaduras no ovo */
+        .egg-crack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: showCracks 0.3s ease-out 7.7s forwards;
+        }
+
+        @keyframes showCracks {
+            to { opacity: 1; }
+        }
+
+        .crack-line {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: #8B4513;
+        }
+
+        .crack1 {
+            top: 20%;
+            left: 40%;
+            transform: rotate(20deg);
+        }
+
+        .crack2 {
+            top: 35%;
+            right: 35%;
+            transform: rotate(-30deg);
+        }
+
+        .crack3 {
+            bottom: 30%;
+            left: 30%;
+            transform: rotate(45deg);
+        }
+
+        /* MENSAGEM DE ANIVERSÁRIO */
+        .birthday-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 40px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.5);
+            text-align: center;
+            opacity: 0;
+            animation: popMessage 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 8.3s forwards;
+            z-index: 1000;
+            max-width: 90%;
+        }
+
+        @keyframes popMessage {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        .birthday-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3rem;
+            color: #FF1493;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 #FFD700;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .birthday-name {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #FF69B4;
+            margin: 20px 0;
+            text-shadow: 4px 4px 0 #FFD700;
+        }
+
+        .birthday-text {
+            font-size: 1.3rem;
+            color: #555;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .birthday-text strong {
+            color: #FF1493;
+            font-size: 1.5rem;
+        }
+
+        .birthday-emojis {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        /* Confetes */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Botão iniciar */
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .start-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3rem;
+            color: #FF1493;
+            margin-bottom: 20px;
+        }
+
+        .start-subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.1);
+        }
+
+        .start-button:active {
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .chicken {
+                width: 120px;
+                height: 120px;
+            }
+
+            .chicken-body {
+                width: 80px;
+                height: 65px;
+            }
+
+            .chicken-head {
+                width: 40px;
+                height: 40px;
+            }
+
+            .birthday-title {
+                font-size: 2rem;
+            }
+
+            .birthday-name {
+                font-size: 3rem;
+            }
+
+            .birthday-text {
+                font-size: 1.1rem;
+            }
+
+            .birthday-message {
+                padding: 30px 25px;
+            }
+
+            .start-title {
+                font-size: 2rem;
+            }
+
+            .start-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .start-button {
+                padding: 15px 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela inicial -->
+    <div class="start-screen" id="startScreen">
+        <div class="start-content">
+            <div class="start-title">🐔 Surpresa Especial! 🥚</div>
+            <div class="start-subtitle">Prepare-se para uma animação divertida!</div>
+            <button class="start-button" onclick="startAnimation()">🎬 Começar</button>
+        </div>
+    </div>
+
+    <!-- Cenário -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="ground"></div>
+
+    <!-- Galinha -->
+    <div class="chicken-wrapper">
+        <div class="chicken">
+            <div class="chicken-head">
+                <div class="chicken-comb"></div>
+                <div class="chicken-eye"></div>
+                <div class="chicken-beak"></div>
+            </div>
+            <div class="chicken-body">
+                <div class="chicken-wing"></div>
+            </div>
+            <div class="chicken-legs">
+                <div>
+                    <div class="chicken-leg"></div>
+                    <div class="chicken-foot"></div>
+                </div>
+                <div>
+                    <div class="chicken-leg"></div>
+                    <div class="chicken-foot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ovo -->
+    <div class="egg">
+        <div class="egg-crack">
+            <div class="crack-line crack1"></div>
+            <div class="crack-line crack2"></div>
+            <div class="crack-line crack3"></div>
+        </div>
+    </div>
+
+    <!-- Mensagem de aniversário -->
+    <div class="birthday-message">
+        <div class="birthday-title">🎉 FELIZ ANIVERSÁRIO! 🎉</div>
+        <div class="birthday-name">ELLEN</div>
+        <div class="birthday-emojis">🎂🎈🎊🥳✨</div>
+        <div class="birthday-text">
+            <strong>Parabéns, amor!</strong><br><br>
+            Que seu dia seja tão especial quanto você é pra mim!<br>
+            Cheio de alegria, amor e momentos inesquecíveis! 💕<br><br>
+            <strong>Te amo muito! 🎁💖</strong>
+        </div>
+    </div>
+
+    <!-- Container de confetes -->
+    <div id="confettiContainer"></div>
+
+    <script>
+        let audioContext;
+        let isPlaying = false;
+
+        // Sons cômicos e música
+        const comicSounds = {
+            walk: [{f:200,d:0.1},{f:250,d:0.1}],
+            layEgg: [{f:400,d:0.2},{f:300,d:0.2},{f:200,d:0.3}],
+            crack: [{f:800,d:0.05},{f:600,d:0.05},{f:400,d:0.1}],
+            celebration: [
+                {f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}
+            ]
+        };
+
+        // Música de parabéns animada
+        const birthdaySong = [
+            {f:264,d:0.3},{f:264,d:0.3},{f:297,d:0.6},{f:264,d:0.6},{f:352,d:0.6},{f:330,d:1.2},
+            {f:264,d:0.3},{f:264,d:0.3},{f:297,d:0.6},{f:264,d:0.6},{f:396,d:0.6},{f:352,d:1.2},
+            {f:264,d:0.3},{f:264,d:0.3},{f:528,d:0.6},{f:440,d:0.6},{f:352,d:0.6},{f:330,d:0.6},{f:297,d:0.6},
+            {f:470,d:0.3},{f:470,d:0.3},{f:440,d:0.6},{f:352,d:0.6},{f:396,d:0.6},{f:352,d:1.2}
+        ];
+
+        function playSound(freq, dur, time, volume = 0.3) {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'square';
+            
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+        }
+
+        function playSoundSequence(sequence, startTime) {
+            let t = startTime;
+            sequence.forEach(({f, d}) => {
+                playSound(f, d, t, 0.2);
+                t += d;
+            });
+        }
+
+        function playBirthdaySong() {
+            let t = audioContext.currentTime;
+            birthdaySong.forEach(({f, d}) => {
+                playSound(f, d, t, 0.4);
+                t += d;
+            });
+        }
+
+        function createConfetti() {
+            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D'];
+            const container = document.getElementById('confettiContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.animationDelay = '0s';
+                    confetti.style.animationDuration = (2 + Math.random()) + 's';
+                    container.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        function startAnimation() {
+            // Criar AudioContext
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            // Esconder tela inicial
+            document.getElementById('startScreen').classList.add('hidden');
+
+            // Sons durante a animação
+            setTimeout(() => {
+                // Som de andar (loop)
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        playSoundSequence(comicSounds.walk, audioContext.currentTime);
+                    }, i * 250);
+                }
+            }, 500);
+
+            // Som de botar ovo
+            setTimeout(() => {
+                playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
+            }, 5500);
+
+            // Som de rachar
+            setTimeout(() => {
+                playSoundSequence(comicSounds.crack, audioContext.currentTime);
+            }, 7700);
+
+            // Celebração
+            setTimeout(() => {
+                playSoundSequence(comicSounds.celebration, audioContext.currentTime);
+                playBirthdaySong();
+                createConfetti();
+            }, 8300);
+
+            // Música contínua
+            setTimeout(() => {
+                setInterval(() => {
+                    playBirthdaySong();
+                }, 10000);
+            }, 8300);
+        }
+    </script>
+</body>
+</html>
