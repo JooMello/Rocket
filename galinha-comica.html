@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🐔🥚 Surpresa da Galinha!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #98D8E8 50%, #90EE90 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Botão de início simples */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .start-overlay.hidden {
+            display: none;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .start-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Nuvens */
+        .cloud {
+            position: fixed;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.7;
+            animation: floatCloud 25s linear infinite;
+            pointer-events: none;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 80px;
+            height: 35px;
+            top: 10%;
+            left: -120px;
+        }
+
+        .cloud1::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 50px;
+            height: 35px;
+            top: -12px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 100px;
+            height: 40px;
+            top: 20%;
+            left: -150px;
+            animation-delay: 12s;
+        }
+
+        .cloud2::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 12px;
+        }
+
+        .cloud2::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 12px;
+        }
+
+        @keyframes floatCloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(120vw); }
+        }
+
+        /* Chão */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(180deg, #8FBC8F 0%, #6B8E23 100%);
+            border-top: 4px solid #556B2F;
+        }
+
+        /* GALINHA REAL */
+        .chicken-wrapper {
+            position: fixed;
+            bottom: 120px;
+            left: -220px;
+            z-index: 10;
+        }
+
+        .chicken-wrapper.walking {
+            animation: walkChicken 5s ease-in-out forwards;
+        }
+
+        @keyframes walkChicken {
+            0% { left: -220px; }
+            40% { left: 50%; transform: translateX(-50%); }
+            100% { left: 50%; transform: translateX(-50%); }
+        }
+
+        .chicken {
+            width: 180px;
+            height: 180px;
+        }
+
+        .chicken.bobbing {
+            animation: chickenBob 0.35s ease-in-out infinite;
+        }
+
+        @keyframes chickenBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chicken img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
+        }
+
+        /* OVO REAL */
+        .egg {
+            position: fixed;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 100px;
+            opacity: 0;
+            z-index: 100;
+            display: none;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5DEB3 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .egg.laying {
+            display: block;
+            animation: layEgg 1.5s ease-out forwards;
+        }
+
+        .egg-emoji {
+            font-size: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        .egg.cracking .egg-emoji {
+            animation: eggShakeEmoji 0.5s ease-out forwards;
+        }
+
+        @keyframes eggShakeEmoji {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(-10deg); }
+            75% { transform: translate(-50%, -50%) rotate(10deg); }
+        }
+
+        @keyframes layEgg {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5);
+            }
+            60% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        /* Ovo some */
+        .egg.exploded {
+            animation: eggExplode 0.3s ease-out forwards;
+        }
+
+        @keyframes eggExplode {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0);
+            }
+        }
+
+        /* MENSAGEM DE ANIVERSÁRIO */
+        .birthday-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 30px 25px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.5);
+            text-align: center;
+            opacity: 0;
+            z-index: 1000;
+            max-width: 85vw;
+            width: 100%;
+        }
+
+        .birthday-message.show {
+            animation: popMessage 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes popMessage {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        .birthday-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            color: #FF1493;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #FFD700;
+            animation: wiggle 1s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .birthday-name {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #FF69B4;
+            margin: 15px 0;
+            text-shadow: 3px 3px 0 #FFD700;
+            line-height: 1;
+        }
+
+        .birthday-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .birthday-text strong {
+            color: #FF1493;
+            font-size: 1.25rem;
+        }
+
+        .birthday-emojis {
+            font-size: 2.5rem;
+            margin: 15px 0;
+        }
+
+        /* Confetes */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confettiFall 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Mobile otimizado */
+        @media (max-width: 500px) {
+            .ground {
+                height: 100px;
+            }
+
+            .chicken-wrapper {
+                bottom: 100px;
+            }
+
+            .chicken {
+                width: 140px;
+                height: 140px;
+            }
+
+            .egg {
+                bottom: 115px;
+                width: 50px;
+                height: 65px;
+            }
+
+            .birthday-title {
+                font-size: 1.8rem;
+            }
+
+            .birthday-name {
+                font-size: 3rem;
+            }
+
+            .birthday-text {
+                font-size: 1rem;
+            }
+
+            .birthday-text strong {
+                font-size: 1.15rem;
+            }
+
+            .birthday-emojis {
+                font-size: 2rem;
+            }
+
+            .start-button {
+                padding: 18px 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .chicken {
+                width: 120px;
+                height: 120px;
+            }
+
+            .egg {
+                width: 45px;
+                height: 60px;
+            }
+
+            .birthday-title {
+                font-size: 1.5rem;
+            }
+
+            .birthday-name {
+                font-size: 2.5rem;
+            }
+
+            .birthday-message {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de início -->
+    <div class="start-overlay" id="startOverlay">
+        <button class="start-button" onclick="startAnimation()">▶ Começar</button>
+    </div>
+
+    <!-- Cenário -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="ground"></div>
+
+    <!-- Galinha Real -->
+    <div class="chicken-wrapper">
+        <div class="chicken">
+            <img src="images/galinha-branca.png" alt="Galinha">
+        </div>
+    </div>
+
+    <!-- Ovo Real -->
+    <div class="egg" id="egg">
+        <div class="egg-emoji" id="eggEmoji">🥚</div>
+    </div>
+
+    <!-- Mensagem de aniversário -->
+    <div class="birthday-message">
+        <div class="birthday-title">💌 Para Ellen 💌</div>
+        <div class="birthday-name">Meu Amor</div>
+        <div class="birthday-emojis">💕✨💖</div>
+        <div class="birthday-text">
+            <strong>Feliz Aniversário, Amor da Minha Vida!</strong><br><br>
+            
+            Hoje é o seu dia, mas eu sou o presenteado por ter você ao meu lado.<br><br>
+            
+            Você é a pessoa que faz meu coração bater mais forte,<br>
+            que traz luz aos meus dias e paz às minhas noites.<br><br>
+            
+            Cada momento contigo é um presente que guardo<br>
+            com todo carinho no meu coração. 💕<br><br>
+            
+            Você me completa de uma forma que eu nunca imaginei ser possível.<br><br>
+            
+            <strong>Que esse novo ano da sua vida seja repleto de realizações,<br>
+            sorrisos e muito amor... especialmente o meu! 🎂✨</strong><br><br>
+            
+            <em>Te amo hoje, amanhã e sempre! 💖</em><br><br>
+            
+            <strong>Seu para sempre 💕</strong>
+        </div>
+    </div>
+
+    <!-- Container de confetes -->
+    <div id="confettiContainer"></div>
+
+    <!-- Música Careless Whisper -->
+    <audio id="carelessWhisperAudio" loop>
+        <source src="sounds/careless-whisper.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let audioContext;
+        const musicAudio = document.getElementById('carelessWhisperAudio');
+
+        // Sons cômicos
+        const comicSounds = {
+            walk: [{f:200,d:0.1},{f:250,d:0.1}],
+            layEgg: [{f:400,d:0.2},{f:300,d:0.2},{f:200,d:0.3}],
+            crack: [{f:800,d:0.05},{f:600,d:0.05},{f:400,d:0.1}],
+            celebration: [{f:523,d:0.2},{f:659,d:0.2},{f:784,d:0.2},{f:1047,d:0.4}]
+        };
+
+        // Careless Whisper - George Michael (melodia EXATA do saxofone)
+        const carelessWhisper = [
+            // Intro icônico (D - E - F - G - E - D - D)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
+            
+            // Segunda frase (D - E - F - G - A - G - F)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:440,d:1.0},{f:392,d:0.5},{f:349,d:1.0},
+            
+            // Terceira frase (D - E - F - G - E - D - D)
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
+            
+            // Quarta frase (B - D - E - D - C)
+            {f:247,d:0.5},{f:294,d:0.5},{f:330,d:0.5},{f:294,d:0.5},{f:262,d:1.5},
+            
+            // Repetição do refrão
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:330,d:1.0},{f:294,d:1.0},{f:294,d:0.5},
+            
+            {f:294,d:0.5},{f:330,d:0.5},{f:349,d:0.5},{f:392,d:0.5},
+            {f:440,d:1.0},{f:392,d:0.5},{f:349,d:1.5},
+            
+            // Final suave
+            {f:330,d:0.5},{f:294,d:0.5},{f:262,d:0.5},{f:294,d:2.0}
+        ];
+
+        function playSound(freq, dur, time, volume = 0.25) {
+            if (!audioContext) return;
+            
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'square';
+            
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+        }
+
+        function playSoundSequence(sequence, startTime) {
+            let t = startTime;
+            sequence.forEach(({f, d}) => {
+                playSound(f, d, t, 0.2);
+                t += d;
+            });
+        }
+
+        function playCarelessWhisper() {
+            if (!audioContext) return;
+            
+            let t = audioContext.currentTime;
+            carelessWhisper.forEach(({f, d}) => {
+                // Som de saxofone (sine wave mais suave)
+                playSaxophone(f, d, t, 0.3);
+                t += d;
+            });
+        }
+
+        function playSaxophone(freq, dur, time, volume = 0.28) {
+            if (!audioContext) return;
+            
+            // Oscilador principal (som de saxofone mais rico)
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.frequency.value = freq;
+            osc.type = 'triangle'; // Triangle para som mais quente
+            
+            // Envelope mais suave e expressivo
+            gain.gain.setValueAtTime(0, time);
+            gain.gain.linearRampToValueAtTime(volume, time + 0.08);
+            gain.gain.linearRampToValueAtTime(volume * 0.85, time + dur * 0.7);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            osc.start(time);
+            osc.stop(time + dur);
+
+            // Harmônico para profundidade
+            const harm = audioContext.createOscillator();
+            const harmGain = audioContext.createGain();
+            harm.connect(harmGain);
+            harmGain.connect(audioContext.destination);
+            harm.frequency.value = freq * 2;
+            harm.type = 'sine';
+            
+            harmGain.gain.setValueAtTime(0, time);
+            harmGain.gain.linearRampToValueAtTime(volume * 0.18, time + 0.08);
+            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm.start(time);
+            harm.stop(time + dur);
+
+            // Sub-harmônico para corpo
+            const sub = audioContext.createOscillator();
+            const subGain = audioContext.createGain();
+            sub.connect(subGain);
+            subGain.connect(audioContext.destination);
+            sub.frequency.value = freq / 2;
+            sub.type = 'sine';
+            
+            subGain.gain.setValueAtTime(0, time);
+            subGain.gain.linearRampToValueAtTime(volume * 0.12, time + 0.08);
+            subGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            sub.start(time);
+            sub.stop(time + dur);
+        }
+
+        function createConfetti() {
+            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
+            const container = document.getElementById('confettiContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.animationDuration = (2 + Math.random()) + 's';
+                    container.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 25);
+            }
+        }
+
+        function startAnimation() {
+            // Criar AudioContext
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            // Esconder tela inicial
+            document.getElementById('startOverlay').classList.add('hidden');
+
+            // INICIAR ANIMAÇÃO DA GALINHA
+            const chickenWrapper = document.querySelector('.chicken-wrapper');
+            const chicken = document.querySelector('.chicken');
+            const egg = document.getElementById('egg');
+            
+            chickenWrapper.classList.add('walking');
+            chicken.classList.add('bobbing');
+
+            // Sons de andar
+            setTimeout(() => {
+                for (let i = 0; i < 18; i++) {
+                    setTimeout(() => {
+                        playSoundSequence(comicSounds.walk, audioContext.currentTime);
+                    }, i * 270);
+                }
+            }, 100);
+
+            // GALINHA BOTA O OVO (depois que ela para de andar)
+            setTimeout(() => {
+                egg.classList.add('laying');
+                playSoundSequence(comicSounds.layEgg, audioContext.currentTime);
+            }, 5200);
+
+            // OVO COMEÇA A RACHAR (2 segundos depois de aparecer)
+            setTimeout(() => {
+                egg.classList.add('cracking');
+                playSoundSequence(comicSounds.crack, audioContext.currentTime);
+            }, 7200);
+
+            // OVO VIRA QUEBRADO
+            setTimeout(() => {
+                document.getElementById('eggEmoji').textContent = '🐣';
+            }, 7700);
+
+            // OVO EXPLODE (ovo some)
+            setTimeout(() => {
+                egg.classList.add('exploded');
+            }, 8000);
+
+            // MENSAGEM APARECE (logo após o ovo explodir)
+            setTimeout(() => {
+                document.querySelector('.birthday-message').classList.add('show');
+                playSoundSequence(comicSounds.celebration, audioContext.currentTime);
+                
+                // Tocar música Careless Whisper (áudio real)
+                musicAudio.volume = 0.6;
+                musicAudio.play().catch(err => console.log('Audio play error:', err));
+                
+                createConfetti();
+            }, 8200);
+        }
+    </script>
+</body>
+</html>

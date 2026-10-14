@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🏰 Mensagem Medieval para Ellen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Estrelas no céu */
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Botão de início simples */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .start-overlay.hidden {
+            display: none;
+        }
+
+        .start-button {
+            background: #8B0000;
+            color: #FFD700;
+            border: 3px solid #FFD700;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .start-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Chão pixel art detalhado */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #5a4a3a 0px, #5a4a3a 16px,
+                    #4a3a2a 16px, #4a3a2a 32px,
+                    #5a4a3a 32px, #5a4a3a 48px,
+                    #4a3a2a 48px, #4a3a2a 64px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    #5a4a3a 0px, #5a4a3a 16px,
+                    #6a5a4a 16px, #6a5a4a 17px,
+                    #5a4a3a 17px, #5a4a3a 32px
+                );
+            border-top: 4px solid #3a2a1a;
+            box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .ground::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 30%, transparent 2px, #3a2a1a 2px, transparent 3px),
+                radial-gradient(circle at 25% 70%, transparent 2px, #3a2a1a 2px, transparent 3px),
+                radial-gradient(circle at 45% 40%, transparent 2px, #3a2a1a 2px, transparent 3px),
+                radial-gradient(circle at 65% 80%, transparent 2px, #3a2a1a 2px, transparent 3px),
+                radial-gradient(circle at 80% 50%, transparent 2px, #3a2a1a 2px, transparent 3px);
+            background-size: 100px 100px;
+            opacity: 0.3;
+        }
+
+        /* Castelo ao fundo */
+        .castle {
+            position: fixed;
+            right: 10%;
+            bottom: 100px;
+            font-size: 8rem;
+            opacity: 0.6;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Cavaleiro pixel art CSS */
+        .knight-wrapper {
+            position: fixed;
+            left: -150px;
+            bottom: 120px;
+            z-index: 10;
+        }
+
+        .knight-wrapper.walking {
+            animation: walkKnight 8s linear forwards;
+        }
+
+        @keyframes walkKnight {
+            0% { left: -150px; }
+            100% { left: 50%; transform: translateX(-50%); }
+        }
+
+        .knight {
+            width: 96px;
+            height: 112px;
+            position: relative;
+            transform-origin: bottom center;
+            filter: drop-shadow(6px 8px 0 rgba(0, 0, 0, 0.5));
+            animation: knightBob 0.5s steps(2) infinite;
+        }
+
+        @keyframes knightBob {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-5px) scaleY(0.98); }
+        }
+
+        .knight.stopped {
+            animation: none;
+        }
+
+        /* Capacete com pluma */
+        .knight-plume {
+            position: absolute;
+            width: 12px;
+            height: 16px;
+            background: #FFD700;
+            top: -8px;
+            left: 42px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .knight-plume::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #FFA500;
+            top: 4px;
+            left: 2px;
+        }
+
+        /* Capacete */
+        .knight-helmet {
+            position: absolute;
+            width: 40px;
+            height: 36px;
+            background: linear-gradient(135deg, #5F7A8C 0%, #4A5F70 100%);
+            top: 8px;
+            left: 28px;
+            box-shadow: 
+                inset -3px -3px 0 rgba(0, 0, 0, 0.4),
+                inset 2px 2px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Visor em cruz */
+        .knight-visor {
+            position: absolute;
+            width: 3px;
+            height: 16px;
+            background: #1a1a1a;
+            top: 24px;
+            left: 46px;
+        }
+
+        .knight-visor::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 3px;
+            background: #1a1a1a;
+            top: 7px;
+            left: -6px;
+        }
+
+        /* Ombro esquerdo */
+        .knight-shoulder-left {
+            position: absolute;
+            width: 20px;
+            height: 24px;
+            background: linear-gradient(135deg, #5F7A8C 0%, #4A5F70 100%);
+            top: 40px;
+            left: 16px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Ombro direito */
+        .knight-shoulder-right {
+            position: absolute;
+            width: 20px;
+            height: 24px;
+            background: linear-gradient(135deg, #5F7A8C 0%, #4A5F70 100%);
+            top: 40px;
+            right: 16px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Torso/peitoral */
+        .knight-chest {
+            position: absolute;
+            width: 48px;
+            height: 40px;
+            background: linear-gradient(135deg, #6B8496 0%, #547087 100%);
+            top: 44px;
+            left: 24px;
+            box-shadow: 
+                inset -4px -4px 0 rgba(0, 0, 0, 0.35),
+                inset 3px 3px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        /* Cruz dourada no peito */
+        .knight-cross {
+            position: absolute;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            top: 52px;
+            left: 46px;
+            box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .knight-cross::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+            top: 6px;
+            left: -6px;
+        }
+
+        /* Braço esquerdo */
+        .knight-arm-left {
+            position: absolute;
+            width: 20px;
+            height: 36px;
+            background: linear-gradient(135deg, #5F7A8C 0%, #4A5F70 100%);
+            top: 56px;
+            left: 8px;
+            border-radius: 4px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+            animation: armSwingLeft 0.5s steps(2) infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes armSwingLeft {
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+        }
+
+        .knight.stopped .knight-arm-left {
+            animation: none;
+            transform: rotate(0deg);
+        }
+
+        /* Mão esquerda */
+        .knight-hand-left {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #8B7355;
+            bottom: -12px;
+            left: 2px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Braço direito (segura rosa) */
+        .knight-arm-right {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: linear-gradient(135deg, #5F7A8C 0%, #4A5F70 100%);
+            top: 56px;
+            right: 8px;
+            border-radius: 4px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mão direita */
+        .knight-hand-right {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #8B7355;
+            bottom: -12px;
+            right: 2px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Cintura/cinto */
+        .knight-belt {
+            position: absolute;
+            width: 48px;
+            height: 8px;
+            background: #8B4513;
+            top: 84px;
+            left: 24px;
+            box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .knight-belt::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #FFD700;
+            left: 18px;
+        }
+
+        /* Saia de malha vermelha */
+        .knight-skirt {
+            position: absolute;
+            width: 52px;
+            height: 20px;
+            background: linear-gradient(180deg, #8B0000 0%, #660000 100%);
+            top: 92px;
+            left: 22px;
+            box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Coxa esquerda */
+        .knight-thigh-left {
+            position: absolute;
+            width: 20px;
+            height: 28px;
+            background: linear-gradient(135deg, #4A5F70 0%, #3A4F60 100%);
+            top: 112px;
+            left: 26px;
+            animation: legWalkLeft 0.5s steps(2) infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes legWalkLeft {
+            0%, 100% { 
+                transform: rotate(0deg);
+            }
+            50% { 
+                transform: rotate(-15deg);
+            }
+        }
+
+        .knight.stopped .knight-thigh-left {
+            animation: none;
+        }
+
+        /* Coxa direita */
+        .knight-thigh-right {
+            position: absolute;
+            width: 20px;
+            height: 28px;
+            background: linear-gradient(135deg, #4A5F70 0%, #3A4F60 100%);
+            top: 112px;
+            right: 26px;
+            animation: legWalkRight 0.5s steps(2) infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes legWalkRight {
+            0%, 100% { 
+                transform: rotate(0deg);
+            }
+            50% { 
+                transform: rotate(15deg);
+            }
+        }
+
+        .knight.stopped .knight-thigh-right {
+            animation: none;
+        }
+
+        /* Perna esquerda/bota */
+        .knight-boot-left {
+            position: absolute;
+            width: 18px;
+            height: 20px;
+            background: #2F2F2F;
+            bottom: -18px;
+            left: 1px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .knight-boot-left::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 8px;
+            background: #2F2F2F;
+            bottom: 0;
+            left: -2px;
+        }
+
+        /* Perna direita/bota */
+        .knight-boot-right {
+            position: absolute;
+            width: 18px;
+            height: 20px;
+            background: #2F2F2F;
+            bottom: -18px;
+            right: 1px;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .knight-boot-right::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 8px;
+            background: #2F2F2F;
+            bottom: 0;
+            right: -2px;
+        }
+
+        /* Rosa pixel art */
+        .rose {
+            position: absolute;
+            width: 32px;
+            height: 40px;
+            top: 32px;
+            right: -20px;
+            animation: roseFloat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes roseFloat {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-6px) rotate(-5deg); }
+        }
+
+        /* Pétalas da rosa */
+        .rose-petals {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0;
+            left: 6px;
+        }
+
+        .rose-petal {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #DC143C;
+            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .rose-petal:nth-child(1) { top: 0; left: 6px; }
+        .rose-petal:nth-child(2) { top: 6px; left: 0; }
+        .rose-petal:nth-child(3) { top: 6px; left: 12px; }
+        .rose-petal:nth-child(4) { top: 12px; left: 6px; }
+        .rose-petal:nth-child(5) { 
+            top: 6px; 
+            left: 6px; 
+            background: #8B0000;
+            width: 8px;
+            height: 8px;
+        }
+
+        /* Caule */
+        .rose-stem {
+            position: absolute;
+            width: 4px;
+            height: 24px;
+            background: #228B22;
+            bottom: 0;
+            left: 14px;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Folhas */
+        .rose-leaf {
+            position: absolute;
+            width: 8px;
+            height: 6px;
+            background: #228B22;
+        }
+
+        .rose-leaf:nth-child(1) {
+            bottom: 12px;
+            left: 10px;
+            transform: rotate(-30deg);
+        }
+
+        .rose-leaf:nth-child(2) {
+            bottom: 8px;
+            right: 8px;
+            transform: rotate(30deg);
+        }
+
+        /* Mensagem medieval */
+        .medieval-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #2C1810 0%, #4A2810 100%);
+            padding: 40px 35px;
+            border-radius: 15px;
+            border: 5px solid #FFD700;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), inset 0 0 50px rgba(255, 215, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            z-index: 1000;
+            max-width: 90vw;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .medieval-message.show {
+            animation: scrollAppear 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes scrollAppear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.05) rotate(2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        .scroll-top,
+        .scroll-bottom {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, transparent, #8B4513, transparent);
+            margin: -30px 0;
+        }
+
+        .message-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #8B4513;
+            line-height: 1.8;
+        }
+
+        .message-name {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #FFD700;
+            margin: 20px 0;
+            text-shadow: 3px 3px 0 #8B4513;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 3px 3px 0 #8B4513, 0 0 20px #FFD700; }
+            50% { text-shadow: 3px 3px 0 #8B4513, 0 0 40px #FFD700; }
+        }
+
+        .message-text {
+            font-size: 1rem;
+            color: #F5DEB3;
+            line-height: 1.9;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .message-text strong {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        .message-text em {
+            color: #FFA500;
+            font-style: italic;
+        }
+
+        .message-icons {
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .signature {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.8rem;
+            color: #FFD700;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Partículas de coração */
+        .heart-particle {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            animation: heartRise 3s ease-out forwards;
+        }
+
+        @keyframes heartRise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1.5);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .start-button {
+                padding: 12px 40px;
+                font-size: 1rem;
+            }
+
+            .castle {
+                font-size: 5rem;
+                right: 5%;
+            }
+
+            .knight {
+                transform: scale(0.8);
+            }
+
+            .message-title {
+                font-size: 1rem;
+            }
+
+            .message-name {
+                font-size: 2.5rem;
+            }
+
+            .message-text {
+                font-size: 0.95rem;
+            }
+
+            .message-text strong {
+                font-size: 1.1rem;
+            }
+
+            .medieval-message {
+                padding: 30px 20px;
+            }
+
+            .signature {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de início -->
+    <div class="start-overlay" id="startOverlay">
+        <button class="start-button" onclick="startAnimation()">▶ Começar</button>
+    </div>
+
+    <!-- Estrelas -->
+    <div id="starsContainer"></div>
+
+    <!-- Cenário -->
+    <div class="castle">🏰</div>
+    <div class="ground"></div>
+
+    <!-- Cavaleiro pixel art CSS detalhado -->
+    <div class="knight-wrapper" id="knightWrapper">
+        <div class="knight" id="knight">
+            <!-- Cabeça -->
+            <div class="knight-plume"></div>
+            <div class="knight-helmet"></div>
+            <div class="knight-visor"></div>
+            
+            <!-- Torso -->
+            <div class="knight-shoulder-left"></div>
+            <div class="knight-shoulder-right"></div>
+            <div class="knight-chest"></div>
+            <div class="knight-cross"></div>
+            
+            <!-- Braços -->
+            <div class="knight-arm-left">
+                <div class="knight-hand-left"></div>
+            </div>
+            <div class="knight-arm-right">
+                <div class="knight-hand-right"></div>
+            </div>
+            
+            <!-- Cintura -->
+            <div class="knight-belt"></div>
+            <div class="knight-skirt"></div>
+            
+            <!-- Pernas -->
+            <div class="knight-thigh-left">
+                <div class="knight-boot-left"></div>
+            </div>
+            <div class="knight-thigh-right">
+                <div class="knight-boot-right"></div>
+            </div>
+            
+            <!-- Rosa -->
+            <div class="rose">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-stem"></div>
+                <div class="rose-leaf"></div>
+                <div class="rose-leaf"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensagem medieval -->
+    <div class="medieval-message" id="message">
+        <div class="scroll-top"></div>
+        
+        <div class="message-name">ELLEN</div>
+        
+        <div class="message-icons">🌹👑💖</div>
+        
+        <div class="message-text">
+            <strong>Minha Amada Ellen,</strong><br><br>
+            
+            <em>Neste dia especial do teu aniversário,</em><br>
+            venho como um humilde cavaleiro,<br>
+            com uma rosa em mãos e o coração transbordando de amor. 🌹<br><br>
+            
+            Tu és a princesa dos meus sonhos,<br>
+            a luz que guia meu caminho,<br>
+            a razão pela qual meu coração bate com mais força. 💕<br><br>
+            
+            <strong>Cada dia ao teu lado é uma aventura épica,</strong><br>
+            repleta de momentos mágicos que guardarei<br>
+            como os tesouros mais preciosos do reino. 👑✨<br><br>
+            
+            Tu me completas de uma forma que as palavras<br>
+            não conseguem expressar plenamente.<br>
+            És minha rainha, minha companheira, meu tudo. 💖<br><br>
+            
+            <strong>Que este novo ano da tua vida seja repleto de:</strong><br>
+            ⚔️ Conquistas gloriosas<br>
+            🏰 Momentos inesquecíveis<br>
+            💕 Amor infinito (especialmente o meu!)<br>
+            ✨ Felicidade sem fim<br><br>
+            
+            <em>Feliz Aniversário, Meu Amor!</em><br><br>
+            
+            <strong>Te amo hoje, amanhã e por toda eternidade! 💖👑</strong>
+        </div>
+        
+        <div class="signature">Teu Cavaleiro Eterno 🗡️💕</div>
+        
+        <div class="scroll-bottom"></div>
+    </div>
+
+    <!-- Container de corações -->
+    <div id="heartsContainer"></div>
+
+    <!-- Música medieval -->
+    <audio id="medievalMusic" loop>
+        <source src="sounds/medieval-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const medievalMusic = document.getElementById('medievalMusic');
+
+        // Criar estrelas
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 70 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Criar corações flutuantes
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['💕', '💖', '💗', '💝', '❤️'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.bottom = '0';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 3000);
+            }, 400);
+        }
+
+        function startAnimation() {
+            // Esconder tela inicial
+            document.getElementById('startOverlay').classList.add('hidden');
+            
+            // Criar estrelas
+            createStars();
+            
+            // Tocar música medieval
+            medievalMusic.volume = 0.5;
+            medievalMusic.play().catch(err => console.log('Audio error:', err));
+            
+            // Cavaleiro anda
+            const knightWrapper = document.getElementById('knightWrapper');
+            const knight = document.getElementById('knight');
+            knightWrapper.classList.add('walking');
+            
+            // Cavaleiro para
+            setTimeout(() => {
+                knight.classList.add('stopped');
+            }, 7500);
+            
+            // Mensagem aparece
+            setTimeout(() => {
+                document.getElementById('message').classList.add('show');
+                
+                // Criar corações
+                createHearts();
+            }, 9000);
+        }
+    </script>
+</body>
+</html>
