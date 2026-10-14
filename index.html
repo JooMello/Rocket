@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversário Ellen 💕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <title>Escolha o design - Aniversário Ellen 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,375 +13,231 @@
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #FFB3D9 0%, #FFD6E8 25%, #FFE5F0 50%, #FFF0F7 75%, #FFB3D9 100%);
-            background-size: 400% 400%;
-            animation: gradient-shift 20s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFE8F0 0%, #FFD6E8 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Decorações de fundo */
-        .bg-decoration {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: float-slow 6s ease-in-out infinite;
-        }
-
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-
-        /* Container do envelope */
-        .envelope-container {
-            position: relative;
-            width: 350px;
-            height: 400px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .envelope-container:hover {
-            transform: scale(1.02);
-        }
-
-        .envelope-container.opened {
-            cursor: default;
-        }
-
-        /* Envelope */
-        .envelope {
-            position: absolute;
-            width: 100%;
-            height: 250px;
-            bottom: 0;
-        }
-
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #FF69B4, #FF85C1);
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4);
-        }
-
-        .envelope-front {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 175px solid transparent;
-            border-right: 175px solid transparent;
-            border-bottom: 150px solid #FF1493;
-            bottom: 0;
-            transform-origin: top center;
-            transition: transform 1s ease;
-            z-index: 3;
-        }
-
-        .envelope-container.opened .envelope-front {
-            transform: rotateX(180deg);
-        }
-
-        /* Decorações no envelope */
-        .envelope-decoration {
-            position: absolute;
-            font-size: 1.5rem;
-            z-index: 2;
-        }
-
-        /* Carta */
-        .letter {
-            position: absolute;
-            width: 320px;
-            height: 450px;
-            background: #FFFFFF;
-            border-radius: 15px;
-            box-shadow: 0 15px 50px rgba(255, 105, 180, 0.3);
-            padding: 30px 25px;
+        .header {
             text-align: center;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100%);
-            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 2;
-            border: 4px solid #FFB6C1;
-            overflow-y: auto;
+            margin-bottom: 50px;
         }
 
-        .envelope-container.opened .letter {
-            transform: translateX(-50%) translateY(-50px);
-        }
-
-        /* Conteúdo da carta */
-        .letter-header {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
+        .header h1 {
+            font-size: 2.5rem;
             color: #FF1493;
             margin-bottom: 15px;
-            animation: fade-in 0.5s ease 1.2s backwards;
-        }
-
-        .letter-bow {
-            font-size: 2.5rem;
-            margin: 10px 0;
-            animation: fade-in 0.5s ease 1.4s backwards, gentle-swing 2s ease-in-out 1.4s infinite;
-        }
-
-        @keyframes gentle-swing {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-        }
-
-        .letter-name {
-            font-size: 2.5rem;
             font-weight: 700;
-            color: #FF1493;
-            margin: 15px 0;
-            animation: fade-in 0.5s ease 1.6s backwards;
         }
 
-        .letter-decoration-line {
+        .header p {
+            font-size: 1.1rem;
+            color: #DB7093;
+            font-weight: 500;
+        }
+
+        .options-container {
             display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            margin: 15px 0;
-            animation: fade-in 0.5s ease 1.8s backwards;
+            max-width: 1000px;
         }
 
-        .letter-message {
-            font-size: 0.95rem;
+        .option-card {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            width: 380px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.2);
+            border: 3px solid #FFB6C1;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 20, 147, 0.3);
+            border-color: #FF1493;
+        }
+
+        .option-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .option-card:nth-child(2) .option-icon {
+            animation-delay: 0.5s;
+        }
+
+        .option-title {
+            font-size: 1.8rem;
+            color: #FF1493;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .option-description {
+            font-size: 1rem;
             color: #DB7093;
             line-height: 1.7;
-            margin: 20px 0;
-            font-weight: 500;
-            animation: fade-in 0.5s ease 2s backwards;
+            margin-bottom: 25px;
         }
 
-        .letter-footer {
-            margin-top: 15px;
-            animation: fade-in 0.5s ease 2.2s backwards;
+        .option-features {
+            text-align: left;
+            margin-bottom: 25px;
         }
 
-        .letter-footer-icons {
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #DB7093;
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+
+        .option-button {
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
+            width: 100%;
+        }
+
+        .option-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.4);
+        }
+
+        .decorations {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            font-size: 1.3rem;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Instrução de clique */
-        .click-instruction {
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: #FF1493;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
-            animation: bounce-soft 2s ease-in-out infinite;
-            border: 2px solid #FFB6C1;
-            z-index: 10;
-        }
-
-        .envelope-container.opened .click-instruction {
-            display: none;
-        }
-
-        @keyframes bounce-soft {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        /* Pétalas e corações caindo */
-        .falling-item {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: fall-rotate 8s linear infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes fall-rotate {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Confetes rosa */
-        .confetti-pink {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #FF69B4;
-            animation: confetti-fall 5s linear infinite;
-        }
-
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+            gap: 15px;
+            margin-top: 40px;
+            font-size: 2rem;
         }
 
         @media (max-width: 768px) {
-            .envelope-container {
-                width: 300px;
-                height: 380px;
+            .header h1 {
+                font-size: 2rem;
             }
-            .letter {
-                width: 280px;
-                height: 420px;
-                padding: 25px 20px;
+            .header p {
+                font-size: 1rem;
             }
-            .letter-header { font-size: 1.5rem; }
-            .letter-name { font-size: 2rem; }
-            .letter-message { font-size: 0.9rem; }
-            .envelope-front {
-                border-left: 150px solid transparent;
-                border-right: 150px solid transparent;
+            .options-container {
+                gap: 30px;
+            }
+            .option-card {
+                width: 100%;
+                max-width: 350px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Decorações de fundo -->
-    <div class="bg-decoration" style="left: 5%; top: 10%; animation-delay: 0s;">🐱</div>
-    <div class="bg-decoration" style="right: 8%; top: 15%; animation-delay: 1s;">🌸</div>
-    <div class="bg-decoration" style="left: 10%; bottom: 20%; animation-delay: 2s;">🍪</div>
-    <div class="bg-decoration" style="right: 12%; bottom: 25%; animation-delay: 1.5s;">🧁</div>
-    <div class="bg-decoration" style="left: 15%; top: 50%; animation-delay: 0.5s;">💕</div>
-    <div class="bg-decoration" style="right: 15%; top: 40%; animation-delay: 2.5s;">😺</div>
+    <div class="header">
+        <h1>💕 Escolha o Design 💕</h1>
+        <p>Duas opções lindas para a Ellen! Escolha sua favorita:</p>
+    </div>
 
-    <!-- Container do envelope -->
-    <div class="envelope-container" id="envelope">
-        <!-- Instrução -->
-        <div class="click-instruction">
-            👆 Clique para abrir a carta! 💕
-        </div>
-
-        <!-- Carta (dentro do envelope) -->
-        <div class="letter">
-            <div class="letter-header">Feliz Aniversário</div>
-            
-            <div class="letter-bow">🎀</div>
-            
-            <div class="letter-name">Ellen</div>
-            
-            <div class="letter-decoration-line">
-                <span>🌸</span>
-                <span>🐱</span>
-                <span>💕</span>
-                <span>🐱</span>
-                <span>🌸</span>
+    <div class="options-container">
+        <!-- Opção 1 -->
+        <div class="option-card" onclick="window.location.href='opcao1.html'">
+            <div class="option-icon">💌</div>
+            <div class="option-title">Opção 1: Carta Romântica</div>
+            <div class="option-description">
+                Uma carta fofa que abre com fogos de artifício! 🎆
             </div>
-            
-            <div class="letter-message">
-                Que seu dia seja repleto de amor,<br>
-                sorrisos e momentos especiais! 💖<br><br>
-                Você merece tudo de mais lindo<br>
-                nesse mundo! ✨<br><br>
-                Feliz aniversário! 🎂
-            </div>
-            
-            <div class="letter-footer">
-                <div class="letter-footer-icons">
-                    <span>🐱</span>
-                    <span>🌸</span>
-                    <span>🍪</span>
-                    <span>🧁</span>
-                    <span>🎂</span>
-                    <span>🌺</span>
-                    <span>🎀</span>
-                    <span>💕</span>
-                    <span>😺</span>
-                    <span>🌷</span>
-                    <span>🍰</span>
-                    <span>💝</span>
+            <div class="option-features">
+                <div class="feature">
+                    <span class="feature-icon">✨</span>
+                    <span>Envelope rosa que abre suavemente</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎆</span>
+                    <span>Fogos de artifício quando abre</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💕</span>
+                    <span>Carta desliza para fora</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🐱</span>
+                    <span>Gatinhos e flores decorando</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎀</span>
+                    <span>Animações delicadas</span>
                 </div>
             </div>
+            <button class="option-button">Ver Opção 1 💌</button>
         </div>
 
-        <!-- Envelope -->
-        <div class="envelope">
-            <div class="envelope-back"></div>
-            
-            <!-- Decorações no envelope -->
-            <div class="envelope-decoration" style="top: 30%; left: 15%;">🐱</div>
-            <div class="envelope-decoration" style="top: 30%; right: 15%;">🐱</div>
-            <div class="envelope-decoration" style="top: 50%; left: 20%;">🌸</div>
-            <div class="envelope-decoration" style="top: 50%; right: 20%;">🌸</div>
-            <div class="envelope-decoration" style="bottom: 30%; left: 50%; transform: translateX(-50%);">💕</div>
-            
-            <div class="envelope-front"></div>
+        <!-- Opção 2 -->
+        <div class="option-card" onclick="window.location.href='opcao2.html'">
+            <div class="option-icon">🎁</div>
+            <div class="option-title">Opção 2: Caixa de Presente</div>
+            <div class="option-description">
+                Uma caixa de presente que abre com confetes! 🎊
+            </div>
+            <div class="option-features">
+                <div class="feature">
+                    <span class="feature-icon">🎁</span>
+                    <span>Caixa rosa com laço</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎊</span>
+                    <span>Explosão de confetes</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">✨</span>
+                    <span>Mensagem especial aparece</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🌸</span>
+                    <span>Muitas decorações fofas</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💖</span>
+                    <span>Animações surpreendentes</span>
+                </div>
+            </div>
+            <button class="option-button">Ver Opção 2 🎁</button>
         </div>
     </div>
 
-    <script>
-        // Abrir envelope ao clicar
-        const envelope = document.getElementById('envelope');
-        envelope.addEventListener('click', function() {
-            if (!this.classList.contains('opened')) {
-                this.classList.add('opened');
-            }
-        });
-
-        // Criar pétalas, gatinhos e cookies caindo
-        const fallingItems = ['🌸', '🌺', '🌷', '🐱', '😺', '💕', '🍪', '🧁', '🎀'];
-        for (let i = 0; i < 20; i++) {
-            const item = document.createElement('div');
-            item.className = 'falling-item';
-            item.textContent = fallingItems[Math.floor(Math.random() * fallingItems.length)];
-            item.style.left = Math.random() * 100 + '%';
-            item.style.animationDuration = (Math.random() * 5 + 6) + 's';
-            item.style.animationDelay = Math.random() * 8 + 's';
-            item.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
-            document.body.appendChild(item);
-        }
-
-        // Criar confetes rosa
-        const pinkShades = ['#FF69B4', '#FFB6C1', '#FF1493', '#FFC0CB', '#FF85C1'];
-        for (let i = 0; i < 30; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti-pink';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.background = pinkShades[Math.floor(Math.random() * pinkShades.length)];
-            confetti.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            confetti.style.animationDelay = Math.random() * 5 + 's';
-            confetti.style.width = (Math.random() * 6 + 5) + 'px';
-            confetti.style.height = (Math.random() * 6 + 5) + 'px';
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            document.body.appendChild(confetti);
-        }
-    </script>
+    <div class="decorations">
+        <span>🐱</span>
+        <span>🌸</span>
+        <span>🎀</span>
+        <span>💕</span>
+        <span>🧁</span>
+        <span>🍪</span>
+    </div>
 </body>
 </html>

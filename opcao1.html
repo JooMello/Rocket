@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário Ellen 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFE8F0 0%, #FFD6E8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fogos de artifício */
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        @keyframes firework-explosion {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        /* Container principal */
+        .main-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Botão de instrução */
+        .instruction-btn {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #FF1493;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
+            border: 3px solid #FFB6C1;
+            cursor: pointer;
+            animation: pulse-glow 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .instruction-btn:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+        }
+
+        .instruction-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(255, 20, 147, 0.3);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(255, 20, 147, 0.6);
+            }
+        }
+
+        /* Envelope */
+        .envelope-wrapper {
+            width: 400px;
+            height: 300px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover:not(.opened) {
+            transform: scale(1.02);
+        }
+
+        .envelope {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .envelope-back {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 15px 50px rgba(255, 20, 147, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .envelope-decoration {
+            font-size: 1.5rem;
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .envelope-flap {
+            position: absolute;
+            bottom: 200px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-top: 150px solid #C71585;
+            transform-origin: bottom center;
+            transition: transform 0.8s ease;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .envelope-wrapper.opened .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        /* Carta */
+        .letter {
+            position: absolute;
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 5;
+            border: 4px solid #FFB6C1;
+            text-align: center;
+        }
+
+        .envelope-wrapper.opened .letter {
+            bottom: 320px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Conteúdo da carta */
+        .letter-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #FF1493;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.8s;
+        }
+
+        .envelope-wrapper.opened .letter-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-bow {
+            font-size: 3rem;
+            margin: 15px 0;
+            display: inline-block;
+            opacity: 0;
+            transform: scale(0) rotate(-180deg);
+            transition: all 0.6s ease 1s;
+        }
+
+        .envelope-wrapper.opened .letter-bow {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .letter-name {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FF1493;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 1.2s;
+        }
+
+        .envelope-wrapper.opened .letter-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-decorations {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.6s ease 1.4s;
+        }
+
+        .envelope-wrapper.opened .letter-decorations {
+            opacity: 1;
+        }
+
+        .letter-message {
+            font-size: 1rem;
+            color: #DB7093;
+            line-height: 1.8;
+            margin: 25px 0;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 1.6s;
+        }
+
+        .envelope-wrapper.opened .letter-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-heart {
+            font-size: 2.5rem;
+            margin-top: 20px;
+            display: inline-block;
+            opacity: 0;
+            animation: none;
+            transition: all 0.6s ease 1.8s;
+        }
+
+        .envelope-wrapper.opened .letter-heart {
+            opacity: 1;
+            animation: heartbeat 1.5s ease-in-out infinite 2.4s;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        /* Decorações flutuantes */
+        .floating-decoration {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.4;
+            pointer-events: none;
+            animation: float-around 6s ease-in-out infinite;
+        }
+
+        @keyframes float-around {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(10px, -10px) rotate(5deg);
+            }
+            50% {
+                transform: translate(-10px, -20px) rotate(-5deg);
+            }
+            75% {
+                transform: translate(10px, -10px) rotate(3deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .envelope-wrapper {
+                width: 320px;
+                height: 280px;
+            }
+            .envelope-back {
+                height: 180px;
+            }
+            .envelope-flap {
+                border-left: 160px solid transparent;
+                border-right: 160px solid transparent;
+                border-top: 130px solid #C71585;
+                bottom: 180px;
+            }
+            .letter {
+                width: 280px;
+                padding: 30px 20px;
+            }
+            .letter-title {
+                font-size: 1.6rem;
+            }
+            .letter-name {
+                font-size: 2.2rem;
+            }
+            .instruction-btn {
+                font-size: 0.9rem;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorações flutuantes -->
+    <div class="floating-decoration" style="left: 5%; top: 10%; animation-delay: 0s;">🐱</div>
+    <div class="floating-decoration" style="right: 8%; top: 15%; animation-delay: 1s;">🌸</div>
+    <div class="floating-decoration" style="left: 10%; bottom: 15%; animation-delay: 2s;">🎀</div>
+    <div class="floating-decoration" style="right: 12%; bottom: 20%; animation-delay: 1.5s;">💕</div>
+
+    <div class="main-container">
+        <!-- Botão de instrução -->
+        <button class="instruction-btn" id="instructionBtn">
+            ✨ Clique no envelope para abrir! 💕
+        </button>
+
+        <!-- Envelope -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope">
+                <!-- Carta -->
+                <div class="letter">
+                    <div class="letter-title">Feliz Aniversário</div>
+                    <div class="letter-bow">🎀</div>
+                    <div class="letter-name">Ellen</div>
+                    <div class="letter-decorations">
+                        <span>🌸</span>
+                        <span>🐱</span>
+                        <span>💕</span>
+                        <span>🐱</span>
+                        <span>🌸</span>
+                    </div>
+                    <div class="letter-message">
+                        Que seu dia seja repleto de amor,<br>
+                        sorrisos e momentos especiais!<br>
+                        Você merece tudo de mais lindo! ✨
+                    </div>
+                    <div class="letter-heart">💖</div>
+                </div>
+
+                <!-- Parte de trás do envelope -->
+                <div class="envelope-back">
+                    <span class="envelope-decoration" style="animation-delay: 0s;">🐱</span>
+                    <span class="envelope-decoration" style="animation-delay: 0.2s;">🌸</span>
+                    <span class="envelope-decoration" style="animation-delay: 0.4s;">🎀</span>
+                    <span class="envelope-decoration" style="animation-delay: 0.6s;">💕</span>
+                    <span class="envelope-decoration" style="animation-delay: 0.8s;">🐱</span>
+                </div>
+
+                <!-- Tampa do envelope -->
+                <div class="envelope-flap" id="envelopeFlap"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+        const instructionBtn = document.getElementById('instructionBtn');
+        let isOpened = false;
+
+        function createFirework(x, y) {
+            const colors = ['#FF1493', '#FF69B4', '#FFB6C1', '#FFC0CB', '#FF85C1', '#FFD700', '#FF6347'];
+            const particles = 30;
+            
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = (Math.PI * 2 * i) / particles;
+                const velocity = 50 + Math.random() * 50;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(firework);
+                
+                firework.style.animation = `firework-explosion ${0.6 + Math.random() * 0.4}s ease-out forwards`;
+                
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        function launchMultipleFireworks() {
+            const launches = 8;
+            for (let i = 0; i < launches; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * (window.innerHeight * 0.6);
+                    createFirework(x, y);
+                }, i * 200);
+            }
+        }
+
+        envelopeWrapper.addEventListener('click', function() {
+            if (!isOpened) {
+                isOpened = true;
+                this.classList.add('opened');
+                instructionBtn.classList.add('hidden');
+                
+                setTimeout(() => {
+                    launchMultipleFireworks();
+                }, 800);
+                
+                setInterval(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * (window.innerHeight * 0.5);
+                    createFirework(x, y);
+                }, 2000);
+            }
+        });
+
+        instructionBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            envelopeWrapper.click();
+        });
+    </script>
+</body>
+</html>
