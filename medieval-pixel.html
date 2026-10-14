@@ -143,193 +143,30 @@
         }
 
         .knight {
-            width: 80px;
-            height: 96px;
+            width: 120px;
+            height: 120px;
             position: relative;
             transform-origin: bottom center;
-            filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.4));
             animation: knightBob 0.6s steps(2) infinite;
         }
 
         @keyframes knightBob {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            50% { transform: translateY(-4px); }
         }
 
         .knight.stopped {
             animation: none;
         }
 
-        /* Capacete topo */
-        .knight-helmet {
-            position: absolute;
-            width: 32px;
-            height: 8px;
-            background: #C0C0C0;
-            top: 0;
-            left: 24px;
-            box-shadow: 
-                inset -2px -2px 0 rgba(0, 0, 0, 0.3),
-                inset 2px 2px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .knight-helmet::before {
-            content: '';
-            position: absolute;
-            width: 36px;
-            height: 4px;
-            background: #B8860B;
-            top: -4px;
-            left: -2px;
-        }
-
-        /* Cabeça/capacete principal */
-        .knight-head {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #A9A9A9 0%, #808080 100%);
-            top: 8px;
-            left: 24px;
-            box-shadow: 
-                inset -4px -4px 0 rgba(0, 0, 0, 0.4),
-                inset 4px 4px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        /* Visor (T-shape) */
-        .knight-visor {
-            position: absolute;
-            width: 16px;
-            height: 8px;
-            background: #000;
-            top: 20px;
-            left: 32px;
-            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .knight-visor::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 12px;
-            background: #000;
-            top: -4px;
-            left: 6px;
-        }
-
-        /* Corpo armadura */
-        .knight-body {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #708090 0%, #556B7D 100%);
-            top: 40px;
-            left: 20px;
-            box-shadow: 
-                inset -4px -4px 0 rgba(0, 0, 0, 0.3),
-                inset 4px 4px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .knight-body::before {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 16px;
-            background: #B8860B;
-            top: 8px;
-            left: 16px;
-            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        /* Braço esquerdo */
-        .knight-arm.left {
-            position: absolute;
-            width: 16px;
-            height: 32px;
-            background: linear-gradient(135deg, #708090 0%, #556B7D 100%);
-            top: 42px;
-            left: 8px;
-            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
-            animation: armSwing 0.6s steps(2) infinite;
-        }
-
-        /* Braço direito (segurando rosa) */
-        .knight-arm.right {
-            position: absolute;
-            width: 16px;
-            height: 36px;
-            background: linear-gradient(135deg, #708090 0%, #556B7D 100%);
-            top: 42px;
-            right: 8px;
-            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes armSwing {
-            0%, 100% { transform: rotate(5deg); }
-            50% { transform: rotate(-5deg); }
-        }
-
-        .knight.stopped .knight-arm.left {
-            animation: none;
-        }
-
-        /* Mão/luva */
-        .knight-arm.left::after,
-        .knight-arm.right::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #8B7355;
-            bottom: -8px;
-            left: 2px;
-        }
-
-        /* Pernas */
-        .knight-leg {
-            position: absolute;
-            width: 16px;
-            height: 40px;
-            background: #4A4A4A;
-            bottom: 0;
-            box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.4);
-        }
-
-        .knight-leg.left {
-            left: 22px;
-            animation: legWalk 0.6s steps(2) infinite;
-        }
-
-        .knight-leg.right {
-            right: 22px;
-            animation: legWalk 0.6s steps(2) infinite 0.3s;
-        }
-
-        @keyframes legWalk {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg);
-                height: 40px;
-            }
-            50% { 
-                transform: translateY(-4px) rotate(10deg);
-                height: 36px;
-            }
-        }
-
-        .knight.stopped .knight-leg {
-            animation: none;
-            transform: rotate(0deg);
-        }
-
-        /* Botas */
-        .knight-leg::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 8px;
-            background: #2F4F4F;
-            bottom: -4px;
-            left: -1px;
+        .knight img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
         }
 
         /* Rosa pixel art */
@@ -582,17 +419,10 @@
     <div class="castle">🏰</div>
     <div class="ground"></div>
 
-    <!-- Cavaleiro pixel art CSS -->
+    <!-- Cavaleiro pixel art profissional -->
     <div class="knight-wrapper" id="knightWrapper">
         <div class="knight" id="knight">
-            <div class="knight-helmet"></div>
-            <div class="knight-head"></div>
-            <div class="knight-visor"></div>
-            <div class="knight-body"></div>
-            <div class="knight-arm left"></div>
-            <div class="knight-arm right"></div>
-            <div class="knight-leg left"></div>
-            <div class="knight-leg right"></div>
+            <img src="images/knight-pixel.jpg" alt="Cavaleiro Pixel Art">
             <div class="rose">
                 <div class="rose-petals">
                     <div class="rose-petal"></div>
