@@ -636,6 +636,10 @@
             // Esconder tela inicial
             document.getElementById('startOverlay').classList.add('hidden');
 
+            // INICIAR MÚSICA CARELESS WHISPER COMO FUNDO (desde o início)
+            musicAudio.volume = 0.5;
+            musicAudio.play().catch(err => console.log('Audio play error:', err));
+
             // INICIAR ANIMAÇÃO DA GALINHA
             const chickenWrapper = document.querySelector('.chicken-wrapper');
             const chicken = document.querySelector('.chicken');
@@ -679,10 +683,6 @@
             setTimeout(() => {
                 document.querySelector('.birthday-message').classList.add('show');
                 playSoundSequence(comicSounds.celebration, audioContext.currentTime);
-                
-                // Tocar música Careless Whisper (áudio real)
-                musicAudio.volume = 0.6;
-                musicAudio.play().catch(err => console.log('Audio play error:', err));
                 
                 createConfetti();
             }, 8200);
