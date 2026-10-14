@@ -258,6 +258,84 @@
             background-clip: text;
         }
 
+        /* Controle de música */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #FF1493, #9D4EDD);
+            color: white;
+            border: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse-music 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-music {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 15px 40px rgba(255, 20, 147, 0.8);
+            }
+        }
+
+        .music-control:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .music-control.playing {
+            animation: spin-music 2s linear infinite;
+        }
+
+        @keyframes spin-music {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Fogos de artifício */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        @keyframes firework-burst {
+            to {
+                transform: translate(var(--fx), var(--fy));
+                opacity: 0;
+            }
+        }
+
+        /* Estrelas cadentes */
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0), #FFD700);
+            animation: shoot 2s linear infinite;
+        }
+
+        @keyframes shoot {
+            from {
+                transform: translateX(0) translateY(-100px) rotate(45deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-500px) translateY(500px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 40px 25px;
@@ -285,24 +363,42 @@
                 font-size: 1.2rem;
                 padding: 15px 35px;
             }
+            .music-control {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Balões -->
-    <div class="balloon" style="left: 10%; animation-delay: 0s;">🎈</div>
-    <div class="balloon" style="left: 30%; animation-delay: 2s;">🎈</div>
-    <div class="balloon" style="left: 50%; animation-delay: 4s;">🎈</div>
-    <div class="balloon" style="left: 70%; animation-delay: 1s;">🎈</div>
-    <div class="balloon" style="left: 90%; animation-delay: 3s;">🎈</div>
+    <!-- Balões (mais balões!) -->
+    <div class="balloon" style="left: 5%; animation-delay: 0s;">🎈</div>
+    <div class="balloon" style="left: 15%; animation-delay: 1.5s;">🎈</div>
+    <div class="balloon" style="left: 25%; animation-delay: 3s;">🎈</div>
+    <div class="balloon" style="left: 35%; animation-delay: 2s;">🎈</div>
+    <div class="balloon" style="left: 45%; animation-delay: 4.5s;">🎈</div>
+    <div class="balloon" style="left: 55%; animation-delay: 1s;">🎈</div>
+    <div class="balloon" style="left: 65%; animation-delay: 3.5s;">🎈</div>
+    <div class="balloon" style="left: 75%; animation-delay: 0.5s;">🎈</div>
+    <div class="balloon" style="left: 85%; animation-delay: 2.5s;">🎈</div>
+    <div class="balloon" style="left: 95%; animation-delay: 4s;">🎈</div>
 
-    <!-- Estrelas -->
+    <!-- Estrelas (mais estrelas!) -->
     <div class="star" style="left: 5%; top: 10%; animation-delay: 0s;">⭐</div>
     <div class="star" style="right: 10%; top: 20%; animation-delay: 0.3s;">✨</div>
     <div class="star" style="left: 15%; bottom: 15%; animation-delay: 0.6s;">💫</div>
     <div class="star" style="right: 20%; bottom: 25%; animation-delay: 0.9s;">🌟</div>
     <div class="star" style="left: 80%; top: 30%; animation-delay: 0.4s;">⭐</div>
     <div class="star" style="right: 5%; top: 70%; animation-delay: 0.7s;">✨</div>
+    <div class="star" style="left: 40%; top: 5%; animation-delay: 0.2s;">⭐</div>
+    <div class="star" style="right: 40%; top: 50%; animation-delay: 0.5s;">✨</div>
+    <div class="star" style="left: 70%; bottom: 10%; animation-delay: 0.8s;">💫</div>
+    <div class="star" style="right: 30%; bottom: 40%; animation-delay: 0.1s;">🌟</div>
+    <div class="star" style="left: 25%; top: 60%; animation-delay: 0.6s;">⭐</div>
+    <div class="star" style="right: 15%; top: 40%; animation-delay: 0.9s;">✨</div>
 
     <!-- Container -->
     <div class="container">
@@ -338,9 +434,136 @@
         </div>
     </div>
 
-    <audio id="celebration-sound" src="" preload="none"></audio>
+    <!-- Botão de controle de música -->
+    <button class="music-control" id="musicControl" onclick="toggleMusic()">
+        🎵
+    </button>
+
+    <!-- Áudio -->
+    <audio id="backgroundMusic" loop>
+        <!-- Música de aniversário -->
+    </audio>
 
     <script>
+        // Criar música de aniversário com Web Audio API
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let isPlaying = false;
+        let oscillators = [];
+
+        // Notas da música "Parabéns" (frequências aproximadas)
+        const happyBirthdaySong = [
+            { note: 262, duration: 0.4 }, // C
+            { note: 262, duration: 0.4 }, // C
+            { note: 294, duration: 0.8 }, // D
+            { note: 262, duration: 0.8 }, // C
+            { note: 349, duration: 0.8 }, // F
+            { note: 330, duration: 1.6 }, // E
+            { note: 262, duration: 0.4 }, // C
+            { note: 262, duration: 0.4 }, // C
+            { note: 294, duration: 0.8 }, // D
+            { note: 262, duration: 0.8 }, // C
+            { note: 392, duration: 0.8 }, // G
+            { note: 349, duration: 1.6 }, // F
+        ];
+
+        function playNote(frequency, duration, startTime) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, startTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, startTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            
+            oscillator.start(startTime);
+            oscillator.stop(startTime + duration);
+            
+            return oscillator;
+        }
+
+        function playHappyBirthday() {
+            if (!isPlaying) return;
+            
+            let currentTime = audioContext.currentTime;
+            
+            happyBirthdaySong.forEach(({ note, duration }) => {
+                playNote(note, duration, currentTime);
+                currentTime += duration;
+            });
+            
+            // Repetir a música
+            setTimeout(() => {
+                if (isPlaying) playHappyBirthday();
+            }, currentTime * 1000 - audioContext.currentTime * 1000);
+        }
+
+        function toggleMusic() {
+            const button = document.getElementById('musicControl');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                button.classList.add('playing');
+                button.textContent = '🎵';
+                playHappyBirthday();
+            } else {
+                isPlaying = false;
+                button.classList.remove('playing');
+                button.textContent = '🔇';
+            }
+        }
+
+        // Criar estrelas cadentes
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            document.body.appendChild(star);
+            
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        setInterval(createShootingStar, 3000);
+
+        // Criar fogos de artifício aleatórios
+        function createRandomFirework() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight * 0.6);
+            
+            const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const velocity = 50 + Math.random() * 100;
+                const fx = Math.cos(angle) * velocity;
+                const fy = Math.sin(angle) * velocity;
+                
+                firework.style.setProperty('--fx', fx + 'px');
+                firework.style.setProperty('--fy', fy + 'px');
+                
+                document.body.appendChild(firework);
+                
+                firework.style.animation = `firework-burst ${0.8 + Math.random() * 0.4}s ease-out forwards`;
+                
+                setTimeout(() => firework.remove(), 1200);
+            }
+        }
+
+        // Fogos de artifício contínuos
+        setInterval(createRandomFirework, 2000);
+
         function celebrate() {
             // Explosão de confetes
             const colors = ['#FF1493', '#FFD700', '#4FACFE', '#9D4EDD', '#FF6B9D', '#00F2FE'];
