@@ -445,28 +445,50 @@
     </audio>
 
     <script>
-        // Criar música de aniversário com Web Audio API
+        // Criar música de aniversário RETRÔ com Web Audio API
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let isPlaying = false;
+        let isPlaying = true; // Começa tocando automaticamente
         let oscillators = [];
 
-        // Notas da música "Parabéns" (frequências aproximadas)
+        // Notas da música "Parabéns" completa - estilo retrô 8-bit
         const happyBirthdaySong = [
-            { note: 262, duration: 0.4 }, // C
-            { note: 262, duration: 0.4 }, // C
-            { note: 294, duration: 0.8 }, // D
-            { note: 262, duration: 0.8 }, // C
-            { note: 349, duration: 0.8 }, // F
-            { note: 330, duration: 1.6 }, // E
-            { note: 262, duration: 0.4 }, // C
-            { note: 262, duration: 0.4 }, // C
-            { note: 294, duration: 0.8 }, // D
-            { note: 262, duration: 0.8 }, // C
-            { note: 392, duration: 0.8 }, // G
-            { note: 349, duration: 1.6 }, // F
+            // Parabéns pra você
+            { note: 264, duration: 0.3 }, // C
+            { note: 264, duration: 0.3 }, // C
+            { note: 297, duration: 0.6 }, // D
+            { note: 264, duration: 0.6 }, // C
+            { note: 352, duration: 0.6 }, // F
+            { note: 330, duration: 1.2 }, // E
+            
+            // Parabéns pra você
+            { note: 264, duration: 0.3 }, // C
+            { note: 264, duration: 0.3 }, // C
+            { note: 297, duration: 0.6 }, // D
+            { note: 264, duration: 0.6 }, // C
+            { note: 396, duration: 0.6 }, // G
+            { note: 352, duration: 1.2 }, // F
+            
+            // Parabéns querida Ellen
+            { note: 264, duration: 0.3 }, // C
+            { note: 264, duration: 0.3 }, // C
+            { note: 528, duration: 0.6 }, // C (oitava acima)
+            { note: 440, duration: 0.6 }, // A
+            { note: 352, duration: 0.6 }, // F
+            { note: 330, duration: 0.6 }, // E
+            { note: 297, duration: 0.6 }, // D
+            
+            // Parabéns pra você
+            { note: 470, duration: 0.3 }, // Bb
+            { note: 470, duration: 0.3 }, // Bb
+            { note: 440, duration: 0.6 }, // A
+            { note: 352, duration: 0.6 }, // F
+            { note: 396, duration: 0.6 }, // G
+            { note: 352, duration: 1.2 }, // F
         ];
 
-        function playNote(frequency, duration, startTime) {
+        // Criar som retrô 8-bit
+        function playRetroNote(frequency, duration, startTime) {
+            // Melodia principal (onda quadrada - som retrô)
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
             
@@ -474,16 +496,31 @@
             gainNode.connect(audioContext.destination);
             
             oscillator.frequency.value = frequency;
-            oscillator.type = 'sine';
+            oscillator.type = 'square'; // Som retrô/8-bit
             
             gainNode.gain.setValueAtTime(0, startTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, startTime + 0.01);
+            gainNode.gain.linearRampToValueAtTime(0.15, startTime + 0.01);
             gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
             
             oscillator.start(startTime);
             oscillator.stop(startTime + duration);
             
-            return oscillator;
+            // Harmonia (oitava abaixo) para som mais cheio
+            const harmonyOsc = audioContext.createOscillator();
+            const harmonyGain = audioContext.createGain();
+            
+            harmonyOsc.connect(harmonyGain);
+            harmonyGain.connect(audioContext.destination);
+            
+            harmonyOsc.frequency.value = frequency / 2;
+            harmonyOsc.type = 'square';
+            
+            harmonyGain.gain.setValueAtTime(0, startTime);
+            harmonyGain.gain.linearRampToValueAtTime(0.08, startTime + 0.01);
+            harmonyGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            
+            harmonyOsc.start(startTime);
+            harmonyOsc.stop(startTime + duration);
         }
 
         function playHappyBirthday() {
@@ -492,14 +529,14 @@
             let currentTime = audioContext.currentTime;
             
             happyBirthdaySong.forEach(({ note, duration }) => {
-                playNote(note, duration, currentTime);
+                playRetroNote(note, duration, currentTime);
                 currentTime += duration;
             });
             
-            // Repetir a música
+            // Repetir a música com pausa
             setTimeout(() => {
                 if (isPlaying) playHappyBirthday();
-            }, currentTime * 1000 - audioContext.currentTime * 1000);
+            }, (currentTime - audioContext.currentTime + 1) * 1000); // +1s de pausa
         }
 
         function toggleMusic() {
@@ -516,6 +553,19 @@
                 button.textContent = '🔇';
             }
         }
+
+        // Iniciar música automaticamente após interação do usuário
+        document.addEventListener('click', function startMusic() {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            if (isPlaying) {
+                playHappyBirthday();
+                const button = document.getElementById('musicControl');
+                button.classList.add('playing');
+            }
+            document.removeEventListener('click', startMusic);
+        }, { once: true });
 
         // Criar estrelas cadentes
         function createShootingStar() {
