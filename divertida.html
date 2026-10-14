@@ -192,6 +192,61 @@
             font-weight: 600;
         }
 
+        /* Botão de ativar som */
+        .sound-button {
+            display: none;
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            animation: pulseButton 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sound-button.show {
+            display: inline-block;
+        }
+
+        .sound-button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulseButton {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+            }
+        }
+
+        .sound-status {
+            display: none;
+            font-size: 1rem;
+            color: #4CAF50;
+            font-weight: 600;
+            margin: 15px 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .sound-status.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Botão música */
         .music-btn {
             position: fixed;
@@ -320,6 +375,15 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .sound-button {
+                font-size: 1.1rem;
+                padding: 18px 35px;
+            }
+
+            .sound-status {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -356,6 +420,14 @@
                 Hora de comemorar, sorrir e<br>
                 ser muito, muito feliz!<br><br>
                 <strong>Te amo demais! 💕</strong>
+            </div>
+            
+            <button class="sound-button" id="soundButton">
+                🔊 TOCAR MÚSICA 🎵
+            </button>
+            
+            <div class="sound-status" id="soundStatus">
+                ✅ Música tocando!
             </div>
             
             <div class="footer">
@@ -469,16 +541,6 @@
 
         // Abrir presente
         document.getElementById('giftBox').addEventListener('click', function() {
-            // Criar AudioContext
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            
-            // Garantir que está ativo
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            
             // Esconder caixa
             this.classList.add('opened');
             
@@ -486,11 +548,8 @@
             document.getElementById('content').classList.add('show');
             document.getElementById('musicBtn').classList.add('show');
             
-            // Iniciar música após um delay
-            setTimeout(() => {
-                isPlaying = true;
-                playSong();
-            }, 600);
+            // Mostrar botão de som
+            document.getElementById('soundButton').classList.add('show');
             
             // Efeitos
             setTimeout(createConfetti, 400);
@@ -512,6 +571,27 @@
                 document.body.appendChild(c);
                 setTimeout(() => c.remove(), 4000);
             }, 500);
+        });
+
+        // Botão de ativar som
+        document.getElementById('soundButton').addEventListener('click', function() {
+            // Criar AudioContext
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            // Garantir que está ativo
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // Iniciar música
+            isPlaying = true;
+            playSong();
+            
+            // Esconder botão e mostrar status
+            this.classList.remove('show');
+            document.getElementById('soundStatus').classList.add('show');
         });
 
         // Botão música
