@@ -180,14 +180,17 @@
         /* OVO REAL */
         .egg {
             position: fixed;
-            bottom: 140px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 80px;
+            width: 80px;
+            height: 100px;
             opacity: 0;
-            z-index: 9;
+            z-index: 100;
             display: none;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5DEB3 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 -10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .egg.laying {
@@ -195,11 +198,23 @@
             animation: layEgg 1.5s ease-out forwards;
         }
 
-        .egg img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        .egg-emoji {
+            font-size: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        .egg.cracking .egg-emoji {
+            animation: eggShakeEmoji 0.5s ease-out forwards;
+        }
+
+        @keyframes eggShakeEmoji {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(-10deg); }
+            75% { transform: translate(-50%, -50%) rotate(10deg); }
         }
 
         @keyframes layEgg {
@@ -215,45 +230,6 @@
                 opacity: 1;
                 transform: translateX(-50%) scale(1);
             }
-        }
-
-        /* Ovo se transformando em quebrado */
-        .egg.cracking .egg-whole {
-            animation: eggShake 0.5s ease-out 2s forwards;
-        }
-
-        .egg.cracking .egg-cracked {
-            animation: eggCrack 0.5s ease-out 2.5s forwards;
-        }
-
-        @keyframes eggShake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-8deg); }
-            75% { transform: rotate(8deg); }
-        }
-
-        @keyframes eggCrack {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .egg-whole {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .egg-cracked {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
         }
 
         /* Ovo some */
@@ -461,8 +437,7 @@
 
     <!-- Ovo Real -->
     <div class="egg" id="egg">
-        <img src="images/ovo-inteiro.png" alt="Ovo" class="egg-whole">
-        <img src="images/ovo-quebrado.png" alt="Ovo Quebrado" class="egg-cracked">
+        <div class="egg-emoji" id="eggEmoji">🥚</div>
     </div>
 
     <!-- Mensagem de aniversário -->
@@ -595,12 +570,13 @@
             // OVO COMEÇA A RACHAR (2 segundos depois de aparecer)
             setTimeout(() => {
                 egg.classList.add('cracking');
+                playSoundSequence(comicSounds.crack, audioContext.currentTime);
             }, 7200);
 
-            // SOM DE RACHAR
+            // OVO VIRA QUEBRADO
             setTimeout(() => {
-                playSoundSequence(comicSounds.crack, audioContext.currentTime);
-            }, 7400);
+                document.getElementById('eggEmoji').textContent = '🐣';
+            }, 7700);
 
             // OVO EXPLODE (ovo some)
             setTimeout(() => {
