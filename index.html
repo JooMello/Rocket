@@ -380,6 +380,7 @@
         ];
 
         function playNote(freq, dur, time) {
+            // MELODIA PRINCIPAL - VOLUME MÁXIMO!
             const osc = audioContext.createOscillator();
             const gain = audioContext.createGain();
             osc.connect(gain);
@@ -387,28 +388,58 @@
             osc.frequency.value = freq;
             osc.type = 'square';
             
-            // VOLUME AUMENTADO para 0.35 (era 0.2)
+            // VOLUME MÁXIMO: 0.5 (bem alto!)
             gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(0.35, time + 0.01);
+            gain.gain.linearRampToValueAtTime(0.5, time + 0.01);
             gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
             
             osc.start(time);
             osc.stop(time + dur);
 
-            // Harmonia mais forte também
-            const harm = audioContext.createOscillator();
-            const harmGain = audioContext.createGain();
-            harm.connect(harmGain);
-            harmGain.connect(audioContext.destination);
-            harm.frequency.value = freq / 2;
-            harm.type = 'square';
+            // HARMONIA 1 (oitava abaixo) - BEM FORTE
+            const harm1 = audioContext.createOscillator();
+            const harm1Gain = audioContext.createGain();
+            harm1.connect(harm1Gain);
+            harm1Gain.connect(audioContext.destination);
+            harm1.frequency.value = freq / 2;
+            harm1.type = 'square';
             
-            harmGain.gain.setValueAtTime(0, time);
-            harmGain.gain.linearRampToValueAtTime(0.15, time + 0.01);
-            harmGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            harm1Gain.gain.setValueAtTime(0, time);
+            harm1Gain.gain.linearRampToValueAtTime(0.3, time + 0.01);
+            harm1Gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
             
-            harm.start(time);
-            harm.stop(time + dur);
+            harm1.start(time);
+            harm1.stop(time + dur);
+
+            // HARMONIA 2 (quinta acima) - REFORÇO
+            const harm2 = audioContext.createOscillator();
+            const harm2Gain = audioContext.createGain();
+            harm2.connect(harm2Gain);
+            harm2Gain.connect(audioContext.destination);
+            harm2.frequency.value = freq * 1.5;
+            harm2.type = 'triangle';
+            
+            harm2Gain.gain.setValueAtTime(0, time);
+            harm2Gain.gain.linearRampToValueAtTime(0.2, time + 0.01);
+            harm2Gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            harm2.start(time);
+            harm2.stop(time + dur);
+
+            // BAIXO - REFORÇO GRAVE
+            const bass = audioContext.createOscillator();
+            const bassGain = audioContext.createGain();
+            bass.connect(bassGain);
+            bassGain.connect(audioContext.destination);
+            bass.frequency.value = freq / 4;
+            bass.type = 'sine';
+            
+            bassGain.gain.setValueAtTime(0, time);
+            bassGain.gain.linearRampToValueAtTime(0.25, time + 0.01);
+            bassGain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+            
+            bass.start(time);
+            bass.stop(time + dur);
         }
 
         function playSong() {
